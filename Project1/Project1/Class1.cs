@@ -12,7 +12,7 @@ namespace Project1
         {
             //fiskepind
 
-
+            //ostekiks
         }
     }
 }
