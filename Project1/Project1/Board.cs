@@ -14,9 +14,12 @@ namespace Project1
     class Board
     {
         int[,] b; //2D array 'b' stores an int that represents 
+        int boardSize;
         public Board()
         {
-            b = new int[8, 8]; //8x8 spaces representing the 64 field gameboard.
+            boardSize = 8;
+            b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
+            //TODO: set the board up so the pieces are correctly placed
         }
 
         public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
@@ -67,5 +70,136 @@ namespace Project1
             return truth; //returns boolean representing success of this functioncall
         }
 
+        public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
+        /*
+        -2 means black king
+        -1 means black pawn
+         0 means empty field
+         1 means red pawn
+         2 means red king
+        */
+        {
+            return b[x, y];
+        }
+
+        public void showBoard()
+        {
+            /*
+            shows the board using the puUURtiest 5x3 ASCII artwork
+            
+            black pawn and king:
+             xxx     xxx
+            x   x   x k x
+             xxx     xxx
+
+            red pawn and king:
+             ooo     ooo
+            o   o   o k o
+             ooo     ooo
+
+            */
+
+            //first we write the very top row (just a line encircling the entire board)
+            showFullLine(); //draws a horizontal row
+            
+
+            //then we write all the rows that exist in between
+            for (int i = boardSize - 1; i >= 0; i--)
+            /*
+            here we must count backwards! Due to the nature of typing out text, the top row must be made first
+            we start from boardSize-1 because we can only read from entry 0 to 7 and not 8 inclusive
+            */
+            {
+                showEmptyLine(); //draws a line with only vertical rows
+                showTopBot(i); //draws the top/bottom row of the 5x3 artstyle for all spaces in row i. Top and bottom of the ASCII art are identical!
+                showMiddle(i); //draws the middle row of the 5x3 artstyle for all spaces in row i
+                showTopBot(i); 
+                showEmptyLine();
+                showFullLine();
+            }
+        }
+
+        //a lot of functions used JUST for drawing..
+        private void showFullLine()
+        {
+            Console.Write("#"); //leading char for the new line
+            for (int i = 0; i < boardSize; i++)
+            {
+                Console.Write("########"); //eight chars (+ the first char to begin. 9 chars with 7 empty spaces to encircle where there is room for the 5x3 piece-art)
+            }
+            Console.WriteLine(""); //newLine
+        }
+
+        private void showEmptyLine()
+        {
+            Console.Write("#"); //leading char for the new line
+            for (int i = 0; i < boardSize; i++)
+            {
+                Console.Write("       #"); //7 spaces + a char
+            }
+            Console.WriteLine(""); //newLine
+        }
+
+        private void showTopBot(int i) //top row of 5x3 ASCII art
+        {
+            Console.Write("#"); //leading char for the new line
+            for (int j = 0; j < boardSize; j++)
+            {
+                int piece = read(i, j);
+                switch (piece)
+                {
+                    case (-2):
+                        Console.Write("  xxx  #");
+                        break;
+                    case (-1):
+                        Console.Write("  xxx  #");
+                        break;
+                    case (0):
+                        Console.Write("       #");
+                        break;
+                    case (1):
+                        Console.Write("  ooo  #");
+                        break;
+                    case (2):
+                        Console.Write("  ooo  #");
+                        break;
+                    default:
+                        //NOTHING, ERROR!
+                        break;
+                }
+            }
+            Console.WriteLine(""); //newLine
+        }
+
+        private void showMiddle(int i)
+        {
+            Console.Write("#"); //leading char for the new line
+            for (int j = 0; j < boardSize; j++)
+            {
+                int piece = read(i, j);
+                switch (piece)
+                {
+                    case (-2):
+                        Console.Write(" x k x #");
+                        break;
+                    case (-1):
+                        Console.Write(" x   x #");
+                        break;
+                    case (0):
+                        Console.Write("       #");
+                        break;
+                    case (1):
+                        Console.Write(" o   o #");
+                        break;
+                    case (2):
+                        Console.Write(" o k o #");
+                        break;
+                    default:
+                        //NOTHING, ERROR!
+                        break;
+                }
+            }
+            Console.WriteLine(""); //newLine
+        }
     }
 }
