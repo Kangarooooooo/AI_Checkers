@@ -14,5 +14,9 @@ namespace Project1
 
             //ostekiks
         }
+        public void ost()
+        {
+
+        }
     }
 }
