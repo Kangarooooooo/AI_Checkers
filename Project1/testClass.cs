@@ -1,8 +1,11 @@
 ﻿using System;
 
-public class Class1
+namespace Project1
 {
-	public Class1()
-	{
-	}
+    public class testClass
+    {
+        public testClass()
+        {
+        }
+    }
 }
