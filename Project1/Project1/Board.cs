@@ -26,7 +26,7 @@ namespace Project1
         public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
         {
             Boolean truth = false; //assumes that functioncall fails
-            if (b[x, y] == 0) //checks if field is empty, represented by 0
+            if (read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
                 b[x, y] = 1; //place red pawn, represented by -1;
@@ -38,7 +38,7 @@ namespace Project1
         public Boolean redKingSet(int x, int y) //places red king on the field (x,y) returns true if it succeeds
         {
             Boolean truth = false; //assumes that functioncall fails
-            if (b[x, y] == 0) //checks if field is empty, represented by 0
+            if (read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
                 b[x, y] = 2; //place red king, represented by -1;
@@ -50,7 +50,7 @@ namespace Project1
         public Boolean blackPawnSet(int x, int y) //places black pawn on the field (x,y) returns true if it succeeds
         {
             Boolean truth = false; //assumes that functioncall fails
-            if(b[x,y] == 0) //checks if field is empty, represented by 0
+            if(read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
                 b[x, y] = -1; //place black pawn, represented by -1;
@@ -62,7 +62,7 @@ namespace Project1
         public Boolean blackKingSet(int x, int y) //places black king on the field (x,y) returns true if it succeeds
         {
             Boolean truth = false; //assumes that functioncall fails
-            if (b[x, y] == 0) //checks if field is empty, represented by 0
+            if (read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
                 b[x, y] = -2; //place king pawn, represented by -1;
@@ -95,6 +95,17 @@ namespace Project1
         */
         {
             return b[x, y];
+        }
+        
+        public Boolean remove(int x, int y) //designed to remove a piece from the board
+        {
+            Boolean truth = false; //assumes that there is nothing to delete
+            if(read(x, y) != 0) //if there is a piece
+            {
+                truth = true; //success
+                b[x, y] = 0; //force-clears the field
+            }
+            return truth; 
         }
 
         public void showBoard()
