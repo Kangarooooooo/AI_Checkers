@@ -20,6 +20,7 @@ namespace Project1
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
             //TODO: set the board up so the pieces are correctly placed
+            startState();
         }
 
         public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
@@ -70,6 +71,20 @@ namespace Project1
             return truth; //returns boolean representing success of this functioncall
         }
 
+        private void startState()
+        {
+            for (int i = 0; i < boardSize; i=i+2)
+            {
+                redPawnSet(0, i);
+                redKingSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
+                redPawnSet(2, i);
+
+                blackPawnSet(5, i+1);
+                blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
+                blackPawnSet(7, i+1);
+            }
+        }
+
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
         /*
         -2 means black king
@@ -88,9 +103,9 @@ namespace Project1
             shows the board using the puUURtiest 5x3 ASCII artwork
             
             black pawn and king:
-             xxx     xxx
+            xxxxx   xxxxx
             x   x   x k x
-             xxx     xxx
+            xxxxx   xxxxx
 
             red pawn and king:
              ooo     ooo
@@ -122,7 +137,7 @@ namespace Project1
         //a lot of functions used JUST for drawing..
         private void showFullLine()
         {
-            Console.Write("#"); //leading char for the new line
+            Console.Write(" #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
             {
                 Console.Write("########"); //eight chars (+ the first char to begin. 9 chars with 7 empty spaces to encircle where there is room for the 5x3 piece-art)
@@ -132,7 +147,7 @@ namespace Project1
 
         private void showEmptyLine()
         {
-            Console.Write("#"); //leading char for the new line
+            Console.Write(" #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
             {
                 Console.Write("       #"); //7 spaces + a char
@@ -142,17 +157,17 @@ namespace Project1
 
         private void showTopBot(int i) //top row of 5x3 ASCII art
         {
-            Console.Write("#"); //leading char for the new line
+            Console.Write(" #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
             {
                 int piece = read(i, j);
                 switch (piece)
                 {
                     case (-2):
-                        Console.Write("  xxx  #");
+                        Console.Write(" xxxxx #");
                         break;
                     case (-1):
-                        Console.Write("  xxx  #");
+                        Console.Write(" xxxxx #");
                         break;
                     case (0):
                         Console.Write("       #");
@@ -173,14 +188,14 @@ namespace Project1
 
         private void showMiddle(int i)
         {
-            Console.Write("#"); //leading char for the new line
+            Console.Write(" #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
             {
                 int piece = read(i, j);
                 switch (piece)
                 {
                     case (-2):
-                        Console.Write(" x k x #");
+                        Console.Write(" x K x #");
                         break;
                     case (-1):
                         Console.Write(" x   x #");
@@ -192,7 +207,7 @@ namespace Project1
                         Console.Write(" o   o #");
                         break;
                     case (2):
-                        Console.Write(" o k o #");
+                        Console.Write(" o K o #");
                         break;
                     default:
                         //NOTHING, ERROR!

@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Board.cs" />
+    <Compile Include="testBoard1.cs" />
     <Compile Include="testClass.cs" />
   </ItemGroup>
   <ItemGroup>
