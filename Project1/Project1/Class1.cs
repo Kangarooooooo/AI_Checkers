@@ -11,8 +11,6 @@ namespace Project1
         public void terror()
         {
 
-            //
-
         }
     }
 }
