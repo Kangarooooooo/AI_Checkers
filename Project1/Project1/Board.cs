@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 /*
 Author: Repsack
@@ -100,9 +96,9 @@ namespace Project1
         //it counts the number of red pieces on the board and subtracts the black pieces. Kings count for double!
         {
             int returnVal = 0; //board score
-            for (int i = 0; i < boardSize; i++) //for each row (or is it row..?)
+            for (int i = 0; i < boardSize; i++) //for each row
             {
-                for (int j = 0; j < boardSize; j++) //for each column (or is it column..?)
+                for (int j = 0; j < boardSize; j++) //for each column
                 {
                     returnVal = returnVal + read(i, j); //add the piece value to the board score 
                 }
