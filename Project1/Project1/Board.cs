@@ -13,14 +13,13 @@ namespace Project1
 {
     class Board
     {
-        int[,] b; //2D array 'b' stores an int that represents 
+        int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
         int boardSize;
         public Board()
         {
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
-            //TODO: set the board up so the pieces are correctly placed
-            startState();
+            startState(); //sets the pieces in the correct position
         }
 
         public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
@@ -71,16 +70,16 @@ namespace Project1
             return truth; //returns boolean representing success of this functioncall
         }
 
-        private void startState()
+        private void startState() //call this to place all the starting pieces in their correct positions
         {
             for (int i = 0; i < boardSize; i=i+2)
             {
                 redPawnSet(0, i);
-                redKingSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
+                redPawnSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
                 redPawnSet(2, i);
 
                 blackPawnSet(5, i+1);
-                blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
+                blackPawnSet(6, i); //should ofcourse be a pawn, but king is set just to test it
                 blackPawnSet(7, i+1);
             }
         }
@@ -97,6 +96,20 @@ namespace Project1
             return b[x, y];
         }
         
+        public int evaluate() //evaluates the board with the red player as the maximizer.
+        //it counts the number of red pieces on the board and subtracts the black pieces. Kings count for double!
+        {
+            int returnVal = 0; //board score
+            for (int i = 0; i < boardSize; i++) //for each row (or is it row..?)
+            {
+                for (int j = 0; j < boardSize; j++) //for each column (or is it column..?)
+                {
+                    returnVal = returnVal + read(i, j); //add the piece value to the board score 
+                }
+            }
+            return returnVal; //send back result
+        }
+
         public Boolean remove(int x, int y) //designed to remove a piece from the board
         {
             Boolean truth = false; //assumes that there is nothing to delete
@@ -227,5 +240,7 @@ namespace Project1
             }
             Console.WriteLine(""); //newLine
         }
+
+        //no more functions made for use in showing the board
     }
 }
