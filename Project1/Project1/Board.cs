@@ -102,7 +102,7 @@ namespace Project1
         }
 
 
-        public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
+        public Boolean redManSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
         //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
@@ -128,7 +128,7 @@ namespace Project1
             return truth; //returns boolean representing success of this functioncall
         }
 
-        public Boolean blackPawnSet(int x, int y) //places black pawn on the field (x,y) returns true if it succeeds
+        public Boolean blackManSet(int x, int y) //places black pawn on the field (x,y) returns true if it succeeds
         //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
@@ -160,13 +160,13 @@ namespace Project1
             for (int i = 0; i < boardSize; i=i+2)
             {
 
-                redPawnSet(0, i);
+                redManSet(0, i);
                 redKingSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
-                redPawnSet(2, i);
+                redManSet(2, i);
 
-                blackPawnSet(5, i+1);
+                blackManSet(5, i+1);
                 blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
-                blackPawnSet(7, i+1);
+                blackManSet(7, i+1);
             }
         }
 
