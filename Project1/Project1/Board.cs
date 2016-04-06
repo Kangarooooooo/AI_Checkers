@@ -1,7 +1,7 @@
 ﻿using System;
 
 /*
-Author: Repsack
+Author: Kasper
 Designed to represent the board and its knowledge about the pieces
 */
 
