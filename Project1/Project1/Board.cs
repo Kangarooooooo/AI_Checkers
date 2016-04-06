@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 /*
 Author: Repsack
 Designed to represent the board and its knowledge about the pieces
@@ -11,20 +11,89 @@ namespace Project1
     {
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
         int boardSize;
+        LinkedList<int[,]> list = new LinkedList<int[,]>();
         public Board()
         {
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
             startState(); //sets the pieces in the correct position
         }
+        //Author Kangarooooooo
+        public int[,] copy(int[,] board)//Method that returns a new copy of the argument
+        {
+            int[,] copy = new int[boardSize, boardSize];
 
+            for(int i =0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    copy[i, j] = board[i, j];
+                }
+            }
+
+            return copy;
+        }
+        //Author Kangarooooooo
+        public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
+        {
+            LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
+            int[,] temp = new int[boardSize,boardSize];
+            for (int i = 0; i < boardSize; i++)//Check for legal captures
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (currentState[i,j]>0)//Current collors piece is present
+                    {
+                        
+                    }
+                }
+            }
+            if (legalMovesRed.First != null)//No capture moves found, find legal regular moves
+            {
+                for (int i = 0; i < boardSize; i++)
+                {
+                    for (int j = 0; j < boardSize; j++)
+                    {
+                        if (currentState[i, j] > 0)//Current collors piece is present
+                        {
+                            if ((i < (boardSize - 1)) && (j > 0))//Check move above to left
+                            {
+                                if (currentState[i + 1, j - 1] == 0)
+                                {
+                                    temp = copy(currentState);
+                                    temp[i+1,j-1] = temp[i,j];
+                                    temp[i, j] = 0;
+                                    legalMovesRed.AddLast(temp);
+                                }
+                            }
+                            if(( i < (boardSize - 1)) && (j<(boardSize-1)))//Check move above to right
+                            {
+                                if(currentState[i+1,j+1] == 0)
+                                {
+                                    temp = copy(currentState);
+                                    temp[i + 1, j + 1] = temp[i, j];
+                                    temp[i, j] = 0;
+                                    legalMovesRed.AddLast(temp);
+                                }
+                            }
+                        }
+                        if (currentState[i, j] > 1)//Current collors piece is present and a king
+                        {
+                        }
+                    }
+                }
+            }
+            return legalMovesRed;
+        }
+
+        
         public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
         {
             Boolean truth = false; //assumes that functioncall fails
             if (read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
-                b[x, y] = 1; //place red pawn, represented by -1;
+                b[x, y] = 1; //place red pawn, represented by 1;
             }
             //should position (x,y) not be empty, no overwriting is made 
             return truth; //returns boolean representing success of this functioncall
@@ -36,7 +105,7 @@ namespace Project1
             if (read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
-                b[x, y] = 2; //place red king, represented by -1;
+                b[x, y] = 2; //place red king, represented by 2;
             }
             //should position (x,y) not be empty, no overwriting is made 
             return truth; //returns boolean representing success of this functioncall
@@ -60,7 +129,7 @@ namespace Project1
             if (read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
-                b[x, y] = -2; //place king pawn, represented by -1;
+                b[x, y] = -2; //place king pawn, represented by -2;
             }
             //should position (x,y) not be empty, no overwriting is made 
             return truth; //returns boolean representing success of this functioncall
@@ -70,6 +139,7 @@ namespace Project1
         {
             for (int i = 0; i < boardSize; i=i+2)
             {
+
                 redPawnSet(0, i);
                 redPawnSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
                 redPawnSet(2, i);
