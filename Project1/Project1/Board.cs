@@ -12,6 +12,7 @@ namespace Project1
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
         int boardSize;
         public Board()
+        //Author: Kasper
         {
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
@@ -19,6 +20,7 @@ namespace Project1
         }
 
         public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if (read(x, y) == 0) //checks if field is empty, represented by 0
@@ -31,6 +33,7 @@ namespace Project1
         }
 
         public Boolean redKingSet(int x, int y) //places red king on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if (read(x, y) == 0) //checks if field is empty, represented by 0
@@ -43,6 +46,7 @@ namespace Project1
         }
 
         public Boolean blackPawnSet(int x, int y) //places black pawn on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if(read(x, y) == 0) //checks if field is empty, represented by 0
@@ -55,6 +59,7 @@ namespace Project1
         }
 
         public Boolean blackKingSet(int x, int y) //places black king on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if (read(x, y) == 0) //checks if field is empty, represented by 0
@@ -67,6 +72,7 @@ namespace Project1
         }
 
         private void startState() //call this to place all the starting pieces in their correct positions
+        //Author: Kasper
         {
             for (int i = 0; i < boardSize; i=i+2)
             {
@@ -81,6 +87,7 @@ namespace Project1
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
+        //Author: Kasper
         /*
         -2 means black king
         -1 means black pawn
@@ -93,6 +100,7 @@ namespace Project1
         }
         
         public int evaluate() //evaluates the board with the red player as the maximizer.
+        //Author: Kasper
         //it counts the number of red pieces on the board and subtracts the black pieces. Kings count for double!
         {
             int returnVal = 0; //board score
@@ -107,6 +115,7 @@ namespace Project1
         }
 
         public Boolean remove(int x, int y) //designed to remove a piece from the board
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that there is nothing to delete
             if(read(x, y) != 0) //if there is a piece
@@ -118,6 +127,7 @@ namespace Project1
         }
 
         public void showBoard()
+        //Author: Kasper
         {
             /*
             shows the board using the puUURtiest 5x3 ASCII artwork
@@ -156,6 +166,7 @@ namespace Project1
 
         //a lot of functions used JUST for drawing..
         private void showFullLine()
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
@@ -166,6 +177,7 @@ namespace Project1
         }
 
         private void showEmptyLine()
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
@@ -176,6 +188,7 @@ namespace Project1
         }
 
         private void showTopBot(int i) //top row of 5x3 ASCII art
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
@@ -207,6 +220,7 @@ namespace Project1
         }
 
         private void showMiddle(int i)
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
