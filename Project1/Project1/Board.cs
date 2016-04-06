@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 /*
-Author: Repsack
+Author: Kasper
 Designed to represent the board and its knowledge about the pieces
 */
 
@@ -13,7 +13,9 @@ namespace Project1
         int boardSize;
         LinkedList<int[,]> list = new LinkedList<int[,]>();
         public Board()
+        //Author: Kasper
         {
+            Console.ForegroundColor = ConsoleColor.White;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
             startState(); //sets the pieces in the correct position
@@ -88,6 +90,7 @@ namespace Project1
 
         
         public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if (read(x, y) == 0) //checks if field is empty, represented by 0
@@ -100,6 +103,7 @@ namespace Project1
         }
 
         public Boolean redKingSet(int x, int y) //places red king on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if (read(x, y) == 0) //checks if field is empty, represented by 0
@@ -112,6 +116,7 @@ namespace Project1
         }
 
         public Boolean blackPawnSet(int x, int y) //places black pawn on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if(read(x, y) == 0) //checks if field is empty, represented by 0
@@ -124,6 +129,7 @@ namespace Project1
         }
 
         public Boolean blackKingSet(int x, int y) //places black king on the field (x,y) returns true if it succeeds
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
             if (read(x, y) == 0) //checks if field is empty, represented by 0
@@ -136,21 +142,23 @@ namespace Project1
         }
 
         private void startState() //call this to place all the starting pieces in their correct positions
+        //Author: Kasper
         {
             for (int i = 0; i < boardSize; i=i+2)
             {
 
                 redPawnSet(0, i);
-                redPawnSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
+                redKingSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
                 redPawnSet(2, i);
 
                 blackPawnSet(5, i+1);
-                blackPawnSet(6, i); //should ofcourse be a pawn, but king is set just to test it
+                blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
                 blackPawnSet(7, i+1);
             }
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
+        //Author: Kasper
         /*
         -2 means black king
         -1 means black pawn
@@ -163,6 +171,7 @@ namespace Project1
         }
         
         public int evaluate() //evaluates the board with the red player as the maximizer.
+        //Author: Kasper
         //it counts the number of red pieces on the board and subtracts the black pieces. Kings count for double!
         {
             int returnVal = 0; //board score
@@ -177,6 +186,7 @@ namespace Project1
         }
 
         public Boolean remove(int x, int y) //designed to remove a piece from the board
+        //Author: Kasper
         {
             Boolean truth = false; //assumes that there is nothing to delete
             if(read(x, y) != 0) //if there is a piece
@@ -188,6 +198,7 @@ namespace Project1
         }
 
         public void showBoard()
+        //Author: Kasper
         {
             /*
             shows the board using the puUURtiest 5x3 ASCII artwork
@@ -226,6 +237,7 @@ namespace Project1
 
         //a lot of functions used JUST for drawing..
         private void showFullLine()
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
@@ -236,6 +248,7 @@ namespace Project1
         }
 
         private void showEmptyLine()
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
@@ -246,6 +259,7 @@ namespace Project1
         }
 
         private void showTopBot(int i) //top row of 5x3 ASCII art
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
@@ -254,29 +268,39 @@ namespace Project1
                 switch (piece)
                 {
                     case (-2):
-                        Console.Write(" xxxxx #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" xxxxx ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (-1):
-                        Console.Write(" xxxxx #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" xxxxx ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (0):
-                        Console.Write("       #");
+                        Console.Write("       ");
                         break;
                     case (1):
-                        Console.Write("  ooo  #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("  ooo  ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (2):
-                        Console.Write("  ooo  #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("  ooo  ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     default:
                         //NOTHING, ERROR!
                         break;
                 }
+                Console.Write("#");
             }
             Console.WriteLine(""); //newLine
         }
 
         private void showMiddle(int i)
+        //Author: Kasper
         {
             Console.Write(" #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
@@ -285,24 +309,41 @@ namespace Project1
                 switch (piece)
                 {
                     case (-2):
-                        Console.Write(" x K x #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" x ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("K");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" x ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (-1):
-                        Console.Write(" x   x #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" x   x ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (0):
-                        Console.Write("       #");
+                        Console.Write("       ");
                         break;
                     case (1):
-                        Console.Write(" o   o #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" o   o ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (2):
-                        Console.Write(" o K o #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" o ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("K");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" o ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     default:
                         //NOTHING, ERROR!
                         break;
                 }
+                Console.Write("#");
             }
             Console.WriteLine(""); //newLine
         }

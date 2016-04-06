@@ -13,7 +13,7 @@ namespace Project1
             Board board = new Board();
             Console.WriteLine("Testing the board\n");
             board.showBoard();
-            Console.ReadLine();
+            Console.ReadLine(); //press enter to close, dimwit
         }
     }
 }
