@@ -42,6 +42,7 @@ namespace Project1
         }
         //Author Kangarooooooo
         public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
+        //KasperComment: Too many comments, too understandable!
         {
             LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
             int[,] temp = new int[boardSize,boardSize];
