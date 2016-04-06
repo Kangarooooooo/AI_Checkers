@@ -40,6 +40,13 @@ namespace Project1
 
             return copy;
         }
+
+        public int[,] copyCurrent()
+        //Author: Kasper
+        {
+            return copy(b);
+        }
+
         //Author Kangarooooooo
         public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
         //KasperComment: Too many comments, too understandable!
