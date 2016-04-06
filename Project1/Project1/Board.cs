@@ -14,6 +14,7 @@ namespace Project1
         public Board()
         //Author: Kasper
         {
+            Console.ForegroundColor = ConsoleColor.White;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
             startState(); //sets the pieces in the correct position
@@ -77,11 +78,11 @@ namespace Project1
             for (int i = 0; i < boardSize; i=i+2)
             {
                 redPawnSet(0, i);
-                redPawnSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
+                redKingSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
                 redPawnSet(2, i);
 
                 blackPawnSet(5, i+1);
-                blackPawnSet(6, i); //should ofcourse be a pawn, but king is set just to test it
+                blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
                 blackPawnSet(7, i+1);
             }
         }
@@ -197,24 +198,33 @@ namespace Project1
                 switch (piece)
                 {
                     case (-2):
-                        Console.Write(" xxxxx #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" xxxxx ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (-1):
-                        Console.Write(" xxxxx #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" xxxxx ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (0):
-                        Console.Write("       #");
+                        Console.Write("       ");
                         break;
                     case (1):
-                        Console.Write("  ooo  #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("  ooo  ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (2):
-                        Console.Write("  ooo  #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write("  ooo  ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     default:
                         //NOTHING, ERROR!
                         break;
                 }
+                Console.Write("#");
             }
             Console.WriteLine(""); //newLine
         }
@@ -229,24 +239,41 @@ namespace Project1
                 switch (piece)
                 {
                     case (-2):
-                        Console.Write(" x K x #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" x ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("K");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" x ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (-1):
-                        Console.Write(" x   x #");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write(" x   x ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (0):
-                        Console.Write("       #");
+                        Console.Write("       ");
                         break;
                     case (1):
-                        Console.Write(" o   o #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" o   o ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     case (2):
-                        Console.Write(" o K o #");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" o ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.Write("K");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Write(" o ");
+                        Console.ForegroundColor = ConsoleColor.White;
                         break;
                     default:
                         //NOTHING, ERROR!
                         break;
                 }
+                Console.Write("#");
             }
             Console.WriteLine(""); //newLine
         }

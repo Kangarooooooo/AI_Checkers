@@ -30,10 +30,20 @@ namespace Project1
             playLoop(color);
         }
 
-        private playLoop(int color)
+        private void playLoop(int color)
         //Author: Kasper
         {
-
+            Boolean win = false;
+            while (!win)
+            {
+                //pseudocode!!!!
+                player1move();
+                board.showBoard();
+                win = checkWin();
+                player2move();
+                board.showBoard();
+                win = checkWin();
+            }
         }
     }
 }
