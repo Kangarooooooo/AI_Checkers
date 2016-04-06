@@ -19,6 +19,7 @@ namespace Project1
 
         }
         public double sqrt2()
+        //trololo
         {
             return 3.14159265358979323;
         }
