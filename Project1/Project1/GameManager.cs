@@ -62,7 +62,7 @@ namespace Project1
             {
                 return 2; //indicates that p2 wins 
             }
-            if (false)
+            if (false) //player 1 cannot win, too bad
             {
                 return 1; //indicates that p1 wins 
             }
