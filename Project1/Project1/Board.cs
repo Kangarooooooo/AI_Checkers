@@ -11,10 +11,15 @@ namespace Project1
     {
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
         int boardSize;
+        ConsoleColor //Color variables. Change to personal preferences if you like.
+            P1 = ConsoleColor.Cyan,
+            P2 = ConsoleColor.Red,
+            king = ConsoleColor.Yellow,
+            baseColor = ConsoleColor.Gray;
         public Board()
         //Author: Kasper
         {
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ForegroundColor = baseColor;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
             startState(); //sets the pieces in the correct position
@@ -198,27 +203,27 @@ namespace Project1
                 switch (piece)
                 {
                     case (-2):
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.Write(" xxxxx ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = P1;
+                        Console.Write("  xxx  ");
+                        Console.ForegroundColor = baseColor;
                         break;
                     case (-1):
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.Write(" xxxxx ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = P1;
+                        Console.Write("  xxx  ");
+                        Console.ForegroundColor = baseColor;
                         break;
                     case (0):
                         Console.Write("       ");
                         break;
                     case (1):
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = P2;
                         Console.Write("  ooo  ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = baseColor;
                         break;
                     case (2):
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = P2;
                         Console.Write("  ooo  ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = baseColor;
                         break;
                     default:
                         //NOTHING, ERROR!
@@ -239,35 +244,35 @@ namespace Project1
                 switch (piece)
                 {
                     case (-2):
-                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = P1;
                         Console.Write(" x ");
-                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = king;
                         Console.Write("K");
-                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = P1;
                         Console.Write(" x ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = baseColor;
                         break;
                     case (-1):
-                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.ForegroundColor = P1;
                         Console.Write(" x   x ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = baseColor;
                         break;
                     case (0):
                         Console.Write("       ");
                         break;
                     case (1):
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = P2;
                         Console.Write(" o   o ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = baseColor;
                         break;
                     case (2):
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = P2;
                         Console.Write(" o ");
-                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.ForegroundColor = king;
                         Console.Write("K");
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.ForegroundColor = P2;
                         Console.Write(" o ");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = baseColor;
                         break;
                     default:
                         //NOTHING, ERROR!

@@ -33,17 +33,44 @@ namespace Project1
         private void playLoop(int color)
         //Author: Kasper
         {
-            Boolean win = false;
-            while (!win)
+            int win = 0;
+            while (win == 0)
             {
                 //pseudocode!!!!
+                /*
                 player1move();
                 board.showBoard();
                 win = checkWin();
+                if(win!=0){break;}
                 player2move();
                 board.showBoard();
                 win = checkWin();
+                */
             }
+        }
+
+        private void player1move()
+        //Author: Repsack
+        {
+
+        }
+
+        private int checkWin()
+        //Author: Kasper
+        {
+            if (p1.availableMoves.isEmpty())
+            {
+                return 2; //indicates that p2 wins 
+            }
+            if (p2.availableMoves.isEmpty())
+            {
+                return 1; //indicates that p1 wins 
+            }
+            if (checkDraw())
+            {
+                return -1; //indicates that the game is over with no winners.
+            }
+            return -9007;//MethodIncompleteException
         }
     }
 }
