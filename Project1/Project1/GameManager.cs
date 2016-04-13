@@ -14,6 +14,7 @@ namespace Project1
     public class GameManager
     {
         Board board;
+        int noCaptureCounter=0;
         public GameManager()
         //Author: Kasper
         {
@@ -66,17 +67,11 @@ namespace Project1
             {
                 return 1; //indicates that p1 wins 
             }
-            if (checkDraw())
+            if (noCaptureCounter<49)
             {
                 return -1; //indicates that the game is over with no winners.
             }
             return 0; //no win yet
-        }
-
-        private Boolean checkDraw()
-        //Author: Kasper
-        {
-            return false; //it is never a draw! or maybe this needs more work..
         }
     }
 }

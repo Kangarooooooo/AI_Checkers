@@ -15,15 +15,23 @@ namespace Project1
             P1 = ConsoleColor.Cyan,
             P2 = ConsoleColor.Red,
             king = ConsoleColor.Yellow,
-            baseColor = ConsoleColor.Gray;
+            baseColor1 = ConsoleColor.Gray,
+            baseColor2 = ConsoleColor.Yellow;
         LinkedList<int[,]> list = new LinkedList<int[,]>();
         public Board()
         //Author: Kasper
         {
-            Console.ForegroundColor = baseColor;
+            Console.ForegroundColor = baseColor1;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
-            startState(); //sets the pieces in the correct position
+            startState2(); //sets the pieces in the correct position
+        }
+
+        public Board(int[,] board)
+        {
+            Console.ForegroundColor = baseColor2;
+            boardSize = 8;
+            b = board; //8x8 spaces representing the 64 field gameboard.
         }
         //Author Kangarooooooo
         public int[,] copy(int[,] board)//Method that returns a new copy of the argument
@@ -101,6 +109,11 @@ namespace Project1
             return legalMovesRed;
         }
 
+        public LinkedList<int[,]> legalMovesRedNow()
+        //Author: Kasper
+        {
+            return legalMovesRed(copyCurrent());
+        }
 
         public Boolean redManSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
         //Author: Kasper
@@ -168,6 +181,12 @@ namespace Project1
                 blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
                 blackManSet(7, i+1);
             }
+        }
+
+        private void startState2() //TestingStart for testing tests
+        //Author: Kasper
+        {
+            redManSet(0, 0);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
@@ -283,12 +302,12 @@ namespace Project1
                     case (-2):
                         Console.ForegroundColor = P1;
                         Console.Write("  xxx  ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     case (-1):
                         Console.ForegroundColor = P1;
                         Console.Write("  xxx  ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     case (0):
                         Console.Write("       ");
@@ -296,12 +315,12 @@ namespace Project1
                     case (1):
                         Console.ForegroundColor = P2;
                         Console.Write("  ooo  ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     case (2):
                         Console.ForegroundColor = P2;
                         Console.Write("  ooo  ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     default:
                         //NOTHING, ERROR!
@@ -328,12 +347,12 @@ namespace Project1
                         Console.Write("K");
                         Console.ForegroundColor = P1;
                         Console.Write(" x ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     case (-1):
                         Console.ForegroundColor = P1;
                         Console.Write(" x   x ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     case (0):
                         Console.Write("       ");
@@ -341,7 +360,7 @@ namespace Project1
                     case (1):
                         Console.ForegroundColor = P2;
                         Console.Write(" o   o ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     case (2):
                         Console.ForegroundColor = P2;
@@ -350,7 +369,7 @@ namespace Project1
                         Console.Write("K");
                         Console.ForegroundColor = P2;
                         Console.Write(" o ");
-                        Console.ForegroundColor = baseColor;
+                        Console.ForegroundColor = baseColor1;
                         break;
                     default:
                         //NOTHING, ERROR!
