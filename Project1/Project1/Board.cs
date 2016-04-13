@@ -56,23 +56,44 @@ namespace Project1
         }
 
         //Author Kangarooooooo
-        public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
-        //KasperComment: Too many comments, too understandable!
+        /// <summary>
+        /// Method takes a boardstate and returns a list of legal boardstates, representating the legal captures given the current boardstate.List is empty if no legal moves exist.
+        /// </summary>
+        /// <param name="currentState"></param>
+        /// <returns></returns>
+        public LinkedList<int[,]> legalCapturesRed(int[,] currentState)//return list of legalmoves
         {
-            LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
-            int[,] temp = new int[boardSize,boardSize];
+            LinkedList<int[,]> legalCapturesRed = new LinkedList<int[,]>();
             for (int i = 0; i < boardSize; i++)//Check for legal captures
             {
                 for (int j = 0; j < boardSize; j++)
                 {
-                    if (currentState[i,j]>0)//Current collors piece is present
+                    if (currentState[i, j] > 0)//Current collors piece is present
+                    {
+                        if ((i < (boardSize - 2)) && (j > 1))//Check capture above to left
+                        {
+                            if ((i < (boardSize - 1)) && (j > 0))//Check piece above to left
                     {
                         
                     }
                 }
             }
-            if (legalMovesRed.First != null)//No capture moves found, find legal regular moves
+                }
+                
+            }
+        return legalCapturesRed;
+        }
+        //Author Kangarooooooo
+        /// <summary>
+        /// Method takes a boardstate and returs a list of legal boardtates, representing the legal moves given the curent boardstate. List is empty if no legal moves exist.
+        /// </summary>
+        /// <param name="currentState"></param>
+        /// <returns></returns>
+        public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
             {
+            LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
+            int[,] temp = new int[boardSize,boardSize];
+
                 for (int i = 0; i < boardSize; i++)
                 {
                     for (int j = 0; j < boardSize; j++)
@@ -102,10 +123,11 @@ namespace Project1
                         }
                         if (currentState[i, j] > 1)//Current collors piece is present and a king
                         {
-                        }
+                         
                     }
                 }
             }
+            
             return legalMovesRed;
         }
 
