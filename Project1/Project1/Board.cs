@@ -41,6 +41,12 @@ namespace Project1
             return copy;
         }
 
+        public int[,] copyCurrent()
+        //Author: Kasper
+        {
+            return copy(b);
+        }
+
         //Author Kangarooooooo
         /// <summary>
         /// Method takes a boardstate and returns a list of legal boardstates, representating the legal captures given the current boardstate.List is empty if no legal moves exist.
@@ -59,11 +65,11 @@ namespace Project1
                         if ((i < (boardSize - 2)) && (j > 1))//Check capture above to left
                         {
                             if ((i < (boardSize - 1)) && (j > 0))//Check piece above to left
-                            {
-
-                            }
-                        }
+                    {
+                        
                     }
+                }
+            }
                 }
                 
             }
@@ -76,12 +82,12 @@ namespace Project1
         /// <param name="currentState"></param>
         /// <returns></returns>
         public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
-        {
+            {
             LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
             int[,] temp = new int[boardSize,boardSize];
 
-            for (int i = 0; i < boardSize; i++)
-            {
+                for (int i = 0; i < boardSize; i++)
+                {
                     for (int j = 0; j < boardSize; j++)
                     {
                         if (currentState[i, j] > 0)//Current collors piece is present
@@ -110,15 +116,15 @@ namespace Project1
                         if (currentState[i, j] > 1)//Current collors piece is present and a king
                         {
                          
-                        }
                     }
                 }
+            }
             
             return legalMovesRed;
         }
 
 
-        public Boolean redPawnSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
+        public Boolean redManSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
         //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
@@ -144,7 +150,7 @@ namespace Project1
             return truth; //returns boolean representing success of this functioncall
         }
 
-        public Boolean blackPawnSet(int x, int y) //places black pawn on the field (x,y) returns true if it succeeds
+        public Boolean blackManSet(int x, int y) //places black pawn on the field (x,y) returns true if it succeeds
         //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
@@ -176,13 +182,13 @@ namespace Project1
             for (int i = 0; i < boardSize; i=i+2)
             {
 
-                redPawnSet(0, i);
+                redManSet(0, i);
                 redKingSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
-                redPawnSet(2, i);
+                redManSet(2, i);
 
-                blackPawnSet(5, i+1);
+                blackManSet(5, i+1);
                 blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
-                blackPawnSet(7, i+1);
+                blackManSet(7, i+1);
             }
         }
 

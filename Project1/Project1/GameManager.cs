@@ -58,11 +58,11 @@ namespace Project1
         private int checkWin()
         //Author: Kasper
         {
-            if (p1.availableMoves.isEmpty())
+            if (board.legalMovesRed(board.copyCurrent()).Count==0)
             {
                 return 2; //indicates that p2 wins 
             }
-            if (p2.availableMoves.isEmpty())
+            if (false) //player 1 cannot win, too bad
             {
                 return 1; //indicates that p1 wins 
             }
@@ -70,7 +70,13 @@ namespace Project1
             {
                 return -1; //indicates that the game is over with no winners.
             }
-            return -9007;//MethodIncompleteException
+            return 0; //no win yet
+        }
+
+        private Boolean checkDraw()
+        //Author: Kasper
+        {
+            return false; //it is never a draw! or maybe this needs more work..
         }
     }
 }
