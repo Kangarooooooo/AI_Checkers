@@ -105,7 +105,11 @@ namespace Project1
                                 if (currentState[i + 1, j - 1] == 0)
                                 {
                                     temp = copy(currentState);
-                                    temp[i+1,j-1] = temp[i,j];
+                                temp[i + 1, j - 1] = temp[i,j];
+                                if (i == (boardSize - 2))
+                                {
+                                    temp[i + 1, j - 1] = 2;
+                                }
                                     temp[i, j] = 0;
                                     legalMovesRed.AddLast(temp);
                                 }
@@ -116,6 +120,10 @@ namespace Project1
                                 {
                                     temp = copy(currentState);
                                     temp[i + 1, j + 1] = temp[i, j];
+                                if (i == (boardSize - 2))
+                                {
+                                    temp[i + 1, j + 1] = 2;
+                                }
                                     temp[i, j] = 0;
                                     legalMovesRed.AddLast(temp);
                                 }
@@ -123,6 +131,10 @@ namespace Project1
                         }
                         if (currentState[i, j] > 1)//Current collors piece is present and a king
                         {
+                            if(i > 0 && j>0)
+                            {
+                                
+                            }
                          
                     }
                 }
@@ -208,7 +220,7 @@ namespace Project1
         private void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            redManSet(0, 0);
+            redManSet(boardSize-2, 0);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
