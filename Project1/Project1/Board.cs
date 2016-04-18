@@ -38,14 +38,13 @@ namespace Project1
         {
             int[,] copy = new int[boardSize, boardSize];
 
-            for(int i =0; i < boardSize; i++)
+            for (int i = 0; i < boardSize; i++)
             {
                 for (int j = 0; j < boardSize; j++)
                 {
                     copy[i, j] = board[i, j];
                 }
             }
-
             return copy;
         }
 
@@ -53,6 +52,52 @@ namespace Project1
         //Author: Kasper
         {
             return copy(b);
+        }
+
+        //Author Kangarooooooo
+        public Boolean canPieceCapture(int[,] currentState, int x, int y)
+        {
+            if (currentState[x, y] > 0)
+            {
+                if (x < boardSize - 2)//Can capture forward
+                {
+                    if (y > 1)//Can capture to left
+                    {
+                        if ((currentState[x + 1, y - 1] < 0) && currentState[x + 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                    if (y < boardSize - 2)//Can capture to right
+                    {
+                        if (currentState[x + 1, y + 1] < 0 && currentState[x + 2, y + 2] == 0)//Piece to capture and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (currentState[x, y] > -1)//Is king
+            {
+                if (x > 1)//Can capture backwards
+                {
+                    if (y > 1)//Can capture to left
+                    {
+                        if ((currentState[x - 1, y - 1] < 0) && currentState[x - 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                    if (y < boardSize - 2)//Can capture to the right
+                    {
+                        if (currentState[x - 1, y + 1] < 0 && currentState[x - 2, y + 2] == 0)//Piece to capture and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
         }
 
         //Author Kangarooooooo
@@ -73,15 +118,15 @@ namespace Project1
                         if ((i < (boardSize - 2)) && (j > 1))//Check capture above to left
                         {
                             if ((i < (boardSize - 1)) && (j > 0))//Check piece above to left
-                    {
-                        
+                            {
+
+                            }
+                        }
                     }
                 }
+
             }
-                }
-                
-            }
-        return legalCapturesRed;
+            return legalCapturesRed;
         }
         //Author Kangarooooooo
         /// <summary>
@@ -90,56 +135,74 @@ namespace Project1
         /// <param name="currentState"></param>
         /// <returns></returns>
         public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
-            {
+        {
             LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
-            int[,] temp = new int[boardSize,boardSize];
+            int[,] temp = new int[boardSize, boardSize];
 
-                for (int i = 0; i < boardSize; i++)
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
                 {
-                    for (int j = 0; j < boardSize; j++)
+                    if (currentState[i, j] > 0)//Current collors piece is present
                     {
-                        if (currentState[i, j] > 0)//Current collors piece is present
+                        if ((i < (boardSize - 1)) && (j > 0))//Check move above to left
                         {
-                            if ((i < (boardSize - 1)) && (j > 0))//Check move above to left
+                            if (currentState[i + 1, j - 1] == 0)
                             {
-                                if (currentState[i + 1, j - 1] == 0)
-                                {
-                                    temp = copy(currentState);
-                                temp[i + 1, j - 1] = temp[i,j];
+                                temp = copy(currentState);
+                                temp[i + 1, j - 1] = temp[i, j];
                                 if (i == (boardSize - 2))
                                 {
                                     temp[i + 1, j - 1] = 2;
                                 }
-                                    temp[i, j] = 0;
-                                    legalMovesRed.AddLast(temp);
-                                }
+                                temp[i, j] = 0;
+                                legalMovesRed.AddLast(temp);
                             }
-                            if(( i < (boardSize - 1)) && (j<(boardSize-1)))//Check move above to right
+                        }
+                        if ((i < (boardSize - 1)) && (j < (boardSize - 1)))//Check move above to right
+                        {
+                            if (currentState[i + 1, j + 1] == 0)
                             {
-                                if(currentState[i+1,j+1] == 0)
-                                {
-                                    temp = copy(currentState);
-                                    temp[i + 1, j + 1] = temp[i, j];
+                                temp = copy(currentState);
+                                temp[i + 1, j + 1] = temp[i, j];
                                 if (i == (boardSize - 2))
                                 {
                                     temp[i + 1, j + 1] = 2;
                                 }
+                                temp[i, j] = 0;
+                                legalMovesRed.AddLast(temp);
+                            }
+                        }
+                    }
+                    if (currentState[i, j] > 1)//Current collors piece is present and a king
+                    {
+
+                        if (i > 0)
+                        {
+                            if (j > 0)
+                            {
+                                if (currentState[i - 1, j - 1] == 0)
+                                {
+                                    temp = copy(currentState);
+                                    temp[i - 1, j - 1] = temp[i, j];
+                                    temp[i, j] = 0;
+                                    legalMovesRed.AddLast(temp);
+                                }
+                            }
+                            if (j < boardSize - 1)
+                            {
+                                if (currentState[i - 1, j + 1] == 0)
+                                {
+                                    temp = copy(currentState);
+                                    temp[i - 1, j + 1] = temp[i, j];
                                     temp[i, j] = 0;
                                     legalMovesRed.AddLast(temp);
                                 }
                             }
                         }
-                        if (currentState[i, j] > 1)//Current collors piece is present and a king
-                        {
-                            if(i > 0 && j>0)
-                            {
-                                
-                            }
-                         
                     }
                 }
             }
-            
             return legalMovesRed;
         }
 
@@ -179,7 +242,7 @@ namespace Project1
         //Author: Kasper
         {
             Boolean truth = false; //assumes that functioncall fails
-            if(read(x, y) == 0) //checks if field is empty, represented by 0
+            if (read(x, y) == 0) //checks if field is empty, represented by 0
             {
                 truth = true; //success
                 b[x, y] = -1; //place black pawn, represented by -1;
@@ -204,23 +267,23 @@ namespace Project1
         private void startState() //call this to place all the starting pieces in their correct positions
         //Author: Kasper
         {
-            for (int i = 0; i < boardSize; i=i+2)
+            for (int i = 0; i < boardSize; i = i + 2)
             {
-
                 redManSet(0, i);
-                redKingSet(1, i+1); //should ofcourse be a pawn, but king is set just to test it
+                redKingSet(1, i + 1); //should ofcourse be a pawn, but king is set just to test it
                 redManSet(2, i);
 
-                blackManSet(5, i+1);
+                blackManSet(5, i + 1);
                 blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
-                blackManSet(7, i+1);
+                blackManSet(7, i + 1);
             }
         }
 
         private void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            redManSet(boardSize-2, 0);
+
+            redKingSet(2, 2);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
@@ -235,7 +298,7 @@ namespace Project1
         {
             return b[x, y];
         }
-        
+
         public int evaluate() //evaluates the board with the red player as the maximizer.
         //Author: Kasper
         //it counts the number of red pieces on the board and subtracts the black pieces. Kings count for double!
@@ -255,12 +318,12 @@ namespace Project1
         //Author: Kasper
         {
             Boolean truth = false; //assumes that there is nothing to delete
-            if(read(x, y) != 0) //if there is a piece
+            if (read(x, y) != 0) //if there is a piece
             {
                 truth = true; //success
                 b[x, y] = 0; //force-clears the field
             }
-            return truth; 
+            return truth;
         }
 
         public void showBoard()
@@ -283,7 +346,7 @@ namespace Project1
 
             //first we write the very top row (just a line encircling the entire board)
             showFullLine(); //draws a horizontal row
-            
+
 
             //then we write all the rows that exist in between
             for (int i = boardSize - 1; i >= 0; i--)
@@ -295,7 +358,7 @@ namespace Project1
                 showEmptyLine(); //draws a line with only vertical rows
                 showTopBot(i); //draws the top/bottom row of the 5x3 artstyle for all spaces in row i. Top and bottom of the ASCII art are identical!
                 showMiddle(i); //draws the middle row of the 5x3 artstyle for all spaces in row i
-                showTopBot(i); 
+                showTopBot(i);
                 showEmptyLine();
                 showFullLine();
             }
