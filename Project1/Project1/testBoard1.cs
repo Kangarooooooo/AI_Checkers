@@ -11,11 +11,11 @@ namespace Project1
         static void Main(string[] args)
         {
             Board board = new Board();
-            MoveGenerator mg = new MoveGenerator(board);
+            MoveGenerator POLICE = new MoveGenerator(board);
             Console.WriteLine("This is the current board:\n");
             board.showBoard();
             Console.WriteLine("NOW we attempt to fetch the new moves:");
-            LinkedList<Move> legalMoves = mg.legalMovesBlackNow();
+            LinkedList<Move> legalMoves = POLICE.legalMovesBlackNow(); //WHOOP WHOOP dat's the sound of da' poliiice!
             Console.WriteLine("Size of legalMoves is: " + legalMoves.Count()+"\n");
             int n = 1;
             /*
