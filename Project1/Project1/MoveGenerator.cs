@@ -156,6 +156,7 @@ namespace Project1
                                     temp[i + 1, j - 1] = 2;
                                 }
                                 temp[i, j] = 0;
+
                                 legalMovesRed.AddLast(temp);
                             }
                         }
@@ -212,10 +213,10 @@ namespace Project1
             return legalMovesRed(boardReference.copyCurrent());
         }
 
-        public LinkedList<String> MovesToStrings()
+        public String PlyToString()
         //Author: Kasper
         {
-            return new LinkedList<string>(); //NOT A PROPER RETURN VALUE 
+            return "AlohaSnackbar"; //NOT A PROPER RETURN VALUE 
         }
     }
 }
