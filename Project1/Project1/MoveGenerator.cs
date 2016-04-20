@@ -108,6 +108,10 @@ namespace Project1
             int i = 0;
             foreach (Move move in moves)
             {
+                if (canPieceCapture(move.getState(),1,1))
+                {
+
+                }
                 i++;
             }
             return null;
