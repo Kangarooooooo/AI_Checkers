@@ -102,7 +102,16 @@ namespace Project1
             }
             return false;
         }
-
+        LinkedList<Move> legalCapturesRedAI(int [,] currentState)
+        {
+            LinkedList<Move>  moves = legalCapturesRed(currentState);
+            int i = 0;
+            foreach (Move move in moves)
+            {
+                i++;
+            }
+            return null;
+        }
         //Author Kangarooooooo
         /// <summary>
         /// Method takes a boardstate and returns a list of legal boardstates, representating the legal captures given the current boardstate.List is empty if no legal moves exist.
@@ -217,7 +226,7 @@ namespace Project1
                                 if ((currentState[i - 1, j - 1] > 0) && currentState[i - 2, j - 2] == 0)//Piece to capture, and space to do it.
                                 {
                                     temp = boardReference.copy(currentState);
-                                    temp[i - 1, j - 1] = temp[i, j];
+                                    temp[i - 2, j - 2] = temp[i, j];
                                     if (i == 2)
                                     {
                                         temp[i - 2, j - 2] = -2;
@@ -232,7 +241,7 @@ namespace Project1
                                 if (currentState[i - 1, j + 1] > 0 && currentState[i - 2, j + 2] == 0)//Piece to capture and space to do it.
                                 {
                                     temp = boardReference.copy(currentState);
-                                    temp[i - 1, j + 1] = temp[i, j];
+                                    temp[i - 2, j + 2] = temp[i, j];
                                     if (i == 2)
                                     {
                                         temp[i - 2, j + 2] = -2;

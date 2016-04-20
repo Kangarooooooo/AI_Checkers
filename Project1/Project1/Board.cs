@@ -161,15 +161,32 @@ namespace Project1
         //Author: Kasper
         //it counts the number of red pieces on the board and subtracts the black pieces. Kings count for double!
         {
-            int returnVal = 0; //board score
+            int red = 0;
+            int black = 0;
             for (int i = 0; i < boardSize; i++) //for each row
             {
                 for (int j = 0; j < boardSize; j++) //for each column
                 {
-                    returnVal = returnVal + read(i, j); //add the piece value to the board score 
+                    if (read(i, j) > 0)
+                    {
+                        red +=read(i, j);
+                    }
+                    else
+                    {
+                        black += read(i, j);
+                    }
+                   
                 }
             }
-            return returnVal; //send back result
+            if (red == 0)
+            {
+                return -10000;
+            }
+            if (black == 0)
+            {
+                return 10000;
+            }
+            return red + black; //send back result
         }
 
         public Boolean remove(int x, int y) //designed to remove a piece from the board
