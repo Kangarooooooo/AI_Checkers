@@ -14,7 +14,7 @@ namespace Project1
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
             LinkedList<Move> legalActions,legalMoves=new LinkedList<Move>(),legalCaptures;
-            board.startState();
+            board.startState2();
             Console.WriteLine("This is the current board:\n");
             int n, choice;
             while (pigs != ableToFly) //should never happen
