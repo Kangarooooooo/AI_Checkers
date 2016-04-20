@@ -10,17 +10,23 @@ namespace Project1
     {
         static void Main(string[] args)
         {
-            Boolean cap = true;
+            Boolean cap;
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
             LinkedList<Move> legalActions,legalMoves=new LinkedList<Move>(),legalCaptures;
-            board.startState2();
+            board.startState3();
             Console.WriteLine("This is the current board:\n");
-            int n, choice;
+            int n, choice,testCount;
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
+                testCount = 0;
+                cap = true;
                 do
                 {
+                    if (testCount > 0)
+                    {
+                        Console.WriteLine("Red do-while went through a second time!");
+                    }
                     board.showBoard();
                     Console.WriteLine("Red player must now choose a possible move:\n");
                     legalCaptures = mg.legalCapturesRedNow();
@@ -43,11 +49,17 @@ namespace Project1
                     Console.WriteLine("\nWhich move will red player choose? enter a number");
                     choice = Int32.Parse(Console.ReadLine());
                     board.doMove(legalActions.ElementAt(choice - 1));
+                    testCount++;
                 }
                 while (cap && mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
 
+                testCount = 0;
                 cap = true;
                 do {
+                    if (testCount > 0)
+                    {
+                        Console.WriteLine("Red do-while went through a second time!");
+                    }
                     board.showBoard();
                     Console.WriteLine("Black player must now choose a possible move:\n");
                     legalCaptures = mg.legalCapturesBlackNow();
@@ -70,8 +82,12 @@ namespace Project1
                     Console.WriteLine("\nWhich move will black player choose? enter a number");
                     choice = Int32.Parse(Console.ReadLine());
                     board.doMove(legalActions.ElementAt(choice - 1));
+                    testCount++;
                 } while (cap && mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
             }
+            board.showBoard();
+            Console.WriteLine("Loop terminated, win?");
+            Console.ReadLine();
         }
     }
 }
