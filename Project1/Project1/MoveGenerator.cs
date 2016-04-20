@@ -196,6 +196,12 @@ namespace Project1
             return legalCapturesRed;
         }
 
+        public LinkedList<Move> legalCapturesRedNow()
+        //Author: Kasper
+        {
+            return legalCapturesRed(boardReference.copyCurrent());
+        }
+
         //Author Kangarooooooo
         /// <summary>
         /// Method takes a boardstate and returns a list of legal boardstates, representating the legal captures given the current boardstate.List is empty if no legal moves exist.
@@ -279,6 +285,13 @@ namespace Project1
             }
             return legalCapturesBlack;
         }
+
+        public LinkedList<Move> legalCapturesBlackNow()
+        //Author: Kasper
+        {
+            return legalCapturesBlack(boardReference.copyCurrent());
+        }
+
         //Author Kangarooooooo
         /// <summary>
         /// Method takes a boardstate and returs a list of legal boardtates, representing the legal moves given the curent boardstate. List is empty if no legal moves exist.

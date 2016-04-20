@@ -13,37 +13,55 @@ namespace Project1
             Boolean pigs = true, ableToFly = false;
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
-            LinkedList<Move> legalMoves;
-            board.startState2();
+            LinkedList<Move> legalActions,legalMoves=new LinkedList<Move>(),legalCaptures;
+            board.startState();
             Console.WriteLine("This is the current board:\n");
             int n, choice;
             while (pigs != ableToFly) //should never happen
             {
                 board.showBoard();
                 Console.WriteLine("Red player must now choose a possible move:\n");
-                legalMoves = mg.legalMovesRedNow();
+                legalCaptures = mg.legalCapturesRedNow();
+                if(legalCaptures.Count == 0)
+                {
+                    legalMoves = mg.legalMovesRedNow();
+                }
+                else
+                {
+                    legalMoves = new LinkedList<Move>();
+                }
+                legalActions = new LinkedList<Move>(legalMoves.Concat(legalCaptures));
                 n = 1;
-                foreach (Move move in legalMoves)
+                foreach (Move move in legalActions)
                 {
                     Console.WriteLine("   "+n+". move: " + move.getString() + "\n");
                     n++;
                 }
                 Console.WriteLine("\nWhich move will red player choose? enter a number");
                 choice = Int32.Parse(Console.ReadLine());
-                board.doMove(legalMoves.ElementAt(choice - 1));
+                board.doMove(legalActions.ElementAt(choice - 1));
 
                 board.showBoard();
                 Console.WriteLine("Black player must now choose a possible move:\n");
-                legalMoves = mg.legalMovesBlackNow();
+                legalCaptures = mg.legalCapturesBlackNow();
+                if (legalCaptures.Count == 0)
+                {
+                    legalMoves = mg.legalMovesBlackNow();
+                }
+                else
+                {
+                    legalMoves = new LinkedList<Move>();
+                }
+                legalActions = new LinkedList<Move>(legalMoves.Concat(legalCaptures));
                 n = 1;
-                foreach (Move move in legalMoves)
+                foreach (Move move in legalActions)
                 {
                     Console.WriteLine("   " + n + ". move: " + move.getString() + "\n");
                     n++;
                 }
                 Console.WriteLine("\nWhich move will black player choose? enter a number");
                 choice = Int32.Parse(Console.ReadLine());
-                board.doMove(legalMoves.ElementAt(choice - 1));
+                board.doMove(legalActions.ElementAt(choice - 1));
             }
         }
     }
