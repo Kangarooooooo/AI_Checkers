@@ -508,5 +508,28 @@ namespace Project1
             s = s + "" + (newx + 1);
             return s;
         }
+        int charToInt(char s)
+        {
+            switch (s) { 
+                case 'a':
+                return 0;
+                case 'b':
+                    return 1;
+                case 'c':
+                    return 2;
+                case 'd':
+                    return 3;
+                case 'e':
+                    return 4;
+                case 'f':
+                    return 5;
+                case 'g':
+                    return 6;
+                case 'h':
+                    return 7;
+                default:
+                    return 0;
+            }
+        }
     }
 }
