@@ -19,9 +19,9 @@ namespace Project1
             Board tempBoard;
             int n = 1;
             foreach(int[,] matrix in legalMoves){
-                Console.WriteLine("After-move-state number "+n);
+                Console.WriteLine("After-move-state number "+n+":\n");
                 tempBoard = new Board(matrix);
-                tempBoard.showBoard();
+                tempBoard.showBoardCustom(ConsoleColor.Green);
                 n++;
             }
             Console.WriteLine("Now make a choice: (except you cant, yet)");

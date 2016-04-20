@@ -12,16 +12,16 @@ namespace Project1
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
         int boardSize;
         ConsoleColor //Color variables. Change to personal preferences if you like.
+            curBase,
             P1 = ConsoleColor.Cyan,
             P2 = ConsoleColor.Red,
             king = ConsoleColor.Yellow,
-            baseColor1 = ConsoleColor.Gray,
-            baseColor2 = ConsoleColor.Yellow;
+            baseColor = ConsoleColor.Gray;
         LinkedList<int[,]> list = new LinkedList<int[,]>();
         public Board()
         //Author: Kasper
         {
-            Console.ForegroundColor = baseColor1;
+            //Console.ForegroundColor = baseColor;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
             startState2(); //sets the pieces in the correct position
@@ -29,7 +29,7 @@ namespace Project1
 
         public Board(int[,] board)
         {
-            Console.ForegroundColor = baseColor2;
+            //Console.ForegroundColor = baseColor;
             boardSize = 8;
             b = board; //8x8 spaces representing the 64 field gameboard.
         }
@@ -208,7 +208,7 @@ namespace Project1
         private void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            redManSet(0, 0);
+            redManSet(0, 2);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
@@ -254,6 +254,14 @@ namespace Project1
         public void showBoard()
         //Author: Kasper
         {
+            showBoardCustom(baseColor);
+        }
+
+        public void showBoardCustom(ConsoleColor color)
+        //Author: Kasper
+        {
+            curBase = color;
+            Console.ForegroundColor = curBase;
             /*
             shows the board using the puUURtiest 5x3 ASCII artwork
             
@@ -287,6 +295,8 @@ namespace Project1
                 showEmptyLine();
                 showFullLine();
             }
+            Console.WriteLine("");
+            Console.ForegroundColor = baseColor;
         }
 
         //a lot of functions used JUST for drawing..
@@ -324,12 +334,12 @@ namespace Project1
                     case (-2):
                         Console.ForegroundColor = P1;
                         Console.Write("  xxx  ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     case (-1):
                         Console.ForegroundColor = P1;
                         Console.Write("  xxx  ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     case (0):
                         Console.Write("       ");
@@ -337,12 +347,12 @@ namespace Project1
                     case (1):
                         Console.ForegroundColor = P2;
                         Console.Write("  ooo  ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     case (2):
                         Console.ForegroundColor = P2;
                         Console.Write("  ooo  ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     default:
                         //NOTHING, ERROR!
@@ -369,12 +379,12 @@ namespace Project1
                         Console.Write("K");
                         Console.ForegroundColor = P1;
                         Console.Write(" x ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     case (-1):
                         Console.ForegroundColor = P1;
                         Console.Write(" x   x ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     case (0):
                         Console.Write("       ");
@@ -382,7 +392,7 @@ namespace Project1
                     case (1):
                         Console.ForegroundColor = P2;
                         Console.Write(" o   o ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     case (2):
                         Console.ForegroundColor = P2;
@@ -391,7 +401,7 @@ namespace Project1
                         Console.Write("K");
                         Console.ForegroundColor = P2;
                         Console.Write(" o ");
-                        Console.ForegroundColor = baseColor1;
+                        Console.ForegroundColor = curBase;
                         break;
                     default:
                         //NOTHING, ERROR!
