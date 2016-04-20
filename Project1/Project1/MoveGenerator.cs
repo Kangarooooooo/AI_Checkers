@@ -133,7 +133,7 @@ namespace Project1
                         {
                             if (j > 1)//Can capture to left
                             {
-                                if ((currentState[i + 1, j - 1] < 0) && currentState[i + 2, j - 2] == 0)//Piece to capture, and space to do it.
+                                if ((currentState[i + 1, j - 1] < 0) && (currentState[i + 2, j - 2] == 0))//Piece to capture, and space to do it.
                                 {
                                     temp = boardReference.copy(currentState);
                                     temp[i + 2, j - 2] = temp[i, j];
@@ -163,7 +163,7 @@ namespace Project1
                             }
                         }
                     }
-                    if (currentState[i, j] > -1)//Is king
+                    if (currentState[i, j] > 1)//Is red king
                     {
                         if (i > 1)//Can capture backwards
                         {
