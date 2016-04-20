@@ -16,6 +16,12 @@ namespace Project1
             state = new int[8, 8];
         }
 
+        public Move(int[,] newState, String newString)
+        {
+            state = newState;
+            stateString = newString;
+        }
+
         public void setState(int[,] newState)
         {
             state = newState;

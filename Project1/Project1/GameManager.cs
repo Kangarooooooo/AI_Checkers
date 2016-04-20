@@ -56,7 +56,7 @@ namespace Project1
 
         }
 
-        private int checkWin()
+        /*private int checkWin()
         //Author: Kasper
         {
             if (board.legalMovesRed(board.copyCurrent()).Count==0)
@@ -72,6 +72,6 @@ namespace Project1
                 return -1; //indicates that the game is over with no winners.
             }
             return 0; //no win yet
-        }
+        }*/
     }
 }
