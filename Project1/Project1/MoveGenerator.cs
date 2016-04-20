@@ -172,7 +172,7 @@ namespace Project1
                                     temp[i + 1, j - 1] = 2; //upgrade if in endzone
                                 }
                                 temp[i, j] = 0;
-                                legalMovesRed.AddLast(new Move(temp,"DEUS VULT"));
+                                legalMovesRed.AddLast(new Move(temp,PlyToString(i,j,i+1,j-1)));
                             }
                         }
                         if ((i < (boardSize - 1)) && (j < (boardSize - 1)))//Check move above to right
@@ -186,7 +186,8 @@ namespace Project1
                                     temp[i + 1, j + 1] = 2; //upgrade if in endzone
                                 }
                                 temp[i, j] = 0;
-                                legalMovesRed.AddLast(new Move(temp, "DEUS VULT"));
+
+                                legalMovesRed.AddLast(new Move(temp, PlyToString(i,j,i+1,j+1)));
                             }
                         }
                     }
@@ -202,7 +203,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i - 1, j - 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    legalMovesRed.AddLast(new Move(temp, "DEUS VULT"));
+                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1)));
                                 }
                             }
                             if (j < boardSize - 1)
@@ -212,7 +213,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i - 1, j + 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    legalMovesRed.AddLast(new Move(temp, "DEUS VULT"));
+                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1)));
                                 }
                             }
                         }
@@ -228,7 +229,7 @@ namespace Project1
             return legalMovesRed(boardReference.copyCurrent());
         }
 
-        public String PlyToString()
+        public String PlyToString(int oldx, int oldy, int newx, int newy)
         //Author: Kasper
         {
             return "AlohaSnackbar"; //NOT A PROPER RETURN VALUE 
