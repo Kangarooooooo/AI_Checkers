@@ -138,7 +138,7 @@ namespace Project1
         private void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-
+            blackManSet(3, 3);
             redKingSet(2, 2);
         }
 

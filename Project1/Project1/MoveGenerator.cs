@@ -87,11 +87,12 @@ namespace Project1
                                 {
                                     temp = boardReference.copy(currentState);
                                     temp[i + 2, j - 2] = temp[i, j];
-                                    if (i == (boardSize - 2))
+                                    if (i == (boardSize - 1))
                                     {
                                         temp[i + 2, j - 2] = 2;
                                     }
                                     temp[i, j] = 0;
+                                    temp[i + 1, j - 1] = 0;
                                     legalCapturesRed.AddLast(temp);
                                 }
                             }
@@ -99,7 +100,15 @@ namespace Project1
                             {
                                 if (currentState[i + 1, j + 1] < 0 && currentState[i + 2, j + 2] == 0)//Piece to capture and space to do it.
                                 {
-                                    return null;
+                                    temp = boardReference.copy(currentState);
+                                    temp[i + 2, j + 2] = temp[i, j];
+                                    if (i == (boardSize - 1))
+                                    {
+                                        temp[i + 2, j + 2] = 2;
+                                    }
+                                    temp[i, j] = 0;
+                                    temp[i + 1, j + 1] = 0;
+                                    legalCapturesRed.AddLast(temp);
                                 }
                             }
                         }
@@ -112,19 +121,26 @@ namespace Project1
                             {
                                 if ((currentState[i - 1, j - 1] < 0) && currentState[i - 2, j - 2] == 0)//Piece to capture, and space to do it.
                                 {
-                                    return null;
+                                    temp = boardReference.copy(currentState);
+                                    temp[i - 2, j - 2] = temp[i, j];
+                                    temp[i, j] = 0;
+                                    temp[i - 1, j - 1] = 0;
+                                    legalCapturesRed.AddLast(temp);
                                 }
                             }
                             if (j < boardSize - 2)//Can capture to the right
                             {
                                 if (currentState[i - 1, j + 1] < 0 && currentState[i - 2, j + 2] == 0)//Piece to capture and space to do it.
                                 {
-                                    return null;
+                                    temp = boardReference.copy(currentState);
+                                    temp[i - 2, j + 2] = temp[i, j];
+                                    temp[i, j] = 0;
+                                    temp[i - 1, j + 1] = 0;
+                                    legalCapturesRed.AddLast(temp);
                                 }
                             }
                         }
                     }
-                    return null;
                 }
             }
             return legalCapturesRed;
