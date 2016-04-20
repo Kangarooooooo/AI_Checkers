@@ -212,5 +212,10 @@ namespace Project1
             return legalMovesRed(boardReference.copyCurrent());
         }
 
+        public LinkedList<String> MovesToStrings()
+        //Author: Kasper
+        {
+            return new LinkedList<string>(); //NOT A PROPER RETURN VALUE 
+        }
     }
 }
