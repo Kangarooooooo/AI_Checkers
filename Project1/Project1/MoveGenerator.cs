@@ -154,7 +154,6 @@ namespace Project1
         public LinkedList<Move> legalMovesRed(int[,] currentState)//return list of legalmoves
         {
             LinkedList<Move> legalMovesRed = new LinkedList<Move>();
-            Move move;
             int[,] temp = new int[boardSize, boardSize];
             for (int i = 0; i < boardSize; i++)
             {
@@ -173,9 +172,7 @@ namespace Project1
                                     temp[i + 1, j - 1] = 2; //upgrade if in endzone
                                 }
                                 temp[i, j] = 0;
-                                move = new Move();
-                                move.setState(temp);
-                                legalMovesRed.AddLast(move);
+                                legalMovesRed.AddLast(new Move(temp,"DEUS VULT"));
                             }
                         }
                         if ((i < (boardSize - 1)) && (j < (boardSize - 1)))//Check move above to right
@@ -189,9 +186,7 @@ namespace Project1
                                     temp[i + 1, j + 1] = 2; //upgrade if in endzone
                                 }
                                 temp[i, j] = 0;
-                                move = new Move();
-                                move.setState(temp);
-                                legalMovesRed.AddLast(move);
+                                legalMovesRed.AddLast(new Move(temp, "DEUS VULT"));
                             }
                         }
                     }
@@ -207,9 +202,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i - 1, j - 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    move = new Move();
-                                    move.setState(temp);
-                                    legalMovesRed.AddLast(move);
+                                    legalMovesRed.AddLast(new Move(temp, "DEUS VULT"));
                                 }
                             }
                             if (j < boardSize - 1)
@@ -219,9 +212,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i - 1, j + 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    move = new Move();
-                                    move.setState(temp);
-                                    legalMovesRed.AddLast(move);
+                                    legalMovesRed.AddLast(new Move(temp, "DEUS VULT"));
                                 }
                             }
                         }
