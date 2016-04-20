@@ -109,22 +109,60 @@ namespace Project1
         public LinkedList<int[,]> legalCapturesRed(int[,] currentState)//return list of legalmoves
         {
             LinkedList<int[,]> legalCapturesRed = new LinkedList<int[,]>();
+            int[,] temp = new int[boardSize, boardSize];
             for (int i = 0; i < boardSize; i++)//Check for legal captures
             {
                 for (int j = 0; j < boardSize; j++)
                 {
-                    if (currentState[i, j] > 0)//Current collors piece is present
+                    if (currentState[i, j] > 0)
                     {
-                        if ((i < (boardSize - 2)) && (j > 1))//Check capture above to left
+                        if (i < boardSize - 2)//Can capture forward
                         {
-                            if ((i < (boardSize - 1)) && (j > 0))//Check piece above to left
+                            if (j > 1)//Can capture to left
                             {
-
+                                if ((currentState[i + 1, j - 1] < 0) && currentState[i + 2, j - 2] == 0)//Piece to capture, and space to do it.
+                                {
+                                    temp = copy(currentState);
+                                    temp[i + 2, j - 2] = temp[i, j];
+                                    if (i == (boardSize - 2))
+                                    {
+                                        temp[i + 2, j - 2] = 2;
+                                    }
+                                    temp[i, j] = 0;
+                                    legalCapturesRed.AddLast(temp);
+                                }
+                            }
+                            if (j < boardSize - 2)//Can capture to right
+                            {
+                                if (currentState[i + 1, j + 1] < 0 && currentState[i + 2, j + 2] == 0)//Piece to capture and space to do it.
+                                {
+                                    return null;
+                                }
                             }
                         }
                     }
+                    if (currentState[i, j] > -1)//Is king
+                    {
+                        if (i > 1)//Can capture backwards
+                        {
+                            if (j > 1)//Can capture to left
+                            {
+                                if ((currentState[i - 1, j - 1] < 0) && currentState[i - 2, j - 2] == 0)//Piece to capture, and space to do it.
+                                {
+                                    return null;
+                                }
+                            }
+                            if (j < boardSize - 2)//Can capture to the right
+                            {
+                                if (currentState[i - 1, j + 1] < 0 && currentState[i - 2, j + 2] == 0)//Piece to capture and space to do it.
+                                {
+                                    return null;
+                                }
+                            }
+                        }
+                    }
+                    return null;
                 }
-
             }
             return legalCapturesRed;
         }
