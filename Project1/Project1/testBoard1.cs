@@ -16,8 +16,7 @@ namespace Project1
             board.showBoard();
             Console.WriteLine("NOW we attempt to fetch the new moves:");
             LinkedList<Move> legalMoves = mg.legalMovesRedNow();
-            Console.WriteLine("Size of legalMoves is: " + legalMoves.Count());
-            Board tempBoard;
+            Console.WriteLine("Size of legalMoves is: " + legalMoves.Count()+"\n");
             int n = 1;
             /*
             if (board.canPieceCapture(board.copyCurrent(), 2, 2))
@@ -26,8 +25,8 @@ namespace Project1
             }
             */
             foreach(Move move in legalMoves){
-                Console.WriteLine("After-move-state number "+n+":\n");
-                Console.WriteLine("moveString: "+move.getString());
+                Console.WriteLine("After-move-state number "+n+":");
+                Console.WriteLine("moveString: "+move.getString()+"\n");
                 n++;
             }
             Console.WriteLine("Now make a choice: (except you cant, yet)");

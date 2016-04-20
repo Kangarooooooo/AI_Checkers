@@ -233,6 +233,7 @@ namespace Project1
                 showEmptyLine();
                 showFullLine();
             }
+            showBotLabels();
             Console.WriteLine("");
             Console.ForegroundColor = baseColor;
         }
@@ -241,7 +242,7 @@ namespace Project1
         private void showFullLine()
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            Console.Write("   #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
             {
                 Console.Write("########"); //eight chars (+ the first char to begin. 9 chars with 7 empty spaces to encircle where there is room for the 5x3 piece-art)
@@ -252,7 +253,7 @@ namespace Project1
         private void showEmptyLine()
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            Console.Write("   #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
             {
                 Console.Write("       #"); //7 spaces + a char
@@ -263,7 +264,7 @@ namespace Project1
         private void showTopBot(int i) //top row of 5x3 ASCII art
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            Console.Write("   #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
             {
                 int piece = read(i, j);
@@ -304,7 +305,8 @@ namespace Project1
         private void showMiddle(int i)
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            //Console.Write("   #"); //leading char for the new line
+            Console.Write(" " + (i + 1) + " #");
             for (int j = 0; j < boardSize; j++)
             {
                 int piece = read(i, j);
@@ -346,6 +348,47 @@ namespace Project1
                         break;
                 }
                 Console.Write("#");
+            }
+            Console.WriteLine(""); //newLine
+        }
+
+        private void showBotLabels()
+        {
+            Console.WriteLine("");
+            Console.Write("    "); //leading char for the new line
+            for (int i = 0; i < boardSize; i++)
+            {
+                Console.Write("   "); //7 spaces + a char
+                switch (i) //first number added here
+                {
+                    case 0:
+                        Console.Write("a");
+                        break;
+                    case 1:
+                        Console.Write("b");
+                        break;
+                    case 2:
+                        Console.Write("c");
+                        break;
+                    case 3:
+                        Console.Write("d");
+                        break;
+                    case 4:
+                        Console.Write("e");
+                        break;
+                    case 5:
+                        Console.Write("f");
+                        break;
+                    case 6:
+                        Console.Write("g");
+                        break;
+                    case 7:
+                        Console.Write("h");
+                        break;
+                    default:
+                        break;
+                }
+                Console.Write("    ");
             }
             Console.WriteLine(""); //newLine
         }
