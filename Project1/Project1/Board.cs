@@ -24,7 +24,7 @@ namespace Project1
             //Console.ForegroundColor = baseColor;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
-            startState(); //sets the pieces in the correct position
+            startState2(); //sets the pieces in the correct position
         }
 
         public Board(int[,] board)
@@ -138,8 +138,8 @@ namespace Project1
         private void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            blackManSet(3, 3);
-            redKingSet(2, 2);
+            redManSet(3, 1);
+            blackKingSet(2, 0);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board

@@ -19,18 +19,21 @@ namespace Project1
             Console.WriteLine("Size of legalMoves is: " + legalMoves.Count());
             Board tempBoard;
             int n = 1;
-            /*
-            if (board.canPieceCapture(board.copyCurrent(), 2, 2))
+            //*
+            
+            if (mg.canPieceCapture(board.copyCurrent(), 2, 2))
             {
                 Console.WriteLine("We can capture");
             }
-            */
-            foreach(Move move in legalMoves){
+            /*/                       
+            
+            foreach (Move move in legalMoves){
                 Console.WriteLine("After-move-state number "+n+":\n");
                 tempBoard = new Board(move.getState());
                 tempBoard.showBoardCustom(ConsoleColor.Green);
                 n++;
             }
+            //*/
             Console.WriteLine("Now make a choice: (except you cant, yet)");
             Console.ReadLine(); //press enter to close, dimwit
         }
