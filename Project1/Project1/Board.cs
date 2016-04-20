@@ -110,14 +110,10 @@ namespace Project1
             return truth; //returns boolean representing success of this functioncall
         }
 
-        public void moveString(int[,] moveState)
-        /*Author: Kasper
-        MIGHT NOT BE NEEDED
-        designed to receive a list of 2D arrays, each array representing a new board state.
-        Each new state has a change, from this change, it can be seen which move
-        */
+        public void doMove(Move move)
         {
-
+            int[,] newMove = move.getState();
+            b = copy(newMove);
         }
 
         public void startState() //call this to place all the starting pieces in their correct positions
