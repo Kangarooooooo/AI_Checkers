@@ -12,6 +12,7 @@ namespace Project1
         {
             Board board = new Board();
             MoveGenerator POLICE = new MoveGenerator(board);
+            board.startState();
             Console.WriteLine("This is the current board:\n");
             board.showBoard();
             Console.WriteLine("NOW we attempt to fetch the new moves:");

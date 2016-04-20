@@ -24,14 +24,14 @@ namespace Project1
             //Console.ForegroundColor = baseColor;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
-            startState(); //sets the pieces in the correct position
+            startState2(); //sets the pieces in the correct position
         }
 
         public Board(int[,] board)
         {
             //Console.ForegroundColor = baseColor;
             boardSize = 8;
-            b = board; //8x8 spaces representing the 64 field gameboard.
+            b = board; //8x8 spaces representing the 64 field gameboard.    
         }
         //Author Kangarooooooo
         public int[,] copy(int[,] board)//Method that returns a new copy of the argument
@@ -120,7 +120,7 @@ namespace Project1
 
         }
 
-        private void startState() //call this to place all the starting pieces in their correct positions
+        public void startState() //call this to place all the starting pieces in their correct positions
         //Author: Kasper
         {
             for (int i = 0; i < boardSize; i = i + 2)
@@ -135,11 +135,17 @@ namespace Project1
             }
         }
 
-        private void startState2() //TestingStart for testing tests
+        public void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            blackManSet(3, 3);
-            redKingSet(2, 2);
+            redManSet(0, 0);
+            redManSet(0, 2);
+            redManSet(0, 4);
+            redManSet(0, 6);
+            blackManSet(7, 1);
+            blackManSet(7, 3);
+            blackManSet(7, 5);
+            blackManSet(7, 7);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
