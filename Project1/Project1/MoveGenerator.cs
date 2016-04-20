@@ -151,10 +151,14 @@ namespace Project1
         /// </summary>
         /// <param name="currentState"></param>
         /// <returns></returns>
-        public LinkedList<int[,]> legalMovesRed(int[,] currentState)//return list of legalmoves
+        public LinkedList<Move> legalMovesRed(int[,] currentState)//return list of legalmoves
         {
-            LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
-            int[,] temp = new int[boardSize, boardSize];
+            Move temp;
+            //OLDLINE LinkedList<int[,]> legalMovesRed = new LinkedList<int[,]>();
+            LinkedList<Move> legalMovesRed = new LinkedList<Move>();
+
+            //OLDLINE int[,] temp = new int[boardSize, boardSize];
+            temp = new Move();
             for (int i = 0; i < boardSize; i++)
             {
                 for (int j = 0; j < boardSize; j++)
@@ -165,13 +169,17 @@ namespace Project1
                         {
                             if (currentState[i + 1, j - 1] == 0)
                             {
-                                temp = boardReference.copy(currentState);
-                                temp[i + 1, j - 1] = temp[i, j];
+                                //OLDLINE temp = boardReference.copy(currentState);
+                                temp.setState(boardReference.copy(currentState));
+                                //OLDLINE temp[i + 1, j - 1] = temp[i, j];
+                                temp.modifyState(i + 1, j - 1, temp.readStatePos(i, j));
                                 if (i == (boardSize - 2))
                                 {
-                                    temp[i + 1, j - 1] = 2;
+                                    //OLDLINE temp[i + 1, j - 1] = 2; //upgrade if in endzone
+                                    temp.modifyState(i + 1, j - 1, 2); //upgrade if in endzone
                                 }
-                                temp[i, j] = 0;
+                                //OLDLINE temp[i, j] = 0;
+                                temp.modifyState(i, j, 0);
 
                                 legalMovesRed.AddLast(temp);
                             }
@@ -180,13 +188,17 @@ namespace Project1
                         {
                             if (currentState[i + 1, j + 1] == 0)
                             {
-                                temp = boardReference.copy(currentState);
-                                temp[i + 1, j + 1] = temp[i, j];
+                                //OLDLINE temp = boardReference.copy(currentState);
+                                temp.setState(boardReference.copy(currentState));
+                                //OLDLINE temp[i + 1, j + 1] = temp[i, j];
+                                temp.modifyState(i + 1, j + 1, temp.readStatePos(i, j));
                                 if (i == (boardSize - 2))
                                 {
-                                    temp[i + 1, j + 1] = 2;
+                                    //OLDLINE temp[i + 1, j + 1] = 2; //upgrade if in endzone
+                                    temp.modifyState(i + 1, j + 1, 2); //upgrade if in endzone
                                 }
-                                temp[i, j] = 0;
+                                //OLDLINE temp[i, j] = 0;
+                                temp.modifyState(i, j, 0);
                                 legalMovesRed.AddLast(temp);
                             }
                         }
@@ -198,21 +210,25 @@ namespace Project1
                         {
                             if (j > 0)
                             {
-                                if (currentState[i - 1, j - 1] == 0)
+                                if (currentState[i - 1, j - 1] == 0) //checking down left
                                 {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 1, j - 1] = temp[i, j];
-                                    temp[i, j] = 0;
+                                    //OLDLINE temp = boardReference.copy(currentState);
+                                    temp.setState(boardReference.copy(currentState));
+                                    //OLDLINE temp[i - 1, j - 1] = temp[i, j];
+                                    temp.modifyState(i - 1, j - 1, temp.readStatePos(i, j));
+                                    //OLDLINE temp[i, j] = 0;
+                                    temp.modifyState(i, j, 0);
                                     legalMovesRed.AddLast(temp);
                                 }
                             }
                             if (j < boardSize - 1)
                             {
-                                if (currentState[i - 1, j + 1] == 0)
+                                if (currentState[i - 1, j + 1] == 0) //checking down right
                                 {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 1, j + 1] = temp[i, j];
-                                    temp[i, j] = 0;
+                                    //OLDLINE temp = boardReference.copy(currentState);
+                                    temp.setState(boardReference.copy(currentState));
+                                    temp.modifyState(i - 1, j + 1, temp.readStatePos(i, j));
+                                    temp.modifyState(i, j, 0);
                                     legalMovesRed.AddLast(temp);
                                 }
                             }
@@ -223,7 +239,7 @@ namespace Project1
             return legalMovesRed;
         }
 
-        public LinkedList<int[,]> legalMovesRedNow()
+        public LinkedList<Move> legalMovesRedNow()
         //Author: Kasper
         {
             return legalMovesRed(boardReference.copyCurrent());
