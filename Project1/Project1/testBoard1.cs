@@ -24,12 +24,13 @@ namespace Project1
             {
                 Console.WriteLine("We can capture");
             }
-            */
+            /*/
             foreach(Move move in legalMoves){
                 Console.WriteLine("After-move-state number "+n+":");
                 Console.WriteLine("moveString: "+move.getString()+"\n");
                 n++;
             }
+            //*/
             Console.WriteLine("Now make a choice: (except you cant, yet)");
             Console.ReadLine(); //press enter to close, dimwit
         }

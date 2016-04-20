@@ -31,7 +31,7 @@ namespace Project1
         {
             //Console.ForegroundColor = baseColor;
             boardSize = 8;
-            b = board; //8x8 spaces representing the 64 field gameboard.    
+            b = board; //8x8 spaces representing the 64 field gameboard.
         }
         //Author Kangarooooooo
         public int[,] copy(int[,] board)//Method that returns a new copy of the argument
