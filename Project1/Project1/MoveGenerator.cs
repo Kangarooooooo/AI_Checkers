@@ -147,7 +147,7 @@ namespace Project1
                                     }
                                     temp[i, j] = 0;
                                     temp[i + 1, j - 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2)));
+                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2),i+2,j-2));
                                 }
                             }
                             if (j < boardSize - 2)//Can capture to right
@@ -162,7 +162,7 @@ namespace Project1
                                     }
                                     temp[i, j] = 0;
                                     temp[i + 1, j + 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2)));
+                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2),i+2,j+2));
                                 }
                             }
                         }
@@ -179,7 +179,7 @@ namespace Project1
                                     temp[i - 2, j - 2] = temp[i, j];
                                     temp[i, j] = 0;
                                     temp[i - 1, j - 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2)));
+                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2),i-2,j-2));
                                 }
                             }
                             if (j < boardSize - 2)//Can capture to the right
@@ -190,7 +190,7 @@ namespace Project1
                                     temp[i - 2, j + 2] = temp[i, j];
                                     temp[i, j] = 0;
                                     temp[i - 1, j + 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2)));
+                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2),i-2,j+2));
                                 }
                             }
                         }
@@ -237,7 +237,7 @@ namespace Project1
                                     }
                                     temp[i, j] = 0;
                                     temp[i - 1, j - 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2)));
+                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2),i-2,j-2));
                                 }
                             }
                             if (j < boardSize - 2)//Can capture to the right
@@ -252,7 +252,7 @@ namespace Project1
                                     }
                                     temp[i, j] = 0;
                                     temp[i - 1, j + 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2)));
+                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2),i-2,j+2));
                                 }
                             }
                         }
@@ -269,7 +269,7 @@ namespace Project1
                                     temp[i + 2, j - 2] = temp[i, j];
                                     temp[i, j] = 0;
                                     temp[i + 1, j - 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2)));
+                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2),i+2,j-2));
                                 }
                             }
                             if (j < boardSize - 2)//Can capture to right
@@ -280,7 +280,7 @@ namespace Project1
                                     temp[i + 2, j + 2] = temp[i, j];
                                     temp[i, j] = 0;
                                     temp[i + 1, j + 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2)));
+                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2),i+2,j+2));
                                 }
                             }
                         }
@@ -323,7 +323,7 @@ namespace Project1
                                     temp[i + 1, j - 1] = 2; //upgrade if in endzone
                                 }
                                 temp[i, j] = 0;
-                                legalMovesRed.AddLast(new Move(temp,PlyToString(i,j,i+1,j-1)));
+                                legalMovesRed.AddLast(new Move(temp,PlyToString(i,j,i+1,j-1),i+1,j-1));
                             }
                         }
                         if ((i < (boardSize - 1)) && (j < (boardSize - 1)))//Check move above to right
@@ -338,7 +338,7 @@ namespace Project1
                                 }
                                 temp[i, j] = 0;
 
-                                legalMovesRed.AddLast(new Move(temp, PlyToString(i,j,i+1,j+1)));
+                                legalMovesRed.AddLast(new Move(temp, PlyToString(i,j,i+1,j+1),i+1,j+1));
                             }
                         }
                     }
@@ -354,7 +354,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i - 1, j - 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1)));
+                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1),i-1,j-1));
                                 }
                             }
                             if (j < boardSize - 1)
@@ -364,7 +364,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i - 1, j + 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1)));
+                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1),i-1,j+1));
                                 }
                             }
                         }
@@ -407,7 +407,7 @@ namespace Project1
                                     temp[i - 1, j - 1] = -2; //upgrade if in endzone
                                 }
                                 temp[i, j] = 0;
-                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1)));
+                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1),i-1,j-1));
                             }
                         }
                         if ((i > 0) && (j < (boardSize - 1)))//Check move down right
@@ -422,7 +422,7 @@ namespace Project1
                                 }
                                 temp[i, j] = 0;
 
-                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1)));
+                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1),i-1,j+1));
                             }
                         }
                     }
@@ -438,7 +438,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i + 1, j - 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j - 1)));
+                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j - 1),i+1,j-1));
                                 }
                             }
                             if (j < (boardSize - 1))
@@ -448,7 +448,7 @@ namespace Project1
                                     temp = boardReference.copy(currentState);
                                     temp[i + 1, j + 1] = temp[i, j];
                                     temp[i, j] = 0;
-                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j + 1)));
+                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j + 1),i+1,j+1));
                                 }
                             }
                         }
