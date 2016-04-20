@@ -315,7 +315,7 @@ namespace Project1
                             }
                         }
                     }
-                    if (currentState[i, j] > 1)//Current collors piece is present and a king
+                    if (currentState[i, j] < -1)//Current collors piece is present and a king
                     {
 
                         if (i < (boardSize - 1))

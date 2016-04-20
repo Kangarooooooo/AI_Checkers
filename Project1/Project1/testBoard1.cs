@@ -15,7 +15,7 @@ namespace Project1
             Console.WriteLine("This is the current board:\n");
             board.showBoard();
             Console.WriteLine("NOW we attempt to fetch the new moves:");
-            LinkedList<Move> legalMoves = mg.legalMovesRedNow();
+            LinkedList<Move> legalMoves = mg.legalMovesBlackNow();
             Console.WriteLine("Size of legalMoves is: " + legalMoves.Count()+"\n");
             int n = 1;
             /*
