@@ -232,7 +232,72 @@ namespace Project1
         public String PlyToString(int oldx, int oldy, int newx, int newy)
         //Author: Kasper
         {
-            return "AlohaSnackbar"; //NOT A PROPER RETURN VALUE 
+            String s = ""; //init string
+
+            switch (oldy) //first number added here
+            {
+                case 0:
+                    s = s + "a";
+                    break;
+                case 1:
+                    s = s + "b";
+                    break;
+                case 2:
+                    s = s + "c";
+                    break;
+                case 3:
+                    s = s + "d";
+                    break;
+                case 4:
+                    s = s + "e";
+                    break;
+                case 5:
+                    s = s + "f";
+                    break;
+                case 6:
+                    s = s + "g";
+                    break;
+                case 7:
+                    s = s + "h";
+                    break;
+                default:
+                    break;
+            }
+
+            s = s + "" + (oldx + 1)+" to "; //adding the second number + some more
+
+            switch (newy) //third number added here
+            {
+                case 0:
+                    s = s + "a";
+                    break;
+                case 1:
+                    s = s + "b";
+                    break;
+                case 2:
+                    s = s + "c";
+                    break;
+                case 3:
+                    s = s + "d";
+                    break;
+                case 4:
+                    s = s + "e";
+                    break;
+                case 5:
+                    s = s + "f";
+                    break;
+                case 6:
+                    s = s + "g";
+                    break;
+                case 7:
+                    s = s + "h";
+                    break;
+                default:
+                    break;
+            }
+
+            s = s + "" + (newx + 1);
+            return s;
         }
     }
 }

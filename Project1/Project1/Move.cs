@@ -42,7 +42,7 @@ namespace Project1
             return state;
         }
 
-        public String getStateString()
+        public String getString()
         {
             return stateString;
         }

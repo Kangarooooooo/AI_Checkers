@@ -27,8 +27,7 @@ namespace Project1
             */
             foreach(Move move in legalMoves){
                 Console.WriteLine("After-move-state number "+n+":\n");
-                tempBoard = new Board(move.getState());
-                tempBoard.showBoardCustom(ConsoleColor.Green);
+                Console.WriteLine("moveString: "+move.getString());
                 n++;
             }
             Console.WriteLine("Now make a choice: (except you cant, yet)");
