@@ -378,7 +378,7 @@ namespace Project1
                                 temp[i - 1, j - 1] = temp[i, j];
                                 if (i == 1)
                                 {
-                                    temp[i - 1, j - 1] = 2; //upgrade if in endzone
+                                    temp[i - 1, j - 1] = -2; //upgrade if in endzone
                                 }
                                 temp[i, j] = 0;
                                 legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1)));

@@ -14,12 +14,12 @@ namespace Project1
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
             LinkedList<Move> legalMoves;
-            board.startState();
+            board.startState2();
             Console.WriteLine("This is the current board:\n");
-            board.showBoard();
             int n, choice;
-            while (pigs != ableToFly)
+            while (pigs != ableToFly) //should never happen
             {
+                board.showBoard();
                 Console.WriteLine("Red player must now choose a possible move:\n");
                 legalMoves = mg.legalMovesRedNow();
                 n = 1;
@@ -32,6 +32,7 @@ namespace Project1
                 choice = Int32.Parse(Console.ReadLine());
                 board.doMove(legalMoves.ElementAt(choice - 1));
 
+                board.showBoard();
                 Console.WriteLine("Black player must now choose a possible move:\n");
                 legalMoves = mg.legalMovesBlackNow();
                 n = 1;
