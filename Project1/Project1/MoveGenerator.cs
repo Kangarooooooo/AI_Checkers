@@ -352,10 +352,159 @@ namespace Project1
             return legalMovesRed(boardReference.copyCurrent());
         }
 
+        //Author Kasper
+        /// <summary>
+        /// Method takes a boardstate and returs a list of legal boardtates, representing the legal moves given the curent boardstate. List is empty if no legal moves exist.
+        /// </summary>
+        /// <param name="currentState"></param>
+        /// <returns></returns>
+        public LinkedList<Move> legalMovesBlack(int[,] currentState)//return list of legalmoves
+        {
+            LinkedList<Move> legalMovesBlack = new LinkedList<Move>();
+            int[,] temp = new int[boardSize, boardSize];
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (currentState[i, j] < 0)//Current collors piece is present
+                    {
+                        if ((i > 0) && (j > 0))//Check move down left
+                        {
+                            if (currentState[i - 1, j - 1] == 0)
+                            {
+                                temp = boardReference.copy(currentState);
+                                temp[i - 1, j - 1] = temp[i, j];
+                                if (i == 1)
+                                {
+                                    temp[i - 1, j - 1] = 2; //upgrade if in endzone
+                                }
+                                temp[i, j] = 0;
+                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1)));
+                            }
+                        }
+                        if ((i > 0) && (j < (boardSize - 1)))//Check move down right
+                        {
+                            if (currentState[i - 1, j + 1] == 0)
+                            {
+                                temp = boardReference.copy(currentState);
+                                temp[i - 1, j + 1] = temp[i, j];
+                                if (i == 1)
+                                {
+                                    temp[i - 1, j + 1] = 2; //upgrade if in endzone
+                                }
+                                temp[i, j] = 0;
+
+                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1)));
+                            }
+                        }
+                    }
+                    if (currentState[i, j] < -1)//Current collors piece is present and a king
+                    {
+
+                        if (i < (boardSize - 1))
+                        {
+                            if (j > 0)
+                            {
+                                if (currentState[i + 1, j - 1] == 0) //checking up left
+                                {
+                                    temp = boardReference.copy(currentState);
+                                    temp[i + 1, j - 1] = temp[i, j];
+                                    temp[i, j] = 0;
+                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j - 1)));
+                                }
+                            }
+                            if (j < (boardSize - 1))
+                            {
+                                if (currentState[i + 1, j + 1] == 0) //checking up right
+                                {
+                                    temp = boardReference.copy(currentState);
+                                    temp[i + 1, j + 1] = temp[i, j];
+                                    temp[i, j] = 0;
+                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j + 1)));
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return legalMovesBlack;
+        }
+
+        public LinkedList<Move> legalMovesBlackNow()
+        //Author: Kasper
+        {
+            return legalMovesBlack(boardReference.copyCurrent());
+        }
+
         public String PlyToString(int oldx, int oldy, int newx, int newy)
         //Author: Kasper
         {
-            return "AlohaSnackbar"; //NOT A PROPER RETURN VALUE 
+            String s = ""; //init string
+
+            switch (oldy) //first number added here
+            {
+                case 0:
+                    s = s + "a";
+                    break;
+                case 1:
+                    s = s + "b";
+                    break;
+                case 2:
+                    s = s + "c";
+                    break;
+                case 3:
+                    s = s + "d";
+                    break;
+                case 4:
+                    s = s + "e";
+                    break;
+                case 5:
+                    s = s + "f";
+                    break;
+                case 6:
+                    s = s + "g";
+                    break;
+                case 7:
+                    s = s + "h";
+                    break;
+                default:
+                    break;
+            }
+
+            s = s + "" + (oldx + 1)+" to "; //adding the second number + some more
+
+            switch (newy) //third number added here
+            {
+                case 0:
+                    s = s + "a";
+                    break;
+                case 1:
+                    s = s + "b";
+                    break;
+                case 2:
+                    s = s + "c";
+                    break;
+                case 3:
+                    s = s + "d";
+                    break;
+                case 4:
+                    s = s + "e";
+                    break;
+                case 5:
+                    s = s + "f";
+                    break;
+                case 6:
+                    s = s + "g";
+                    break;
+                case 7:
+                    s = s + "h";
+                    break;
+                default:
+                    break;
+            }
+
+            s = s + "" + (newx + 1);
+            return s;
         }
     }
 }

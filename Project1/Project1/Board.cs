@@ -120,7 +120,7 @@ namespace Project1
 
         }
 
-        private void startState() //call this to place all the starting pieces in their correct positions
+        public void startState() //call this to place all the starting pieces in their correct positions
         //Author: Kasper
         {
             for (int i = 0; i < boardSize; i = i + 2)
@@ -135,11 +135,17 @@ namespace Project1
             }
         }
 
-        private void startState2() //TestingStart for testing tests
+        public void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            redManSet(3, 1);
-            blackKingSet(2, 0);
+            redManSet(0, 0);
+            redManSet(0, 2);
+            redManSet(0, 4);
+            redManSet(0, 6);
+            blackManSet(7, 1);
+            blackManSet(7, 3);
+            blackManSet(7, 5);
+            blackManSet(7, 7);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
@@ -233,6 +239,7 @@ namespace Project1
                 showEmptyLine();
                 showFullLine();
             }
+            showBotLabels();
             Console.WriteLine("");
             Console.ForegroundColor = baseColor;
         }
@@ -241,7 +248,7 @@ namespace Project1
         private void showFullLine()
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            Console.Write("   #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
             {
                 Console.Write("########"); //eight chars (+ the first char to begin. 9 chars with 7 empty spaces to encircle where there is room for the 5x3 piece-art)
@@ -252,7 +259,7 @@ namespace Project1
         private void showEmptyLine()
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            Console.Write("   #"); //leading char for the new line
             for (int i = 0; i < boardSize; i++)
             {
                 Console.Write("       #"); //7 spaces + a char
@@ -263,7 +270,7 @@ namespace Project1
         private void showTopBot(int i) //top row of 5x3 ASCII art
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            Console.Write("   #"); //leading char for the new line
             for (int j = 0; j < boardSize; j++)
             {
                 int piece = read(i, j);
@@ -304,7 +311,8 @@ namespace Project1
         private void showMiddle(int i)
         //Author: Kasper
         {
-            Console.Write(" #"); //leading char for the new line
+            //Console.Write("   #"); //leading char for the new line
+            Console.Write(" " + (i + 1) + " #");
             for (int j = 0; j < boardSize; j++)
             {
                 int piece = read(i, j);
@@ -346,6 +354,47 @@ namespace Project1
                         break;
                 }
                 Console.Write("#");
+            }
+            Console.WriteLine(""); //newLine
+        }
+
+        private void showBotLabels()
+        {
+            Console.WriteLine("");
+            Console.Write("    "); //leading char for the new line
+            for (int i = 0; i < boardSize; i++)
+            {
+                Console.Write("   "); //7 spaces + a char
+                switch (i) //first number added here
+                {
+                    case 0:
+                        Console.Write("a");
+                        break;
+                    case 1:
+                        Console.Write("b");
+                        break;
+                    case 2:
+                        Console.Write("c");
+                        break;
+                    case 3:
+                        Console.Write("d");
+                        break;
+                    case 4:
+                        Console.Write("e");
+                        break;
+                    case 5:
+                        Console.Write("f");
+                        break;
+                    case 6:
+                        Console.Write("g");
+                        break;
+                    case 7:
+                        Console.Write("h");
+                        break;
+                    default:
+                        break;
+                }
+                Console.Write("    ");
             }
             Console.WriteLine(""); //newLine
         }
