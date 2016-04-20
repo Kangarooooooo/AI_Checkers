@@ -42,6 +42,7 @@
     <Compile Include="Move.cs" />
     <Compile Include="MoveGenerator.cs" />
     <Compile Include="testBoard1.cs" />
+    <Compile Include="testBoard3.cs" />
     <Compile Include="testClass.cs" />
   </ItemGroup>
   <ItemGroup>
