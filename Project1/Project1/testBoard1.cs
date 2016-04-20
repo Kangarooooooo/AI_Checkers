@@ -11,10 +11,11 @@ namespace Project1
         static void Main(string[] args)
         {
             Board board = new Board();
+            MoveGenerator mg = new MoveGenerator(board);
             Console.WriteLine("This is the current board:\n");
             board.showBoard();
             Console.WriteLine("NOW we attempt to fetch the new moves:");
-            LinkedList<int[,]> legalMoves = board.legalMovesRedNow();
+            LinkedList<Move> legalMoves = mg.legalMovesRedNow();
             Console.WriteLine("Size of legalMoves is: " + legalMoves.Count());
             Board tempBoard;
             int n = 1;
@@ -24,9 +25,9 @@ namespace Project1
                 Console.WriteLine("We can capture");
             }
             */
-            foreach(int[,] matrix in legalMoves){
+            foreach(Move move in legalMoves){
                 Console.WriteLine("After-move-state number "+n+":\n");
-                tempBoard = new Board(matrix);
+                tempBoard = new Board(move.getState());
                 tempBoard.showBoardCustom(ConsoleColor.Green);
                 n++;
             }
