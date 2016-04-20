@@ -18,6 +18,12 @@ namespace Project1
             Console.WriteLine("Size of legalMoves is: " + legalMoves.Count());
             Board tempBoard;
             int n = 1;
+            /*
+            if (board.canPieceCapture(board.copyCurrent(), 2, 2))
+            {
+                Console.WriteLine("We can capture");
+            }
+            */
             foreach(int[,] matrix in legalMoves){
                 Console.WriteLine("After-move-state number "+n+":\n");
                 tempBoard = new Board(matrix);
