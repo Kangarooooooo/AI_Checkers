@@ -25,6 +25,7 @@ namespace Project1
                 Console.WriteLine("We can capture");
             }
             /*/
+            
             foreach(Move move in legalMoves){
                 Console.WriteLine("After-move-state number "+n+":");
                 Console.WriteLine("moveString: "+move.getString()+"\n");
