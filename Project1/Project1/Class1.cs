@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    class Class1
+    class class1
     {
         public void terror()
         {

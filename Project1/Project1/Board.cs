@@ -24,7 +24,7 @@ namespace Project1
             //Console.ForegroundColor = baseColor;
             boardSize = 8;
             b = new int[boardSize, boardSize]; //8x8 spaces representing the 64 field gameboard.
-            startState2(); //sets the pieces in the correct position
+            startState(); //sets the pieces in the correct position
         }
 
         public Board(int[,] board)
@@ -299,6 +299,16 @@ namespace Project1
             }
             //should position (x,y) not be empty, no overwriting is made 
             return truth; //returns boolean representing success of this functioncall
+        }
+
+        public void moveString(int[,] moveState)
+        /*Author: Kasper
+        MIGHT NOT BE NEEDED
+        designed to receive a list of 2D arrays, each array representing a new board state.
+        Each new state has a change, from this change, it can be seen which move
+        */
+        {
+
         }
 
         private void startState() //call this to place all the starting pieces in their correct positions

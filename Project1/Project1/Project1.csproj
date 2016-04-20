@@ -36,9 +36,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="class1.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="MoveGenerator.cs" />
     <Compile Include="testBoard1.cs" />
     <Compile Include="testClass.cs" />
   </ItemGroup>
