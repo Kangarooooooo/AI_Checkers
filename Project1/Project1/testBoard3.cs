@@ -10,16 +10,15 @@ namespace Project1
     {
         static void Main(string[] args)
         {
-            Boolean pigs = true, ableToFly = false;
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
             LinkedList<Move> legalActions,legalMoves=new LinkedList<Move>(),legalCaptures;
             board.startState2();
             Console.WriteLine("This is the current board:\n");
             int n, choice;
-            while (pigs != ableToFly) //should never happen
+            while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
-                board.showBoard();
+                board.showBoard(); 
                 Console.WriteLine("Red player must now choose a possible move:\n");
                 legalCaptures = mg.legalCapturesRedNow();
                 if(legalCaptures.Count == 0)
@@ -40,6 +39,10 @@ namespace Project1
                 Console.WriteLine("\nWhich move will red player choose? enter a number");
                 choice = Int32.Parse(Console.ReadLine());
                 board.doMove(legalActions.ElementAt(choice - 1));
+                //chain capturing?
+
+                while(mg.canPieceCapture(board.copyCurrent(),)
+
 
                 board.showBoard();
                 Console.WriteLine("Black player must now choose a possible move:\n");

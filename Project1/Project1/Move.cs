@@ -10,13 +10,14 @@ namespace Project1
     {
         int[,] state;
         String stateString;
+        int endX, endY;
 
         public Move()
         {
             state = new int[8, 8];
         }
 
-        public Move(int[,] newState, String newString)
+        public Move(int[,] newState, String newString, int endX, int endY)
         {
             state = newState;
             stateString = newString;
@@ -40,6 +41,26 @@ namespace Project1
         public int[,] getState()
         {
             return state;
+        }
+
+        public void setEndX(int setVal)
+        {
+            endX = setVal;
+        }
+
+        public int getEndX()
+        {
+            return endX;
+        }
+
+        public void setEndY(int setVal)
+        {
+            endY = setVal;
+        }
+
+        public int getEndY()
+        {
+            return endY;
         }
 
         public String getString()
