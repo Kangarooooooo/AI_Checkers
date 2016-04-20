@@ -20,7 +20,7 @@ namespace Project1
         //Author Kangarooooooo
         public Boolean canPieceCapture(int[,] currentState, int x, int y)
         {
-            if (currentState[x, y] > 0)
+            if (currentState[x, y] > 0)//Is red
             {
                 if (x < boardSize - 2)//Can capture forward
                 {
@@ -40,7 +40,7 @@ namespace Project1
                     }
                 }
             }
-            if (currentState[x, y] > -1)//Is king
+            if (currentState[x, y] > 1)//Is king
             {
                 if (x > 1)//Can capture backwards
                 {
@@ -54,6 +54,46 @@ namespace Project1
                     if (y < boardSize - 2)//Can capture to the right
                     {
                         if (currentState[x - 1, y + 1] < 0 && currentState[x - 2, y + 2] == 0)//Piece to capture and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (currentState[x, y] < 0)//Is black
+            {
+                if (x > 1)//Can capture backwards
+                {
+                    if (y > 1)//Can capture to left
+                    {
+                        if ((currentState[x - 1, y - 1] > 0) && currentState[x - 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                    if (y < boardSize - 2)//Can capture to the right
+                    {
+                        if (currentState[x - 1, y + 1] > 0 && currentState[x - 2, y + 2] == 0)//Piece to capture and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            if (currentState[x, y] < -1)//Is black king
+            {
+                if (x < boardSize - 2)//Can capture forward
+                {
+                    if (y > 1)//Can capture to left
+                    {
+                        if ((currentState[x + 1, y - 1] > 0) && currentState[x + 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                    if (y < boardSize - 2)//Can capture to right
+                    {
+                        if (currentState[x + 1, y + 1] > 0 && currentState[x + 2, y + 2] == 0)//Piece to capture and space to do it.
                         {
                             return true;
                         }
