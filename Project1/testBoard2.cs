@@ -11,7 +11,10 @@ public class testBoard2
         board.showBoard();
         Console.WriteLine("NOW we attempt to fetch the new moves:");
         LinkedList<int[,]> legalCaptures = moveGenerator.legalCapturesRed(board.getBoard());
-        
+        if (!legalCaptures.Any())
+        {
+            ;
+        }
         LinkedList<int[,]> legalMoves = moveGenerator.legalMovesRed(board.getBoard());
         Console.WriteLine("Size of legalMoves is: " + legalMoves.Count());
         Board tempBoard;
