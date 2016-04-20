@@ -8,6 +8,15 @@ namespace Project1
 {
     class MoveGenerator
     {
+        Board boardReference;
+        int boardSize;
+
+        public MoveGenerator(Board board)
+        {
+            boardReference = board;
+            boardSize = boardReference.getBoardSize();         
+        }
+
         //Author Kangarooooooo
         public Boolean canPieceCapture(int[,] currentState, int x, int y)
         {
@@ -76,7 +85,7 @@ namespace Project1
                             {
                                 if ((currentState[i + 1, j - 1] < 0) && currentState[i + 2, j - 2] == 0)//Piece to capture, and space to do it.
                                 {
-                                    temp = copy(currentState);
+                                    temp = boardReference.copy(currentState);
                                     temp[i + 2, j - 2] = temp[i, j];
                                     if (i == (boardSize - 2))
                                     {
@@ -140,7 +149,7 @@ namespace Project1
                         {
                             if (currentState[i + 1, j - 1] == 0)
                             {
-                                temp = copy(currentState);
+                                temp = boardReference.copy(currentState);
                                 temp[i + 1, j - 1] = temp[i, j];
                                 if (i == (boardSize - 2))
                                 {
@@ -154,7 +163,7 @@ namespace Project1
                         {
                             if (currentState[i + 1, j + 1] == 0)
                             {
-                                temp = copy(currentState);
+                                temp = boardReference.copy(currentState);
                                 temp[i + 1, j + 1] = temp[i, j];
                                 if (i == (boardSize - 2))
                                 {
@@ -174,7 +183,7 @@ namespace Project1
                             {
                                 if (currentState[i - 1, j - 1] == 0)
                                 {
-                                    temp = copy(currentState);
+                                    temp = boardReference.copy(currentState);
                                     temp[i - 1, j - 1] = temp[i, j];
                                     temp[i, j] = 0;
                                     legalMovesRed.AddLast(temp);
@@ -184,7 +193,7 @@ namespace Project1
                             {
                                 if (currentState[i - 1, j + 1] == 0)
                                 {
-                                    temp = copy(currentState);
+                                    temp = boardReference.copy(currentState);
                                     temp[i - 1, j + 1] = temp[i, j];
                                     temp[i, j] = 0;
                                     legalMovesRed.AddLast(temp);
@@ -200,7 +209,7 @@ namespace Project1
         public LinkedList<int[,]> legalMovesRedNow()
         //Author: Kasper
         {
-            return legalMovesRed(copyCurrent());
+            return legalMovesRed(boardReference.copyCurrent());
         }
 
     }

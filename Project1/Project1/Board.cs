@@ -182,6 +182,13 @@ namespace Project1
             return truth;
         }
 
+        public int getBoardSize()
+        //Author: Kasper
+        //Returns boardSize
+        {
+            return boardSize;
+        }
+
         public void showBoard()
         //Author: Kasper
         {
