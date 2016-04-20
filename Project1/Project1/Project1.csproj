@@ -39,6 +39,7 @@
     <Compile Include="class1.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="GameManager.cs" />
+    <Compile Include="Move.cs" />
     <Compile Include="MoveGenerator.cs" />
     <Compile Include="testBoard1.cs" />
     <Compile Include="testClass.cs" />
