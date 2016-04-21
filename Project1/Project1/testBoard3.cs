@@ -13,14 +13,14 @@ namespace Project1
             Boolean cap;
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
-            LinkedList<Move> legalActions,legalMoves=new LinkedList<Move>(),legalCaptures;
+            LinkedList<Move> legalActions,legalMoves,legalCaptures;
             board.startState3();
             Console.WriteLine("This is the current board:\n");
             int n, choice,testCount;
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
                 testCount = 0;
-                cap = true;
+                //cap = true;
                 do
                 {
                     if (testCount > 0)
@@ -32,12 +32,12 @@ namespace Project1
                     legalCaptures = mg.legalCapturesRedNow();
                     if (legalCaptures.Count == 0)
                     {
-                        cap = false;
+                        //cap = false;
                         legalMoves = mg.legalMovesRedNow();
                     }
                     else
                     {
-                        legalMoves = new LinkedList<Move>();
+                        legalMoves = new LinkedList<Move>(); //this list must be initialized
                     }
                     legalActions = new LinkedList<Move>(legalMoves.Concat(legalCaptures));
                     n = 1;
@@ -48,10 +48,13 @@ namespace Project1
                     }
                     Console.WriteLine("\nWhich move will red player choose? enter a number");
                     choice = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("AND NOW FOR A TEST:");
+                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndX() = " + legalActions.ElementAt(choice - 1).getEndX());
+                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndY() = " + legalActions.ElementAt(choice - 1).getEndY());
                     board.doMove(legalActions.ElementAt(choice - 1));
                     testCount++;
                 }
-                while (cap && mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
+                while (mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
 
                 testCount = 0;
                 cap = true;
@@ -70,7 +73,7 @@ namespace Project1
                     }
                     else
                     {
-                        legalMoves = new LinkedList<Move>();
+                        legalMoves = new LinkedList<Move>(); //this list must be initialized
                     }
                     legalActions = new LinkedList<Move>(legalMoves.Concat(legalCaptures));
                     n = 1;
@@ -81,9 +84,12 @@ namespace Project1
                     }
                     Console.WriteLine("\nWhich move will black player choose? enter a number");
                     choice = Int32.Parse(Console.ReadLine());
+                    Console.WriteLine("AND NOW FOR A TEST:");
+                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndX() = " + legalActions.ElementAt(choice - 1).getEndX());
+                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndY() = " + legalActions.ElementAt(choice - 1).getEndY());
                     board.doMove(legalActions.ElementAt(choice - 1));
                     testCount++;
-                } while (cap && mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
+                } while (mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
             }
             board.showBoard();
             Console.WriteLine("Loop terminated, win?");

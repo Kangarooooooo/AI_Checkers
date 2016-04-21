@@ -10,7 +10,7 @@ namespace Project1
     class Board
     {
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
-        int boardSize;
+        int boardSize, redPieceCount,blackPieceCount;
         ConsoleColor //Color variables. Change to personal preferences if you like.
             curBase,
             P1 = ConsoleColor.Cyan,
@@ -148,9 +148,10 @@ namespace Project1
         //Author: Kasper
         //start state for testing purposes
         {
-            redManSet(0, 6);
-            blackManSet(3, 3);
-            blackManSet(4, 4);
+            redManSet(1, 5);
+            redManSet(1, 3);
+            blackManSet(2, 4);
+            blackManSet(4, 2);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
