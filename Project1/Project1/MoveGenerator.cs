@@ -26,14 +26,14 @@ namespace Project1
                 {
                     if (y > 1)//Can capture to left
                     {
-                        if ((currentState[x + 1, y - 1] < 0) && currentState[x + 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        if ((currentState[x + 1, y - 1] < 0) && (currentState[x + 2, y - 2] == 0))//Piece to capture, and space to do it.
                         {
                             return true;
                         }
                     }
                     if (y < boardSize - 2)//Can capture to right
                     {
-                        if (currentState[x + 1, y + 1] < 0 && currentState[x + 2, y + 2] == 0)//Piece to capture and space to do it.
+                        if ((currentState[x + 1, y + 1] < 0) && (currentState[x + 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
                             return true;
                         }
@@ -46,14 +46,14 @@ namespace Project1
                 {
                     if (y > 1)//Can capture to left
                     {
-                        if ((currentState[x - 1, y - 1] < 0) && currentState[x - 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        if ((currentState[x - 1, y - 1] < 0) && (currentState[x - 2, y - 2] == 0))//Piece to capture, and space to do it.
                         {
                             return true;
                         }
                     }
                     if (y < boardSize - 2)//Can capture to the right
                     {
-                        if (currentState[x - 1, y + 1] < 0 && currentState[x - 2, y + 2] == 0)//Piece to capture and space to do it.
+                        if ((currentState[x - 1, y + 1] < 0) && (currentState[x - 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
                             return true;
                         }
@@ -62,18 +62,18 @@ namespace Project1
             }
             if (currentState[x, y] < 0)//Is black
             {
-                if (x > 1)//Can capture backwards
+                if (x > 1)//Can capture downwards
                 {
                     if (y > 1)//Can capture to left
                     {
-                        if ((currentState[x - 1, y - 1] > 0) && currentState[x - 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        if ((currentState[x - 1, y - 1] > 0) && (currentState[x - 2, y - 2] == 0))//Piece to capture, and space to do it.
                         {
                             return true;
                         }
                     }
                     if (y < boardSize - 2)//Can capture to the right
                     {
-                        if (currentState[x - 1, y + 1] > 0 && currentState[x - 2, y + 2] == 0)//Piece to capture and space to do it.
+                        if ((currentState[x - 1, y + 1] > 0) && (currentState[x - 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
                             return true;
                         }
@@ -86,14 +86,14 @@ namespace Project1
                 {
                     if (y > 1)//Can capture to left
                     {
-                        if ((currentState[x + 1, y - 1] > 0) && currentState[x + 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        if ((currentState[x + 1, y - 1] > 0) && (currentState[x + 2, y - 2] == 0))//Piece to capture, and space to do it.
                         {
                             return true;
                         }
                     }
                     if (y < boardSize - 2)//Can capture to right
                     {
-                        if (currentState[x + 1, y + 1] > 0 && currentState[x + 2, y + 2] == 0)//Piece to capture and space to do it.
+                        if ((currentState[x + 1, y + 1] > 0) && (currentState[x + 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
                             return true;
                         }
@@ -102,6 +102,8 @@ namespace Project1
             }
             return false;
         }
+
+        
         LinkedList<Move> legalCapturesRedAI(int [,] currentState)
         {
             LinkedList<Move>  moves = legalCapturesRed(currentState);
