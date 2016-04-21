@@ -20,7 +20,7 @@ namespace Project1
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
                 testCount = 0;
-                //cap = true;
+                cap = true;
                 do
                 {
                     if (testCount > 0)
@@ -32,13 +32,18 @@ namespace Project1
                     legalCaptures = mg.legalCapturesRedNow();
                     if (legalCaptures.Count == 0)
                     {
-                        //cap = false;
+                        cap = false;
                         legalMoves = mg.legalMovesRedNow();
                     }
                     else
                     {
                         legalMoves = new LinkedList<Move>(); //this list must be initialized
                     }
+                    if (testCount > 0) //if this is the second time the loop goes around, there cannot be a legal non-capture move
+                    {
+                        legalMoves = new LinkedList<Move>();
+                    }
+
                     legalActions = new LinkedList<Move>(legalMoves.Concat(legalCaptures));
                     n = 1;
                     foreach (Move move in legalActions)
@@ -46,19 +51,23 @@ namespace Project1
                         Console.WriteLine("   " + n + ". move: " + move.getString() + "\n");
                         n++;
                     }
-                    Console.WriteLine("\nWhich move will red player choose? enter a number");
-                    choice = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("AND NOW FOR A TEST:");
-                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndX() = " + legalActions.ElementAt(choice - 1).getEndX());
-                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndY() = " + legalActions.ElementAt(choice - 1).getEndY());
-                    board.doMove(legalActions.ElementAt(choice - 1));
-                    testCount++;
+                    if (legalActions.Count > 0)
+                    {
+                        Console.WriteLine("\nWhich move will red player choose? enter a number");
+                        choice = Int32.Parse(Console.ReadLine());
+                        board.doMove(legalActions.ElementAt(choice - 1));
+                        testCount++;
+                    }
+                    Console.WriteLine("1 sec sleep");
+                    System.Threading.Thread.Sleep(1000);
                 }
-                while (mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
+                //while (mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
+                while (cap);
 
                 testCount = 0;
                 cap = true;
-                do {
+                do
+                {
                     if (testCount > 0)
                     {
                         Console.WriteLine("Red do-while went through a second time!");
@@ -75,6 +84,11 @@ namespace Project1
                     {
                         legalMoves = new LinkedList<Move>(); //this list must be initialized
                     }
+                    if (testCount > 0) //if this is the second time the loop goes around, there cannot be a legal non-capture move
+                    {
+                        legalMoves = new LinkedList<Move>();
+                    }
+
                     legalActions = new LinkedList<Move>(legalMoves.Concat(legalCaptures));
                     n = 1;
                     foreach (Move move in legalActions)
@@ -82,14 +96,18 @@ namespace Project1
                         Console.WriteLine("   " + n + ". move: " + move.getString() + "\n");
                         n++;
                     }
-                    Console.WriteLine("\nWhich move will black player choose? enter a number");
-                    choice = Int32.Parse(Console.ReadLine());
-                    Console.WriteLine("AND NOW FOR A TEST:");
-                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndX() = " + legalActions.ElementAt(choice - 1).getEndX());
-                    Console.WriteLine("legalActions.ElementAt(choice -1).getEndY() = " + legalActions.ElementAt(choice - 1).getEndY());
-                    board.doMove(legalActions.ElementAt(choice - 1));
-                    testCount++;
-                } while (mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
+                    if (legalActions.Count > 0)
+                    {
+                        Console.WriteLine("\nWhich move will black player choose? enter a number");
+                        choice = Int32.Parse(Console.ReadLine());
+                        board.doMove(legalActions.ElementAt(choice - 1));
+                        testCount++;
+                    }
+                    Console.WriteLine("1 sec sleep");
+                    System.Threading.Thread.Sleep(1000);
+                }
+                //while (mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
+                while (cap);
             }
             board.showBoard();
             Console.WriteLine("Loop terminated, win?");

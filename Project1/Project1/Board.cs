@@ -148,10 +148,10 @@ namespace Project1
         //Author: Kasper
         //start state for testing purposes
         {
-            redManSet(1, 5);
-            redManSet(1, 3);
-            blackManSet(2, 4);
-            blackManSet(4, 2);
+            redManSet(0,0);
+            redManSet(0,4);
+            blackManSet(1, 1);
+            blackManSet(1,5);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
