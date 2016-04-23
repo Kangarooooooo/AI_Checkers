@@ -111,6 +111,7 @@ namespace Project1
         }
 
         public void doMove(Move move)
+        //Author: Kasper
         {
             int[,] newMove = move.getState();
             b = copy(newMove);
