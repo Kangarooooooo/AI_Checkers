@@ -132,46 +132,7 @@ namespace Project1
             }
             return null;
         }
-        public LinkedList<Move> legalCapturesRedPiece(int[,] currentState, int i,int j)
-        {
-            LinkedList<Move> legalCapturesRed = new LinkedList<Move>();
-            //LinkedList<int[,]> legalCapturesRed = new LinkedList<int[,]>();
-            int[,] temp = new int[boardSize, boardSize];
-            if (i < boardSize - 2)//Can capture forward
-            {
-                if (j > 1)//Can capture to left
-                {
-                    if ((currentState[i + 1, j - 1] < 0) && (currentState[i + 2, j - 2] == 0))//Piece to capture, and space to do it.
-                    {
-                        temp = boardReference.copy(currentState);
-                        temp[i + 2, j - 2] = temp[i, j];
-                        if (i == (boardSize - 1))
-                        {
-                            temp[i + 2, j - 2] = 2;
-                        }
-                        temp[i, j] = 0;
-                        temp[i + 1, j - 1] = 0;
-                        legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2), i + 2, j - 2));
-                    }
-                }
-                if (j < boardSize - 2)//Can capture to right
-                {
-                    if (currentState[i + 1, j + 1] < 0 && currentState[i + 2, j + 2] == 0)//Piece to capture and space to do it.
-                    {
-                        temp = boardReference.copy(currentState);
-                        temp[i + 2, j + 2] = temp[i, j];
-                        if (i == (boardSize - 1))
-                        {
-                            temp[i + 2, j + 2] = 2;
-                        }
-                        temp[i, j] = 0;
-                        temp[i + 1, j + 1] = 0;
-                        legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2), i + 2, j + 2));
-                    }
-                }
-            }
-            return legalCapturesRed;
-        }
+        
         //Author Kangarooooooo
         /// <summary>
         /// Method takes a boardstate and returns a list of legal boardstates, representating the legal captures given the current boardstate.List is empty if no legal moves exist.
@@ -187,73 +148,79 @@ namespace Project1
             {
                 for (int j = 0; j < boardSize; j++)
                 {
-                    if (currentState[i, j] > 0)
+                    LegalCapturesRedPiece(currentState, legalCapturesRed, i, j);
+                }
+            }
+            return legalCapturesRed;
+        }
+
+        public void LegalCapturesRedPiece(int[,] currentState, LinkedList<Move> legalCapturesRed, int i, int j)
+        {
+            int[,] temp = new int[boardSize, boardSize];
+            if (currentState[i, j] > 0)
+            {
+                if (i < boardSize - 2)//Can capture forward
+                {
+                    if (j > 1)//Can capture to left
                     {
-                        if (i < boardSize - 2)//Can capture forward
+                        if ((currentState[i + 1, j - 1] < 0) && (currentState[i + 2, j - 2] == 0))//Piece to capture, and space to do it.
                         {
-                            if (j > 1)//Can capture to left
+                            temp = boardReference.copy(currentState);
+                            temp[i + 2, j - 2] = temp[i, j];
+                            if (i == (boardSize - 1))
                             {
-                                if ((currentState[i + 1, j - 1] < 0) && (currentState[i + 2, j - 2] == 0))//Piece to capture, and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i + 2, j - 2] = temp[i, j];
-                                    if (i == (boardSize - 1))
-                                    {
-                                        temp[i + 2, j - 2] = 2;
-                                    }
-                                    temp[i, j] = 0;
-                                    temp[i + 1, j - 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2),i+2,j-2));
-                                }
+                                temp[i + 2, j - 2] = 2;
                             }
-                            if (j < boardSize - 2)//Can capture to right
-                            {
-                                if (currentState[i + 1, j + 1] < 0 && currentState[i + 2, j + 2] == 0)//Piece to capture and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i + 2, j + 2] = temp[i, j];
-                                    if (i == (boardSize - 1))
-                                    {
-                                        temp[i + 2, j + 2] = 2;
-                                    }
-                                    temp[i, j] = 0;
-                                    temp[i + 1, j + 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2),i+2,j+2));
-                                }
-                            }
+                            temp[i, j] = 0;
+                            temp[i + 1, j - 1] = 0;
+                            legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2), i + 2, j - 2));
                         }
                     }
-                    if (currentState[i, j] > 1)//Is red king
+                    if (j < boardSize - 2)//Can capture to right
                     {
-                        if (i > 1)//Can capture backwards
+                        if (currentState[i + 1, j + 1] < 0 && currentState[i + 2, j + 2] == 0)//Piece to capture and space to do it.
                         {
-                            if (j > 1)//Can capture to left
+                            temp = boardReference.copy(currentState);
+                            temp[i + 2, j + 2] = temp[i, j];
+                            if (i == (boardSize - 1))
                             {
-                                if ((currentState[i - 1, j - 1] < 0) && currentState[i - 2, j - 2] == 0)//Piece to capture, and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 2, j - 2] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    temp[i - 1, j - 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2),i-2,j-2));
-                                }
+                                temp[i + 2, j + 2] = 2;
                             }
-                            if (j < boardSize - 2)//Can capture to the right
-                            {
-                                if (currentState[i - 1, j + 1] < 0 && currentState[i - 2, j + 2] == 0)//Piece to capture and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 2, j + 2] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    temp[i - 1, j + 1] = 0;
-                                    legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2),i-2,j+2));
-                                }
-                            }
+                            temp[i, j] = 0;
+                            temp[i + 1, j + 1] = 0;
+                            legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2), i + 2, j + 2));
                         }
                     }
                 }
             }
-            return legalCapturesRed;
+            if (currentState[i, j] > 1)//Is red king
+            {
+                if (i > 1)//Can capture backwards
+                {
+                    if (j > 1)//Can capture to left
+                    {
+                        if ((currentState[i - 1, j - 1] < 0) && currentState[i - 2, j - 2] == 0)//Piece to capture, and space to do it.
+                        {
+                            temp = boardReference.copy(currentState);
+                            temp[i - 2, j - 2] = temp[i, j];
+                            temp[i, j] = 0;
+                            temp[i - 1, j - 1] = 0;
+                            legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2), i - 2, j - 2));
+                        }
+                    }
+                    if (j < boardSize - 2)//Can capture to the right
+                    {
+                        if (currentState[i - 1, j + 1] < 0 && currentState[i - 2, j + 2] == 0)//Piece to capture and space to do it.
+                        {
+                            temp = boardReference.copy(currentState);
+                            temp[i - 2, j + 2] = temp[i, j];
+                            temp[i, j] = 0;
+                            temp[i - 1, j + 1] = 0;
+                            legalCapturesRed.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2), i - 2, j + 2));
+                        }
+                    }
+                }
+            }
         }
 
         public LinkedList<Move> legalCapturesRedNow()
@@ -272,78 +239,84 @@ namespace Project1
         {
             LinkedList<Move> legalCapturesBlack = new LinkedList<Move>();
             //LinkedList<int[,]> legalCapturesBlack = new LinkedList<int[,]>();
-            int[,] temp = new int[boardSize, boardSize];
             for (int i = 0; i < boardSize; i++)//Check for legal captures
             {
                 for (int j = 0; j < boardSize; j++)
                 {
-                    if (currentState[i, j] < 0)//Is black
+                    LegalCapturesBlackPiece(currentState, legalCapturesBlack, i, j);
+                }
+            }
+            return legalCapturesBlack;
+        }
+
+        public void LegalCapturesBlackPiece(int[,] currentState, LinkedList<Move> legalCapturesBlack, int i, int j)
+        {
+
+            int[,] temp = new int[boardSize, boardSize];
+            if (currentState[i, j] < 0)//Is black
+            {
+                if (i > 1)//Can capture backwards
+                {
+                    if (j > 1)//Can capture to left
                     {
-                        if (i > 1)//Can capture backwards
+                        if ((currentState[i - 1, j - 1] > 0) && currentState[i - 2, j - 2] == 0)//Piece to capture, and space to do it.
                         {
-                            if (j > 1)//Can capture to left
+                            temp = boardReference.copy(currentState);
+                            temp[i - 2, j - 2] = temp[i, j];
+                            if (i == 2)
                             {
-                                if ((currentState[i - 1, j - 1] > 0) && currentState[i - 2, j - 2] == 0)//Piece to capture, and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 2, j - 2] = temp[i, j];
-                                    if (i == 2)
-                                    {
-                                        temp[i - 2, j - 2] = -2;
-                                    }
-                                    temp[i, j] = 0;
-                                    temp[i - 1, j - 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2),i-2,j-2));
-                                }
+                                temp[i - 2, j - 2] = -2;
                             }
-                            if (j < boardSize - 2)//Can capture to the right
-                            {
-                                if (currentState[i - 1, j + 1] > 0 && currentState[i - 2, j + 2] == 0)//Piece to capture and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 2, j + 2] = temp[i, j];
-                                    if (i == 2)
-                                    {
-                                        temp[i - 2, j + 2] = -2;
-                                    }
-                                    temp[i, j] = 0;
-                                    temp[i - 1, j + 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2),i-2,j+2));
-                                }
-                            }
+                            temp[i, j] = 0;
+                            temp[i - 1, j - 1] = 0;
+                            legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j - 2), i - 2, j - 2));
                         }
                     }
-                    if (currentState[i, j] < -1)//Is black king
+                    if (j < boardSize - 2)//Can capture to the right
                     {
-                        if (i < boardSize - 2)//Can capture forward
+                        if (currentState[i - 1, j + 1] > 0 && currentState[i - 2, j + 2] == 0)//Piece to capture and space to do it.
                         {
-                            if (j > 1)//Can capture to left
+                            temp = boardReference.copy(currentState);
+                            temp[i - 2, j + 2] = temp[i, j];
+                            if (i == 2)
                             {
-                                if ((currentState[i + 1, j - 1] > 0) && currentState[i + 2, j - 2] == 0)//Piece to capture, and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i + 2, j - 2] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    temp[i + 1, j - 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2),i+2,j-2));
-                                }
+                                temp[i - 2, j + 2] = -2;
                             }
-                            if (j < boardSize - 2)//Can capture to right
-                            {
-                                if (currentState[i + 1, j + 1] > 0 && currentState[i + 2, j + 2] == 0)//Piece to capture and space to do it.
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i + 2, j + 2] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    temp[i + 1, j + 1] = 0;
-                                    legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2),i+2,j+2));
-                                }
-                            }
+                            temp[i, j] = 0;
+                            temp[i - 1, j + 1] = 0;
+                            legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 2, j + 2), i - 2, j + 2));
                         }
                     }
                 }
             }
-            return legalCapturesBlack;
+            if (currentState[i, j] < -1)//Is black king
+            {
+                if (i < boardSize - 2)//Can capture forward
+                {
+                    if (j > 1)//Can capture to left
+                    {
+                        if ((currentState[i + 1, j - 1] > 0) && currentState[i + 2, j - 2] == 0)//Piece to capture, and space to do it.
+                        {
+                            temp = boardReference.copy(currentState);
+                            temp[i + 2, j - 2] = temp[i, j];
+                            temp[i, j] = 0;
+                            temp[i + 1, j - 1] = 0;
+                            legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j - 2), i + 2, j - 2));
+                        }
+                    }
+                    if (j < boardSize - 2)//Can capture to right
+                    {
+                        if (currentState[i + 1, j + 1] > 0 && currentState[i + 2, j + 2] == 0)//Piece to capture and space to do it.
+                        {
+                            temp = boardReference.copy(currentState);
+                            temp[i + 2, j + 2] = temp[i, j];
+                            temp[i, j] = 0;
+                            temp[i + 1, j + 1] = 0;
+                            legalCapturesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 2, j + 2), i + 2, j + 2));
+                        }
+                    }
+                }
+            }
         }
 
         public LinkedList<Move> legalCapturesBlackNow()
