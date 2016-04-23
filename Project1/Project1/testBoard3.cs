@@ -14,7 +14,7 @@ namespace Project1
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
             LinkedList<Move> legalActions,legalMoves,legalCaptures;
-            board.startState3();
+            board.startState2();
             Console.WriteLine("This is the current board:\n");
             int n, choice,testCount;
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet

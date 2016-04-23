@@ -135,13 +135,7 @@ namespace Project1
         //Author: Kasper
         {
             redManSet(0, 0);
-            redManSet(0, 2);
-            redManSet(0, 4);
-            redManSet(0, 6);
-            blackManSet(7, 1);
-            blackManSet(7, 3);
-            blackManSet(7, 5);
-            blackManSet(7, 7);
+            blackManSet(2, 2);
         }
 
         public void startState3()

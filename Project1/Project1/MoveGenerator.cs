@@ -167,7 +167,7 @@ namespace Project1
                         {
                             temp = boardReference.copy(currentState);
                             temp[i + 2, j - 2] = temp[i, j];
-                            if (i == (boardSize - 1))
+                            if (i == (boardSize - 3))
                             {
                                 temp[i + 2, j - 2] = 2;
                             }
@@ -182,7 +182,8 @@ namespace Project1
                         {
                             temp = boardReference.copy(currentState);
                             temp[i + 2, j + 2] = temp[i, j];
-                            if (i == (boardSize - 1))
+                            
+                            if (i == (boardSize - 3))
                             {
                                 temp[i + 2, j + 2] = 2;
                             }
@@ -251,7 +252,6 @@ namespace Project1
 
         public void LegalCapturesBlackPiece(int[,] currentState, LinkedList<Move> legalCapturesBlack, int i, int j)
         {
-
             int[,] temp = new int[boardSize, boardSize];
             if (currentState[i, j] < 0)//Is black
             {
