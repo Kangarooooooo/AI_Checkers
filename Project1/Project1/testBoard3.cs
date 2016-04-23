@@ -32,7 +32,7 @@ namespace Project1
                     Console.WriteLine("Red player must now choose a possible move:\n");
                     if (testCount < 1)
                     {
-                        legalCaptures = mg.legalCapturesRedNow();
+                    legalCaptures = mg.legalCapturesRedNow();
                     } else
                     {
                         legalCaptures = new LinkedList<Move>();
@@ -85,7 +85,7 @@ namespace Project1
                     Console.WriteLine("Black player must now choose a possible move:\n");
                     if (testCount < 1)
                     {
-                        legalCaptures = mg.legalCapturesBlackNow();
+                    legalCaptures = mg.legalCapturesBlackNow();
                     }
                     else
                     {
