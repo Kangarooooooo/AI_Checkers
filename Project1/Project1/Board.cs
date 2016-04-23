@@ -10,7 +10,7 @@ namespace Project1
     class Board
     {
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
-        int boardSize, redPieceCount,blackPieceCount;
+        int boardSize, redPieceCount, blackPieceCount;
         ConsoleColor //Color variables. Change to personal preferences if you like.
             curBase,
             P1 = ConsoleColor.Cyan,
@@ -114,6 +114,7 @@ namespace Project1
         {
             int[,] newMove = move.getState();
             b = copy(newMove);
+
         }
 
         public void startState() //call this to place all the starting pieces in their correct positions
@@ -142,10 +143,8 @@ namespace Project1
         //Author: Kasper
         //start state for testing purposes
         {
-            redManSet(0,0);
-            redManSet(0,4);
-            blackManSet(1, 1);
-            blackManSet(1,5);
+            redManSet(6, 2);
+            blackManSet(3, 3);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
