@@ -20,88 +20,104 @@ namespace Project1
         //Author Kangarooooooo
         public Boolean canPieceCapture(int[,] currentState, int x, int y)
         {
+            Console.WriteLine("canPieceCapture called with x=" + x + " and y=" + y);
             if (currentState[x, y] > 0)//Is red
             {
+                Console.Write("RedMan");
+                if (x < boardSize - 2)//Can capture forward
+                {
+                    Console.Write("Up");
+                    if (y > 1)//Can capture to left
+                    {
+                        Console.Write("Left");
+                        if ((currentState[x + 1, y - 1] < 0) && (currentState[x + 2, y - 2] == 0))//Piece to capture, and space to do it.
+                        {
+                            Console.Write("-TRUE");
+                            return true;
+                        }
+                    }
+                    else if (y < boardSize - 2)//Can capture to right
+                    {
+                        Console.Write("Right");
+                        if ((currentState[x + 1, y + 1] < 0) && (currentState[x + 2, y + 2] == 0))//Piece to capture and space to do it.
+                        {
+                            Console.Write("-TRUE");
+                            return true;
+                        }
+                    }
+                }
+            }
+            else if (currentState[x, y] > 1)//Is king
+            {
+                if (x > 1)//Can capture backwards
+                {
+                    if (y > 1)//Can capture to left
+                    {
+                        if ((currentState[x - 1, y - 1] < 0) && (currentState[x - 2, y - 2] == 0))//Piece to capture, and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                    else if (y < boardSize - 2)//Can capture to the right
+                    {
+                        if ((currentState[x - 1, y + 1] < 0) && (currentState[x - 2, y + 2] == 0))//Piece to capture and space to do it.
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            else if (currentState[x, y] < 0)//Is black
+            {
+                Console.Write("BlackMan");
+                if (x > 1)//Can capture downwards
+                {
+                    Console.Write("Down");
+                    if (y > 1)//Can capture to left
+                    {
+                        Console.Write("Left");
+                        if ((currentState[x - 1, y - 1] > 0) && (currentState[x - 2, y - 2] == 0))//Piece to capture, and space to do it.
+                        {
+                            Console.Write("-TRUE");
+                            return true;
+                        }
+                    }
+                    else if (y < boardSize - 2)//Can capture to the right
+                    {
+                        Console.Write("Right");
+                        if ((currentState[x - 1, y + 1] > 0) && (currentState[x - 2, y + 2] == 0))//Piece to capture and space to do it.
+                        {
+                            Console.Write("-TRUE");
+                            return true;
+                        }
+                    }
+                }
+            }
+            else if (currentState[x, y] < -1)//Is black king
+            {
                 if (x < boardSize - 2)//Can capture forward
                 {
                     if (y > 1)//Can capture to left
                     {
-                        if ((currentState[x + 1, y - 1] < 0) && currentState[x + 2, y - 2] == 0)//Piece to capture, and space to do it.
+                        if ((currentState[x + 1, y - 1] > 0) && (currentState[x + 2, y - 2] == 0))//Piece to capture, and space to do it.
                         {
                             return true;
                         }
                     }
                     if (y < boardSize - 2)//Can capture to right
                     {
-                        if (currentState[x + 1, y + 1] < 0 && currentState[x + 2, y + 2] == 0)//Piece to capture and space to do it.
+                        if ((currentState[x + 1, y + 1] > 0) && (currentState[x + 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
                             return true;
                         }
                     }
                 }
             }
-            if (currentState[x, y] > 1)//Is king
-            {
-                if (x > 1)//Can capture backwards
-                {
-                    if (y > 1)//Can capture to left
-                    {
-                        if ((currentState[x - 1, y - 1] < 0) && currentState[x - 2, y - 2] == 0)//Piece to capture, and space to do it.
-                        {
-                            return true;
-                        }
-                    }
-                    if (y < boardSize - 2)//Can capture to the right
-                    {
-                        if (currentState[x - 1, y + 1] < 0 && currentState[x - 2, y + 2] == 0)//Piece to capture and space to do it.
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (currentState[x, y] < 0)//Is black
-            {
-                if (x > 1)//Can capture backwards
-                {
-                    if (y > 1)//Can capture to left
-                    {
-                        if ((currentState[x - 1, y - 1] > 0) && currentState[x - 2, y - 2] == 0)//Piece to capture, and space to do it.
-                        {
-                            return true;
-                        }
-                    }
-                    if (y < boardSize - 2)//Can capture to the right
-                    {
-                        if (currentState[x - 1, y + 1] > 0 && currentState[x - 2, y + 2] == 0)//Piece to capture and space to do it.
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (currentState[x, y] < -1)//Is black king
-            {
-                if (x < boardSize - 2)//Can capture forward
-                {
-                    if (y > 1)//Can capture to left
-                    {
-                        if ((currentState[x + 1, y - 1] > 0) && currentState[x + 2, y - 2] == 0)//Piece to capture, and space to do it.
-                        {
-                            return true;
-                        }
-                    }
-                    if (y < boardSize - 2)//Can capture to right
-                    {
-                        if (currentState[x + 1, y + 1] > 0 && currentState[x + 2, y + 2] == 0)//Piece to capture and space to do it.
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
+            Console.WriteLine("CanPieceCapture never found TRUE\n");
             return false;
         }
+
+        
         LinkedList<Move> legalCapturesRedAI(int [,] currentState)
         {
             LinkedList<Move>  moves = legalCapturesRed(currentState);
