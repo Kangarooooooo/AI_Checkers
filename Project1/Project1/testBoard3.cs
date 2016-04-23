@@ -14,10 +14,11 @@ namespace Project1
             Board board = new Board();
             MoveGenerator mg = new MoveGenerator(board);
             Move latestMove = new Move();
-            LinkedList<Move> legalActions,legalMoves,legalCaptures = new LinkedList<Move>();
-            board.startState3();
+            LinkedList<Move> legalActions, legalMoves, legalCaptures = new LinkedList<Move>();
+            int n, choice, testCount;
+            board.startState();
             Console.WriteLine("This is the current board:\n");
-            int n, choice,testCount;
+            Console.WriteLine("Who goes first? 1 for ")
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
                 testCount = 0;
