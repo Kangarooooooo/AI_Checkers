@@ -21,6 +21,8 @@ namespace Project1
         {
             state = newState;
             stateString = newString;
+            setEndX(endX);
+            setEndY(endY);
         }
 
         public void setState(int[,] newState)
