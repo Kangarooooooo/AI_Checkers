@@ -14,6 +14,7 @@ namespace Project1
         public MoveGenerator(Board board)
         {
             boardReference = board;
+            board.setMoveGenerator(this);
             boardSize = boardReference.getBoardSize();         
         }
 

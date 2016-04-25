@@ -9,6 +9,7 @@ namespace Project1
 {
     class Board
     {
+        MoveGenerator mg;
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
         int boardSize, redPieceCount, blackPieceCount;
         ConsoleColor //Color variables. Change to personal preferences if you like.
@@ -205,6 +206,11 @@ namespace Project1
                 b[x, y] = 0; //force-clears the field
             }
             return truth;
+        }
+
+        public void setMoveGenerator(MoveGenerator master)
+        {
+            mg = master;
         }
 
         public int getBoardSize()
