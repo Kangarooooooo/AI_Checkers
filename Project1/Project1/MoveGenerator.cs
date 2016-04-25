@@ -8,7 +8,7 @@ namespace Project1
 {
     class MoveGenerator
     {
-        Board boardReference;
+        public Board boardReference;
         int boardSize;
 
         public MoveGenerator(Board board)

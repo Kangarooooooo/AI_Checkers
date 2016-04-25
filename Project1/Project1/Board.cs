@@ -151,6 +151,15 @@ namespace Project1
             blackManSet(6, 3);
         }
 
+        public void startState4()
+        //Author: Kasper
+        //start state for testing purposes
+        {
+            redManSet(0, 0);
+            blackManSet(1, 1);
+            blackManSet(2, 2);
+        }
+
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
         //Author: Kasper
         /*
