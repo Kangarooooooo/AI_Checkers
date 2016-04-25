@@ -17,10 +17,37 @@ namespace Project1
 
         public OnePlayer()
         {
-            playLoop();
+            board = new Board();
+            mg = new MoveGenerator(board);
+            latestMove = new Move();
+            legalCaptures = new LinkedList<Move>();
+            int n, choice, testCount;
+            board.startState();
+            Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second");
+            choice = Int32.Parse(Console.ReadLine());
+
+            if (choice == 1)
+            {
+                playerFirstLoop();
+            }
+            else
+            {
+                AIFirstLoop();
+            }
         }
 
-        void playLoop()
+        void playerFirstLoop()
         {
+            while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
+            {
+            }
         }
+
+        void AIFirstLoop()
+        {
+            while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
+            {
+            }
+        }
+    }
 }
