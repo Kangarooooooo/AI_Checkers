@@ -14,10 +14,15 @@ namespace Project1
             MoveGenerator mg = new MoveGenerator(board);
             Move latestMove = new Move();
             LinkedList<Move> legalCaptures = new LinkedList<Move>();
-            board.startState2();
+            board.startState22();
             board.showBoard();
-            legalCaptures = mg.legalCapturesRedAI(board.copyCurrent());
-            Console.WriteLine(legalCaptures.Count);
+            legalCaptures = mg.legalCapturesBlackAI(board.copyCurrent());
+            foreach(Move move in legalCaptures)
+            {
+                board.doMove(move);
+                board.showBoard();
+            }
+
             Console.ReadLine();
         }
     }

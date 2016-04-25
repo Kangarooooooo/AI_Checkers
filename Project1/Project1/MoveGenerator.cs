@@ -21,34 +21,34 @@ namespace Project1
         //Author Kangarooooooo
         public Boolean canPieceCapture(int[,] currentState, int x, int y)
         {
-            Console.WriteLine("canPieceCapture called with x=" + x + " and y=" + y);
+            //Console.WriteLine("canPieceCapture called with x=" + x + " and y=" + y);
             if (currentState[x, y] > 0)//Is red
             {
-                Console.Write("RedMan");
+                //Console.Write("RedMan");
                 if (x < boardSize - 2)//Can capture forward
                 {
-                    Console.Write("Up");
+                    //Console.Write("Up");
                     if (y > 1)//Can capture to left
                     {
-                        Console.Write("Left");
+                        //Console.Write("Left");
                         if ((currentState[x + 1, y - 1] < 0) && (currentState[x + 2, y - 2] == 0))//Piece to capture, and space to do it.
                         {
-                            Console.Write("-TRUE");
+                            //Console.Write("-TRUE");
                             return true;
                         }
                     }
-                    else if (y < boardSize - 2)//Can capture to right
+                    if (y < boardSize - 2)//Can capture to right
                     {
-                        Console.Write("Right");
+                        //Console.Write("Right");
                         if ((currentState[x + 1, y + 1] < 0) && (currentState[x + 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
-                            Console.Write("-TRUE");
+                            //Console.Write("-TRUE");
                             return true;
                         }
                     }
                 }
             }
-            else if (currentState[x, y] > 1)//Is king
+            if (currentState[x, y] > 1)//Is king
             {
                 if (x > 1)//Can capture backwards
                 {
@@ -59,7 +59,7 @@ namespace Project1
                             return true;
                         }
                     }
-                    else if (y < boardSize - 2)//Can capture to the right
+                    if (y < boardSize - 2)//Can capture to the right
                     {
                         if ((currentState[x - 1, y + 1] < 0) && (currentState[x - 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
@@ -68,33 +68,33 @@ namespace Project1
                     }
                 }
             }
-            else if (currentState[x, y] < 0)//Is black
+            if (currentState[x, y] < 0)//Is black
             {
-                Console.Write("BlackMan");
+                // Console.Write("BlackMan");
                 if (x > 1)//Can capture downwards
                 {
-                    Console.Write("Down");
+                    //Console.Write("Down");
                     if (y > 1)//Can capture to left
                     {
-                        Console.Write("Left");
+                        //Console.Write("Left");
                         if ((currentState[x - 1, y - 1] > 0) && (currentState[x - 2, y - 2] == 0))//Piece to capture, and space to do it.
                         {
-                            Console.Write("-TRUE");
+                            //Console.Write("-TRUE");
                             return true;
                         }
                     }
-                    else if (y < boardSize - 2)//Can capture to the right
+                    if (y < boardSize - 2)//Can capture to the right
                     {
-                        Console.Write("Right");
+                        //Console.Write("Right");
                         if ((currentState[x - 1, y + 1] > 0) && (currentState[x - 2, y + 2] == 0))//Piece to capture and space to do it.
                         {
-                            Console.Write("-TRUE");
+                            //Console.Write("-TRUE");
                             return true;
                         }
                     }
                 }
             }
-            else if (currentState[x, y] < -1)//Is black king
+            if (currentState[x, y] < -1)//Is black king
             {
                 if (x < boardSize - 2)//Can capture forward
                 {
@@ -114,7 +114,7 @@ namespace Project1
                     }
                 }
             }
-            Console.WriteLine("CanPieceCapture never found TRUE\n");
+            //Console.WriteLine("CanPieceCapture never found TRUE\n");
             return false;
         }
 
@@ -122,22 +122,52 @@ namespace Project1
         public LinkedList<Move> legalCapturesRedAI(int [,] currentState)
         {
             LinkedList<Move>  moves = legalCapturesRed(currentState);
-            int i = 0;
-            foreach (Move move in moves)
+            Boolean b = false;
+            do
             {
-                if (canPieceCapture(move.getState(),move.getEndX(), move.getEndY()))
+                LinkedList<Move> chain = new LinkedList<Move>();
+                b = false;
+                foreach (Move move in moves)
                 {
-                    moves.Remove(move);
-                    i--;
-                    LegalCapturesRedPiece(move.getState(), moves, move.getEndX(), move.getEndY());
+                    if (canPieceCapture(move.getState(), move.getEndX(), move.getEndY()))
+                    {
+                        chain.AddLast(move);
+                        b = true;
+                    }
                 }
-                i++;
+                foreach (Move move in chain)
+                {
+                    LegalCapturesRedPiece(move.getState(), moves, move.getEndX(), move.getEndY());
+                    moves.Remove(move);
+                }
             }
+            while (b);
             return moves;
         }
         public LinkedList<Move> legalCapturesBlackAI(int[,] currentState)
         {
-            return null;
+            LinkedList<Move> moves = legalCapturesBlack(currentState);
+            Boolean b = false;
+            do
+            {
+                LinkedList<Move> chain = new LinkedList<Move>();
+                b = false;
+                foreach (Move move in moves)
+                {
+                    if (canPieceCapture(move.getState(), move.getEndX(), move.getEndY()))
+                    {
+                        chain.AddLast(move);
+                        b = true;
+                    }
+                }
+                foreach (Move move in chain)
+                {
+                    LegalCapturesBlackPiece(move.getState(), moves, move.getEndX(), move.getEndY());
+                    moves.Remove(move);
+                }
+            }
+            while (b);
+            return moves;
         }
 
         //Author Kangarooooooo
