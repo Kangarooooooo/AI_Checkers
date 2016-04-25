@@ -23,6 +23,7 @@ namespace Project1
         {
             board = new Board();
             mg = new MoveGenerator(board);
+            ai = new AI(mg);
             latestMove = new Move();
             legalCaptures = new LinkedList<Move>();
             int n, choice, testCount;
@@ -195,6 +196,16 @@ namespace Project1
                 }
             }
             while (cap);
+        }
+
+        void AIred()
+        {
+            ai.MaximizerStart();
+        }
+
+        void AIblack()
+        {
+            ai.MinimizerStart();
         }
     }
 }

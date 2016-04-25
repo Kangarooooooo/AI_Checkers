@@ -10,17 +10,30 @@ namespace Project1
     {
         MoveGenerator mg;
         Board board;
-        public AI(MoveGenerator mg, Board board)
+        public AI(MoveGenerator mg)
         {
             this.mg = mg;
-            this.board = board;
+            this.board = mg.boardReference;
         }
+        
+        public void MaximizerStart()
+        //Author: Kasper
+        //Call this first, then the Maximizer will be called until it is no longer relevant
+        {
 
-        public int Minimizer(int[,] move)
+        }
+        public int Maximizer(int[,] move)
         {
             return 0;
         }
-        public int Maximizer(int[,] move)
+
+        public void MinimizerStart()
+        //Author: Kasper
+        //Call this first, then the Maximizer will be called until it is no longer relevant
+        {
+
+        }
+        public int Minimizer(int[,] move)
         {
             return 0;
         }
