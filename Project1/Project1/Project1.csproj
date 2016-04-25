@@ -33,12 +33,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Project1.testBoard4</StartupObject>
+    <StartupObject>Project1.Eirikspecialmainclass</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI.cs" />
     <Compile Include="testBoard4.cs" />
     <Compile Include="TwoPlayer.cs" />
     <Compile Include="class1.cs" />

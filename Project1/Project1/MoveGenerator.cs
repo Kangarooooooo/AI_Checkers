@@ -127,13 +127,19 @@ namespace Project1
             {
                 if (canPieceCapture(move.getState(),move.getEndX(), move.getEndY()))
                 {
+                    moves.Remove(move);
+                    i--;
                     LegalCapturesRedPiece(move.getState(), moves, move.getEndX(), move.getEndY());
                 }
                 i++;
             }
+            return moves;
+        }
+        public LinkedList<Move> legalCapturesBlackAI(int[,] currentState)
+        {
             return null;
         }
-        
+
         //Author Kangarooooooo
         /// <summary>
         /// Method takes a boardstate and returns a list of legal boardstates, representating the legal captures given the current boardstate.List is empty if no legal moves exist.
