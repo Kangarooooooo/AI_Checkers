@@ -137,11 +137,21 @@ namespace Project1
         public void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            redManSet(0, 0);
-            blackManSet(1, 1);
-            blackManSet(3, 3);
-            blackManSet(5, 5);
-            blackManSet(5, 3);
+            redManSet(1, 0);
+            blackManSet(2, 1);
+            blackManSet(4, 3);
+            blackManSet(6, 5);
+            blackManSet(6, 3);
+            blackManSet(6, 1);
+        }
+        public void startState22() //TestingStart for testing tests
+        //Author: Kasper
+        {
+            blackKingSet(0, 0);
+            redManSet(1, 1);
+            redManSet(3, 3);
+            redManSet(5, 5);
+            redManSet(5, 3);
         }
 
         public void startState3()

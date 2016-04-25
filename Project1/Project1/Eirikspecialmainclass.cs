@@ -14,9 +14,9 @@ namespace Project1
             MoveGenerator mg = new MoveGenerator(board);
             Move latestMove = new Move();
             LinkedList<Move> legalCaptures = new LinkedList<Move>();
-            board.startState2();
+            board.startState22();
             board.showBoard();
-            legalCaptures = mg.legalCapturesRedAI(board.copyCurrent());
+            legalCaptures = mg.legalCapturesBlackAI(board.copyCurrent());
             foreach(Move move in legalCaptures)
             {
                 board.doMove(move);
