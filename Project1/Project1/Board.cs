@@ -197,11 +197,11 @@ namespace Project1
                    
                 }
             }
-            if (red == 0 || mg.legalMovesRedNow().Count < 1)
+            if (red == 0 || mg.legalMovesRedNow().Count < 1) //if red has no pieces or no moves
             {
                 return -10000;
             }
-            if (black == 0 || mg.legalMovesBlackNow().Count < 1)
+            if (black == 0 || mg.legalMovesBlackNow().Count < 1) //if black has no pieces or no moves
             {
                 return 10000;
             }
