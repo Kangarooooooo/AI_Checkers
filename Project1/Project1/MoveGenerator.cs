@@ -118,16 +118,16 @@ namespace Project1
             return false;
         }
 
-        
-        LinkedList<Move> legalCapturesRedAI(int [,] currentState)
+        //Author Kangarooooooo
+        public LinkedList<Move> legalCapturesRedAI(int [,] currentState)
         {
             LinkedList<Move>  moves = legalCapturesRed(currentState);
             int i = 0;
             foreach (Move move in moves)
             {
-                if (canPieceCapture(move.getState(),1,1))
+                if (canPieceCapture(move.getState(),move.getEndX(), move.getEndY()))
                 {
-
+                    LegalCapturesRedPiece(move.getState(), moves, move.getEndX(), move.getEndY());
                 }
                 i++;
             }
