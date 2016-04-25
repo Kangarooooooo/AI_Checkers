@@ -176,7 +176,7 @@ namespace Project1
                 {
                     if (read(i, j) > 0)
                     {
-                        red +=read(i, j);
+                        red += read(i, j);
                     }
                     else
                     {
@@ -185,11 +185,11 @@ namespace Project1
                    
                 }
             }
-            if (red == 0)
+            if (red == 0 || mg.legalMovesRedNow().Count < 1)
             {
                 return -10000;
             }
-            if (black == 0)
+            if (black == 0 || mg.legalMovesBlackNow().Count < 1)
             {
                 return 10000;
             }
