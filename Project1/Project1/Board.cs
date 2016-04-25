@@ -16,7 +16,7 @@ namespace Project1
             P1 = ConsoleColor.Cyan,
             P2 = ConsoleColor.Red,
             king = ConsoleColor.Yellow,
-            baseColor = ConsoleColor.Gray;
+            baseColor = ConsoleColor.DarkGray;
         LinkedList<int[,]> list = new LinkedList<int[,]>();
         public Board()
         //Author: Kasper
