@@ -10,6 +10,8 @@ namespace Project1
     {
 
         static void Main(string[] args)
+        //Author: Kasper
+        //used for testing if detection of lack of moves is possible
         {
             MoveGenerator mg = new MoveGenerator(new Board());
             mg.boardReference.startState4();

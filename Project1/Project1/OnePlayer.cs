@@ -40,6 +40,17 @@ namespace Project1
         {
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
+                playred();
+                checkWin();
+                if (checkWin() != 0)
+                {
+                    break;
+                }
+                AIblack();
+                if (checkWin() != 0)
+                {
+                    break;
+                }
             }
         }
 
@@ -47,6 +58,29 @@ namespace Project1
         {
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
+                playblack();
+                checkWin();
+                if (checkWin() != 0)
+                {
+                    break;
+                }
+                AIred();
+            }
+        }
+
+        int checkWin()
+        {
+            if (board.evaluate() > 1000)
+            {
+                return 1; //starting player/AI wins
+            }
+            else if(board.evaluate() < -1000)
+            {
+                return -1; //non-starting player/AI wins
+            }
+            else
+            {
+                return 0;
             }
         }
     }
