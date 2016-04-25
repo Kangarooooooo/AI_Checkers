@@ -141,7 +141,7 @@ namespace Project1
             blackManSet(1, 1);
             blackManSet(3, 3);
             blackManSet(5, 5);
-            blackManSet(5, 1);
+            blackManSet(5, 3);
         }
 
         public void startState3()

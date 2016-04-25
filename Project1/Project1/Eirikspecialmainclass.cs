@@ -17,7 +17,12 @@ namespace Project1
             board.startState2();
             board.showBoard();
             legalCaptures = mg.legalCapturesRedAI(board.copyCurrent());
-            Console.WriteLine(legalCaptures.Count);
+            foreach(Move move in legalCaptures)
+            {
+                board.doMove(move);
+                board.showBoard();
+            }
+
             Console.ReadLine();
         }
     }
