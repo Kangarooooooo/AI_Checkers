@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Project1
 {
-    class testBoard4
+    public class testBoard4
     {
-        public static void main(String[] args)
+        static void Main(String[] args)
         {
             MoveGenerator mg = new MoveGenerator(new Board());
             mg.boardReference.startState4();
             int evalval = mg.boardReference.evaluate();
+            Console.WriteLine("Showing the board:\n\n");
+            mg.boardReference.showBoard();
             Console.WriteLine("evalval = " + evalval);
             Console.ReadLine();
         }
