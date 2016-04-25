@@ -8,7 +8,8 @@ namespace Project1
 {
     class testBoard4
     {
-        public static void main(String[] args)
+
+        static void Main(string[] args)
         {
             MoveGenerator mg = new MoveGenerator(new Board());
             mg.boardReference.startState4();
