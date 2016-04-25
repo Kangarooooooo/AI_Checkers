@@ -39,6 +39,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="testBoard4.cs" />
+    <Compile Include="TwoPlayer.cs" />
     <Compile Include="class1.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="Eirikspecialmainclass.cs" />

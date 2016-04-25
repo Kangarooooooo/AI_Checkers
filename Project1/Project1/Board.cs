@@ -9,6 +9,7 @@ namespace Project1
 {
     class Board
     {
+        MoveGenerator mg;
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
         int boardSize, redPieceCount, blackPieceCount;
         ConsoleColor //Color variables. Change to personal preferences if you like.
@@ -16,7 +17,7 @@ namespace Project1
             P1 = ConsoleColor.Cyan,
             P2 = ConsoleColor.Red,
             king = ConsoleColor.Yellow,
-            baseColor = ConsoleColor.Gray;
+            baseColor = ConsoleColor.DarkGray;
         LinkedList<int[,]> list = new LinkedList<int[,]>();
         public Board()
         //Author: Kasper
@@ -111,6 +112,7 @@ namespace Project1
         }
 
         public void doMove(Move move)
+        //Author: Kasper
         {
             int[,] newMove = move.getState();
             b = copy(newMove);
@@ -146,8 +148,19 @@ namespace Project1
         //Author: Kasper
         //start state for testing purposes
         {
-            redManSet(6, 2);
-            blackManSet(3, 3);
+            redManSet(1, 4);
+            blackManSet(2, 3);
+            blackManSet(4, 3);
+            blackManSet(6, 3);
+        }
+
+        public void startState4()
+        //Author: Kasper
+        //start state for testing purposes
+        {
+            redManSet(0, 0);
+            blackManSet(1, 1);
+            blackManSet(2, 2);
         }
 
         public int read(int x, int y) //returns integer defining the type of piece on the specific field of the board
@@ -175,7 +188,7 @@ namespace Project1
                 {
                     if (read(i, j) > 0)
                     {
-                        red +=read(i, j);
+                        red += read(i, j);
                     }
                     else
                     {
@@ -184,11 +197,11 @@ namespace Project1
                    
                 }
             }
-            if (red == 0)
+            if (red == 0 || mg.legalMovesRedNow().Count < 1)
             {
                 return -10000;
             }
-            if (black == 0)
+            if (black == 0 || mg.legalMovesBlackNow().Count < 1)
             {
                 return 10000;
             }
@@ -205,6 +218,11 @@ namespace Project1
                 b[x, y] = 0; //force-clears the field
             }
             return truth;
+        }
+
+        public void setMoveGenerator(MoveGenerator master)
+        {
+            mg = master;
         }
 
         public int getBoardSize()

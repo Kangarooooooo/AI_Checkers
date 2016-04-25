@@ -4,24 +4,33 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*
-THIS CLASS IS DISCONTINUED, USE TwoPlayer INSTEAD
-*/
-
 namespace Project1
 {
-    class testBoard3
+    public class TwoPlayer
     {
-        static void Main(string[] args)
+        Boolean cap;
+        Board board;
+        MoveGenerator mg;
+        Move latestMove;
+        LinkedList<Move> legalActions, legalMoves, legalCaptures;
+        int n, choice, testCount;
+
+        public TwoPlayer()
         {
-            Boolean cap;
-            Board board = new Board();
-            MoveGenerator mg = new MoveGenerator(board);
-            Move latestMove = new Move();
-            LinkedList<Move> legalActions, legalMoves, legalCaptures = new LinkedList<Move>();
+            playLoop();
+        }
+
+        void playLoop()
+        {
+            
+            board = new Board();
+            mg = new MoveGenerator(board);
+            latestMove = new Move();
+            legalCaptures = new LinkedList<Move>();
             int n, choice, testCount;
             board.startState();
             Console.WriteLine("This is the current board:\n");
+
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
                 testCount = 0;
@@ -36,8 +45,9 @@ namespace Project1
                     Console.WriteLine("Red player must now choose a possible move:\n");
                     if (testCount < 1)
                     {
-                    legalCaptures = mg.legalCapturesRedNow();
-                    } else
+                        legalCaptures = mg.legalCapturesRedNow();
+                    }
+                    else
                     {
                         legalCaptures = new LinkedList<Move>();
                         mg.LegalCapturesRedPiece(board.copyCurrent(), legalCaptures, latestMove.getEndX(), latestMove.getEndY());
@@ -71,10 +81,7 @@ namespace Project1
                         board.doMove(latestMove);
                         testCount++;
                     }
-                    /*Console.WriteLine("1 sec sleep");
-                    System.Threading.Thread.Sleep(1000);*/
                 }
-                //while (mg.canPieceCapture(board.copyCurrent(), legalActions.ElementAt(choice - 1).getEndX(), legalActions.ElementAt(choice - 1).getEndY()));
                 while (cap);
 
                 testCount = 0;
@@ -89,7 +96,7 @@ namespace Project1
                     Console.WriteLine("Black player must now choose a possible move:\n");
                     if (testCount < 1)
                     {
-                    legalCaptures = mg.legalCapturesBlackNow();
+                        legalCaptures = mg.legalCapturesBlackNow();
                     }
                     else
                     {
