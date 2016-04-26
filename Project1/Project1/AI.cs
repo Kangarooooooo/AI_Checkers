@@ -39,9 +39,14 @@ namespace Project1
             Move start = new Move(board.copyCurrent(), "", -1, -1);
             Minimizer(start, maxDepth, 0);
         }
-        public Move Minimizer(Move move, int maxDepth, int currentDepth)
+        public int Minimizer(Move move, int maxDepth, int currentDepth)
         {
-            return null;
+            if (maxDepth == currentDepth)
+            {
+                return board.evaluate(move.getState());
+
+            }
+            return 0;
         }
     }
 }
