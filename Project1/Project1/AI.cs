@@ -14,6 +14,7 @@ namespace Project1
         int depth, maxDepth;
         Boolean isMaximizer,keepGoing;
         Move bestSuggestion;
+        Thread t;
 
         public AI(MoveGenerator mg)
         {
@@ -164,8 +165,16 @@ namespace Project1
         //call this whenever you wish to start the thread that finds the best move
         {
             this.isMaximizer = isMaximizer; //this is a variable that the entire AI object can read. It is needed in the threadCode.
-            Thread t = new Thread(new ThreadStart(threadCode));
+            keepGoing = true;
+            t = new Thread(new ThreadStart(threadCode));
             t.Start();
+        }
+
+        public void killThread()
+        //Author: Kasper
+        //Use this to stop the thread
+        {
+            t.Abort();
         }
     }
 }
