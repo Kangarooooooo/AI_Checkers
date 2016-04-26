@@ -17,7 +17,7 @@ namespace Project1
         MoveGenerator mg;
         Move latestMove;
         LinkedList<Move> legalActions, legalMoves, legalCaptures;
-        int n, choice, testCount;
+        int n, choice, testCount, maxWorkTime;
 
         public OnePlayer()
         {
@@ -199,18 +199,16 @@ namespace Project1
 
         public void AIred()
         {
-            //startTimer
             ai.startFindMoveThread(true);
-            sleep(15000);
+            sleep(maxWorkTime);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
         }
 
         public void AIblack()
         {
-            //startTimer
             ai.startFindMoveThread(false);
-            sleep(15000);
+            sleep(maxWorkTime);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
         }
