@@ -32,7 +32,6 @@ namespace Project1
             {
                 moves = mg.legalMovesRed(board.copyCurrent());
             }
-            int[] values = new int[moves.Count];
             int i = 0;
             Move bestMove = null;
             foreach (Move move in moves)
@@ -85,7 +84,6 @@ namespace Project1
             {
                 moves = mg.legalMovesBlack(board.copyCurrent());
             }
-            int[] values = new int[moves.Count];
             int i = 0;
             Move bestMove = null;
             foreach ( Move move in moves)
