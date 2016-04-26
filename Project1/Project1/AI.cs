@@ -30,7 +30,31 @@ namespace Project1
         }
         public int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
-            return 0;
+            if (maxDepth == currentDepth)
+            {
+                return board.evaluate(currentState);
+            }
+            LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
+            if (moves.Count == 0)
+            {
+                moves = mg.legalMovesBlack(currentState);
+            }
+
+            if (moves.Count != 0)
+            {
+                while (alpha > beta)
+                {
+                    Move move = moves.First();
+                    moves.RemoveFirst();
+                    int v = Maximizer(move.getState(), maxDepth, currentDepth + 1, alpha, beta);
+                    if (v > alpha)
+                    {
+                        alpha = v;
+                    }
+                }
+                return alpha;
+            }
+            return 10000;
         }
 
         public int[,] MinimizerStart(int maxDepth)
