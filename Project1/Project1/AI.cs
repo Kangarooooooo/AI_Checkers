@@ -42,7 +42,6 @@ namespace Project1
                     i = temp;
                     bestMove = move;
                 }
-                i++;
             }
             return bestMove;
         }
@@ -94,7 +93,6 @@ namespace Project1
                     i = temp;
                     bestMove = move;
                 }
-                i++;
             }
             return bestMove;
         }
