@@ -236,7 +236,7 @@ namespace Project1
                     {
                         black += read(i, j);
                     }
-                   
+
                 }
             }
             if (red == 0 || mg.legalMovesRedNow().Count < 1) //if red has no pieces or no moves
@@ -248,6 +248,38 @@ namespace Project1
                 return 10000;
             }
             return red + black; //send back result
+        }
+
+        public int evaluate(int[,] boardState) //overloaded method
+        {
+            {
+                int red = 0;
+                int black = 0;
+                for (int i = 0; i < boardSize; i++) //for each row
+                {
+                    for (int j = 0; j < boardSize; j++) //for each column
+                    {
+                        if (boardState[i,j] > 0)
+                        {
+                            red += boardState[i,j];
+                        }
+                        else
+                        {
+                            black += boardState[i, j];
+                        }
+
+                    }
+                }
+                if (red == 0 || mg.legalMovesRed(boardState).Count < 1) //if red has no pieces or no moves
+                {
+                    return -10000;
+                }
+                if (black == 0 || mg.legalMovesBlack(boardState).Count < 1) //if black has no pieces or no moves
+                {
+                    return 10000;
+                }
+                return red + black; //send back result
+            }
         }
 
         public Boolean remove(int x, int y) //designed to remove a piece from the board
