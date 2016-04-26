@@ -132,7 +132,7 @@ namespace Project1
                 n = 1;
                 foreach (Move move in legalActions)
                 {
-                    Console.WriteLine("   " + n + ". move: " + move.getString() + "\n");
+                    Console.WriteLine("   " + n + ". move: " + move.getString());
                     n++;
                 }
                 if (legalActions.Count > 0)
@@ -187,7 +187,7 @@ namespace Project1
                 n = 1;
                 foreach (Move move in legalActions)
                 {
-                    Console.WriteLine("   " + n + ". move: " + move.getString() + "\n");
+                    Console.WriteLine("   " + n + ". move: " + move.getString());
                     n++;
                 }
                 if (legalActions.Count > 0)
