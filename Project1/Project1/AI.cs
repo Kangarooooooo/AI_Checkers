@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Project1
@@ -108,9 +109,16 @@ namespace Project1
             return 10000;
         }
 
-        public void threadCode(Boolean isMaximizer)
+        public Move getBestSuggestion()
+        {
+            return bestSuggestion;
+        }
+
+        public void threadCode()
         //Author: Kasper
         //Code to be called in a thread, so that we can interrupt it!
+        //this code will run, and will periodically update the value "bestSuggestion"
+        //once the thread has been interrupted for any reason, call getBestSuggestion() to retrieve whatever result was most recently aquired
         {
             if (isMaximizer)
             {
@@ -119,7 +127,22 @@ namespace Project1
                     bestSuggestion = MaximizerStart(maxDepth);
                     maxDepth++;
                 }
+            } 
+            else
+            {
+                while (keepGoing)
+                {
+                    bestSuggestion = MinimizerStart(maxDepth);
+                    maxDepth++;
+                }
             }
+        }
+
+        public void startFindMoveThread(Boolean isMaximizer)
+        {
+            this.isMaximizer = isMaximizer; //this is a variable that the entire AI object can read. It is needed in the threadCode.
+            Thread t = new Thread(new ThreadStart(threadCode));
+            t.Start();
         }
     }
 }
