@@ -20,7 +20,7 @@ namespace Project1
             this.board = mg.boardReference;
         }
         
-        public int[,] MaximizerStart(int maxDepth)
+        public Move MaximizerStart(int maxDepth)
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
@@ -34,10 +34,10 @@ namespace Project1
             {
                 return board.evaluate(currentState);
             }
-            LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
+            LinkedList<Move> moves = mg.legalCapturesRedAI(currentState);
             if (moves.Count == 0)
             {
-                moves = mg.legalMovesBlack(currentState);
+                moves = mg.legalMovesRed(currentState);
             }
 
             if (moves.Count != 0)
@@ -57,12 +57,23 @@ namespace Project1
             return -10000;
         }
 
-        public int[,] MinimizerStart(int maxDepth)
+        public Move MinimizerStart(int maxDepth)
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
             LinkedList<Move> moves = mg.legalCapturesBlackAI(board.copyCurrent());
-            Minimizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
+            if (moves.Count == 0)
+            {
+                moves = mg.legalMovesBlack(board.copyCurrent());
+            }
+            int[] values = new int[moves.Count];
+            int i = 0;
+            Move bestMove;
+            foreach ( Move move in moves)
+            {
+                int temp = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
+                i++;
+            }
             return null;
         }
         private int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
