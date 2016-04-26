@@ -11,7 +11,7 @@ namespace Project1
         MoveGenerator mg;
         Board board;
         int depth, maxDepth;
-        Boolean isMaximizer;
+        Boolean isMaximizer,keepGoing;
         Move bestSuggestion;
 
         public AI(MoveGenerator mg)
@@ -30,7 +30,7 @@ namespace Project1
             Maximizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
             return null;
         }
-        private int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
+        public int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
             if (maxDepth == currentDepth)
             {
@@ -44,7 +44,7 @@ namespace Project1
 
             if (moves.Count != 0)
             {
-                while (alpha < beta)
+                while (alpha > beta)
                 {
                     Move move = moves.First();
                     moves.RemoveFirst();
@@ -67,7 +67,7 @@ namespace Project1
             Minimizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
             return null;
         }
-        private int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
+        public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
             
             if (maxDepth == currentDepth)
@@ -99,9 +99,16 @@ namespace Project1
 
         public void threadCode(Boolean isMaximizer)
         //Author: Kasper
-        //Code to be called in a thread
+        //Code to be called in a thread, so that we can interrupt it!
         {
-
+            if (isMaximizer)
+            {
+                while (keepGoing)
+                {
+                    bestSuggestion = MaximizerStart(maxDepth);
+                    maxDepth++;
+                }
+            }
         }
     }
 }
