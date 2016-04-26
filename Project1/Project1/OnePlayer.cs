@@ -25,7 +25,7 @@ namespace Project1
             mg = new MoveGenerator(board);
             latestMove = new Move();
             legalCaptures = new LinkedList<Move>();
-            int n, choice, testCount;
+            maxWorkTime = 15000; //means 15 thousand milliseconds of worktime
             board.startState();
             Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second");
             choice = Int32.Parse(Console.ReadLine());
@@ -69,6 +69,10 @@ namespace Project1
                     break;
                 }
                 playblack();
+                if (checkWin() != 0)
+                {
+                    break;
+                }
             }
         }
 
@@ -200,7 +204,7 @@ namespace Project1
         public void AIred()
         {
             ai.startFindMoveThread(true);
-            sleep(maxWorkTime);
+            System.Threading.Thread.Sleep(maxWorkTime);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
         }
@@ -208,7 +212,7 @@ namespace Project1
         public void AIblack()
         {
             ai.startFindMoveThread(false);
-            sleep(maxWorkTime);
+            System.Threading.Thread.Sleep(maxWorkTime);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
         }
