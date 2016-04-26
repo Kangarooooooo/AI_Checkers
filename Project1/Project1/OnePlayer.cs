@@ -24,6 +24,7 @@ namespace Project1
             board = new Board();
             mg = new MoveGenerator(board);
             latestMove = new Move();
+            ai = new AI(mg);
             legalCaptures = new LinkedList<Move>();
             maxWorkTime = 15000; //means 15 thousand milliseconds of worktime
             board.startState();

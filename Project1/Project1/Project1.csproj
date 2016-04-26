@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Project1.testBoard4</StartupObject>
+    <StartupObject>Project1.testOnePlayer</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -42,6 +42,7 @@
     <Compile Include="AI.cs" />
     <Compile Include="OnePlayer.cs" />
     <Compile Include="testBoard4.cs" />
+    <Compile Include="testOnePlayer.cs" />
     <Compile Include="TwoPlayer.cs" />
     <Compile Include="class1.cs" />
     <Compile Include="Board.cs" />
