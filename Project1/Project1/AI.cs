@@ -25,9 +25,9 @@ namespace Project1
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
             Move start = new Move(board.copyCurrent(),"",-1, -1);
-            Maximizer(start, maxDepth, 0);
+            Maximizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
         }
-        public Move Maximizer(Move move, int maxDepth, int currentDepth)
+        public Move Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
             return null;
         }
@@ -36,9 +36,9 @@ namespace Project1
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
-            Minimizer(board.copyCurrent(), maxDepth, 0);
+            Minimizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
         }
-        public int Minimizer(int [,] currentState, int maxDepth, int currentDepth)
+        public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
             if (maxDepth == currentDepth)
             {
@@ -48,9 +48,14 @@ namespace Project1
             if (moves.Count != 0)
             {
 
+
             }
             moves = mg.legalMovesBlack(currentState);
-            return 0;
+            if (moves.Count != 0)
+            {
+
+            }
+            return 10000;
         }
     }
 }
