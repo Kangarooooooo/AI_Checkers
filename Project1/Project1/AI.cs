@@ -10,12 +10,14 @@ namespace Project1
     {
         MoveGenerator mg;
         Board board;
-        int depth, maxdepth;
+        int depth, maxDepth;
+        Boolean isMaximizer;
+        Move bestSuggestion;
 
         public AI(MoveGenerator mg)
         {
             depth = 0;
-            maxdepth = 10;
+            maxDepth = 1;
             this.mg = mg;
             this.board = mg.boardReference;
         }
@@ -104,6 +106,13 @@ namespace Project1
                 return beta;
             }
             return 10000;
+        }
+
+        public void threadCode(Boolean isMaximizer)
+        //Author: Kasper
+        //Code to be called in a thread
+        {
+
         }
     }
 }
