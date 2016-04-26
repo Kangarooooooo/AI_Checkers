@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Project1.Eirikspecialmainclass</StartupObject>
+    <StartupObject>Project1.testBoard4</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <None Include="App.config" />
