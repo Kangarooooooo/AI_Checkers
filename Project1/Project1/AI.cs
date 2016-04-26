@@ -36,16 +36,20 @@ namespace Project1
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
-            Move start = new Move(board.copyCurrent(), "", -1, -1);
-            Minimizer(start, maxDepth, 0);
+            Minimizer(board.copyCurrent(), maxDepth, 0);
         }
-        public int Minimizer(Move move, int maxDepth, int currentDepth)
+        public int Minimizer(int [,] currentState, int maxDepth, int currentDepth)
         {
             if (maxDepth == currentDepth)
             {
-                return board.evaluate(move.getState());
+                return board.evaluate(currentState);
+            }
+            LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
+            if (moves.Count != 0)
+            {
 
             }
+            moves = mg.legalMovesBlack(currentState);
             return 0;
         }
     }

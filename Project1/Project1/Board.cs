@@ -49,7 +49,7 @@ namespace Project1
             return copy;
         }
 
-        int evaluate(int[,] boardState)
+        public int evaluate(int[,] boardState)
         {
             {
                 int red = 0;
