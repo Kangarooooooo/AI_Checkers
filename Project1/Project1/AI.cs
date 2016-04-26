@@ -26,9 +26,25 @@ namespace Project1
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
-
-            Maximizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
-            return null;
+            LinkedList<Move> moves = mg.legalCapturesRedAI(board.copyCurrent());
+            if (moves.Count == 0)
+            {
+                moves = mg.legalMovesRed(board.copyCurrent());
+            }
+            int[] values = new int[moves.Count];
+            int i = 0;
+            Move bestMove = null;
+            foreach (Move move in moves)
+            {
+                int temp = Maximizer(move.getState(), maxDepth, 0, -11000, 11000);
+                if (temp < i)
+                {
+                    i = temp;
+                    bestMove = move;
+                }
+                i++;
+            }
+            return bestMove;
         }
         private int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
@@ -70,13 +86,18 @@ namespace Project1
             }
             int[] values = new int[moves.Count];
             int i = 0;
-            Move bestMove;
+            Move bestMove = null;
             foreach ( Move move in moves)
             {
                 int temp = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
+                if (temp > i)
+                {
+                    i = temp;
+                    bestMove = move;
+                }
                 i++;
             }
-            return null;
+            return bestMove;
         }
         private int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
