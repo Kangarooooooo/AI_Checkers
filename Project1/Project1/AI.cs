@@ -139,6 +139,8 @@ namespace Project1
         }
 
         public void startFindMoveThread(Boolean isMaximizer)
+        //Author: Kasper
+        //call this whenever you wish to start the thread that finds the best move
         {
             this.isMaximizer = isMaximizer; //this is a variable that the entire AI object can read. It is needed in the threadCode.
             Thread t = new Thread(new ThreadStart(threadCode));
