@@ -20,28 +20,28 @@ namespace Project1
             this.board = mg.boardReference;
         }
         
-        public void MaximizerStart()
+        public void MaximizerStart(int maxDepth)
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
             Move start = new Move(board.copyCurrent(),"",-1, -1);
-            Maximizer(start);
+            Maximizer(start, maxDepth, 0);
         }
-        public Move Maximizer(Move move)
+        public Move Maximizer(Move move, int maxDepth, int currentDepth)
         {
-            return 0;
+            return null;
         }
 
-        public void MinimizerStart()
+        public void MinimizerStart(int maxDepth)
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
             Move start = new Move(board.copyCurrent(), "", -1, -1);
-            Maximizer(start);
+            Minimizer(start, maxDepth, 0);
         }
-        public Move Minimizer(Move move)
+        public Move Minimizer(Move move, int maxDepth, int currentDepth)
         {
-            return 0;
+            return null;
         }
     }
 }
