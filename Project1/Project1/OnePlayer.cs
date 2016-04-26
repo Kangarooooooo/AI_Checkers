@@ -50,7 +50,7 @@ namespace Project1
                 {
                     break;
                 }
-                //AIblack();
+                AIblack();
                 if (checkWin() != 0)
                 {
                     break;
@@ -62,7 +62,7 @@ namespace Project1
         {
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
-                //AIred();
+                AIred();
                 checkWin();
                 if (checkWin() != 0)
                 {
@@ -195,6 +195,30 @@ namespace Project1
                 }
             }
             while (cap);
+        }
+
+        public void AIred()
+        {
+            //startTimer
+            ai.startFindMoveThread(true);
+            while (elapsedTime < 15000)
+            {
+                //trololo
+            }
+            ai.killThread();
+            Move suggestion = ai.getBestSuggestion();
+        }
+
+        public void AIblack()
+        {
+            //startTimer
+            ai.startFindMoveThread(false);
+            while (elapsedTime < 15000)
+            {
+                //trololo
+            }
+            ai.killThread();
+            Move suggestion = ai.getBestSuggestion();
         }
     }
 }
