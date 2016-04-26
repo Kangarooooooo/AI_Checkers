@@ -27,9 +27,9 @@ namespace Project1
             Move start = new Move(board.copyCurrent(),"",-1, -1);
             Maximizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
         }
-        public Move Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
+        public int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
-            return null;
+            return 0;
         }
 
         public void MinimizerStart(int maxDepth)
@@ -40,20 +40,29 @@ namespace Project1
         }
         public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
+            
             if (maxDepth == currentDepth)
             {
                 return board.evaluate(currentState);
             }
             LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
-            if (moves.Count != 0)
+            if (moves.Count == 0)
             {
-
-
+               moves = mg.legalMovesBlack(currentState);
             }
-            moves = mg.legalMovesBlack(currentState);
+            
             if (moves.Count != 0)
             {
-
+                while (alpha < beta)
+                {
+                    Move move = moves.First();
+                    moves.RemoveFirst();
+                    int v = Maximizer(move.getState(), maxDepth, currentDepth + 1, alpha, beta);
+                    if (v < beta)
+                    {
+                        beta = v;
+                    }
+                }
             }
             return 10000;
         }
