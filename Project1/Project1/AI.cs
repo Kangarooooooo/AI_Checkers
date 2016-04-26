@@ -34,12 +34,14 @@ namespace Project1
             }
             int i = 0;
             Move bestMove = null;
+            Boolean first = true;
             foreach (Move move in moves)
             {
-                int temp = Maximizer(move.getState(), maxDepth, 0, -11000, 11000);
-                if (temp < i)
+                int alpha = Maximizer(move.getState(), maxDepth, 0, -11000, 11000);
+                if (alpha < i||first)
                 {
-                    i = temp;
+                    first = false;
+                    i = alpha;
                     bestMove = move;
                 }
             }
@@ -85,12 +87,14 @@ namespace Project1
             }
             int i = 0;
             Move bestMove = null;
+            Boolean first = true;
             foreach ( Move move in moves)
             {
-                int temp = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
-                if (temp > i)
+                int beta = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
+                if (beta > i||first)
                 {
-                    i = temp;
+                    first = false;
+                    i = beta;
                     bestMove = move;
                 }
             }
