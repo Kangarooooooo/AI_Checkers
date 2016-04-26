@@ -10,7 +10,7 @@ namespace Project1
     {
         int[,] state;
         String stateString;
-        int endX, endY;
+        int endX, endY, Alpha, Beta; //the alpha and beta values are exclusively utilized by the AI, and are irrelevant for players
 
         public Move()
         {
@@ -63,6 +63,26 @@ namespace Project1
         public int getEndY()
         {
             return endY;
+        }
+
+        public void setAlpha(int setVal)
+        {
+            Alpha = setVal;
+        }
+
+        public int getAlpha()
+        {
+            return Alpha;
+        }
+
+        public void setBeta(int setVal)
+        {
+            Beta = setVal;
+        }
+
+        public int getBeta()
+        {
+            return Beta;
         }
 
         public String getString()

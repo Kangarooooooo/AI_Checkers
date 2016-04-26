@@ -10,8 +10,12 @@ namespace Project1
     {
         MoveGenerator mg;
         Board board;
+        int depth, maxdepth;
+
         public AI(MoveGenerator mg)
         {
+            depth = 0;
+            maxdepth = 10;
             this.mg = mg;
             this.board = mg.boardReference;
         }
@@ -20,9 +24,10 @@ namespace Project1
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
-
+            Move start = new Move(board.copyCurrent(),"",-1, -1);
+            Maximizer(start);
         }
-        public int Maximizer(int[,] move)
+        public Move Maximizer(Move move)
         {
             return 0;
         }
@@ -31,9 +36,10 @@ namespace Project1
         //Author: Kasper
         //Call this first, then the Maximizer will be called until it is no longer relevant
         {
-
+            Move start = new Move(board.copyCurrent(), "", -1, -1);
+            Maximizer(start);
         }
-        public int Minimizer(int[,] move)
+        public Move Minimizer(Move move)
         {
             return 0;
         }
