@@ -125,11 +125,11 @@ namespace Project1
             for (int i = 0; i < boardSize; i = i + 2)
             {
                 redManSet(0, i);
-                redKingSet(1, i + 1); //should ofcourse be a pawn, but king is set just to test it
+                redManSet(1, i + 1); //should ofcourse be a pawn, but king is set just to test it
                 redManSet(2, i);
 
                 blackManSet(5, i + 1);
-                blackKingSet(6, i); //should ofcourse be a pawn, but king is set just to test it
+                blackManSet(6, i); //should ofcourse be a pawn, but king is set just to test it
                 blackManSet(7, i + 1);
             }
         }
