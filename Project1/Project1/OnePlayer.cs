@@ -201,10 +201,7 @@ namespace Project1
         {
             //startTimer
             ai.startFindMoveThread(true);
-            while (elapsedTime < 15000)
-            {
-                //trololo
-            }
+            sleep(15000);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
         }
@@ -213,10 +210,7 @@ namespace Project1
         {
             //startTimer
             ai.startFindMoveThread(false);
-            while (elapsedTime < 15000)
-            {
-                //trololo
-            }
+            sleep(15000);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
         }
