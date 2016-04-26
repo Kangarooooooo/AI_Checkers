@@ -49,38 +49,6 @@ namespace Project1
             return copy;
         }
 
-        int evaluate(int[,] boardState)
-        {
-            {
-                int red = 0;
-                int black = 0;
-                for (int i = 0; i < boardSize; i++) //for each row
-                {
-                    for (int j = 0; j < boardSize; j++) //for each column
-                    {
-                        if (read(i, j) > 0)
-                        {
-                            red += read(i, j);
-                        }
-                        else
-                        {
-                            black += read(i, j);
-                        }
-
-                    }
-                }
-                if (red == 0 || mg.legalMovesRedNow().Count < 1) //if red has no pieces or no moves
-                {
-                    return -10000;
-                }
-                if (black == 0 || mg.legalMovesBlackNow().Count < 1) //if black has no pieces or no moves
-                {
-                    return 10000;
-                }
-                return red + black; //send back result
-            }
-        }
-
         public int[,] copyCurrent()
         //Author: Kasper
         {
