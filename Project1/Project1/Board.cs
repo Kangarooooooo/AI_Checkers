@@ -251,6 +251,7 @@ namespace Project1
         }
 
         public int evaluate(int[,] boardState) //overloaded method
+        //Author: Kasper
         {
             {
                 int red = 0;
