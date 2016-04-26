@@ -62,7 +62,7 @@ namespace Project1
 
             if (moves.Count != 0)
             {
-                while (alpha > beta)
+                while (alpha > beta&& moves.Count != 0)
                 {
                     Move move = moves.First();
                     moves.RemoveFirst();
@@ -116,7 +116,7 @@ namespace Project1
             
             if (moves.Count != 0)
             {
-                while (alpha < beta)
+                while (alpha < beta&& moves.Count != 0)
                 {
                     Move move = moves.First();
                     moves.RemoveFirst();

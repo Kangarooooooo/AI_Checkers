@@ -26,7 +26,7 @@ namespace Project1
             latestMove = new Move();
             ai = new AI(mg);
             legalCaptures = new LinkedList<Move>();
-            maxWorkTime = 5000; //means 15 thousand milliseconds of worktime
+            maxWorkTime = 15000; //means 15 thousand milliseconds of worktime
             board.startState();
             Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second");
             choice = Int32.Parse(Console.ReadLine());
