@@ -30,7 +30,7 @@ namespace Project1
             Maximizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
             return null;
         }
-        public int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
+        private int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
             if (maxDepth == currentDepth)
             {
@@ -44,7 +44,7 @@ namespace Project1
 
             if (moves.Count != 0)
             {
-                while (alpha > beta)
+                while (alpha < beta)
                 {
                     Move move = moves.First();
                     moves.RemoveFirst();
@@ -67,7 +67,7 @@ namespace Project1
             Minimizer(board.copyCurrent(), maxDepth, 0, -11000, 11000);
             return null;
         }
-        public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
+        private int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
             
             if (maxDepth == currentDepth)
