@@ -12,7 +12,7 @@ namespace Project1
     */
     {
         AI ai;
-        Boolean cap;
+        Boolean cap, inputNotValid;
         Board board;
         MoveGenerator mg;
         Move latestMove;
@@ -27,9 +27,31 @@ namespace Project1
             ai = new AI(mg);
             legalCaptures = new LinkedList<Move>();
             maxWorkTime = 15000; //means 15 thousand milliseconds of worktime
-            board.startState2();
-            Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second");
-            choice = Int32.Parse(Console.ReadLine());
+            board.startState();
+
+            Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second:");
+            inputNotValid = true;
+            choice = 2;
+            while (inputNotValid)
+            {
+                try
+                {
+                    choice = Int32.Parse(Console.ReadLine());
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("That was not a valid number!");
+                }
+                if(choice == 1 ||choice == 0)
+                {
+                    inputNotValid = false;
+                }
+                else
+                {
+                    Console.WriteLine("You *must* choose either 1 or 0 here! Try again:");
+                }
+            }
+            
             board.showBoard();
             if (choice == 1)
             {
@@ -140,7 +162,33 @@ namespace Project1
                 if (legalActions.Count > 0)
                 {
                     Console.WriteLine("\nWhich move will red player choose? enter a number");
-                    choice = Int32.Parse(Console.ReadLine());
+                    inputNotValid = true;
+                    choice = -1;
+                    while (inputNotValid)
+                    {
+                        try
+                        {
+                            choice = Int32.Parse(Console.ReadLine());
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("That was not a valid number!");
+                        }
+                        if (choice > 0 && choice <= legalActions.Count)
+                        {
+                            inputNotValid = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You *must* choose a value within the specified range! Try again:");
+                            n = 1;
+                            foreach (Move move in legalActions)
+                            {
+                                Console.WriteLine("   " + n + ". move: " + move.getString());
+                                n++;
+                            }
+                        }
+                    }
                     latestMove = legalActions.ElementAt(choice - 1);
                     board.doMove(latestMove);
                     board.showBoard();
@@ -195,7 +243,33 @@ namespace Project1
                 if (legalActions.Count > 0)
                 {
                     Console.WriteLine("\nWhich move will black player choose? enter a number");
-                    choice = Int32.Parse(Console.ReadLine());
+                    inputNotValid = true;
+                    choice = -1;
+                    while (inputNotValid)
+                    {
+                        try
+                        {
+                            choice = Int32.Parse(Console.ReadLine());
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine("That was not a valid number!");
+                        }
+                        if (choice > 0 && choice <= legalActions.Count)
+                        {
+                            inputNotValid = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("You *must* choose a value within the specified range! Try again:");
+                            n=1;
+                            foreach (Move move in legalActions)
+                            {
+                                Console.WriteLine("   " + n + ". move: " + move.getString());
+                                n++;
+                            }
+                        }
+                    }
                     latestMove = legalActions.ElementAt(choice - 1);
                     board.doMove(latestMove);
                     board.showBoard();
