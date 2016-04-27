@@ -51,7 +51,6 @@ namespace Project1
         }
         public int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
-            Console.WriteLine("Maximizer called with currentDepth = " + currentDepth);
             if (maxDepth == currentDepth)
             {
                 return board.evaluate(currentState);

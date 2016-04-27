@@ -297,7 +297,7 @@ namespace Project1
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
             Console.WriteLine("AI has chosen a move\n");
-            board.doMove(suggestion);
+            board.doMove(suggestion);m
             board.showBoard();
         }
         public void AIredTest()
