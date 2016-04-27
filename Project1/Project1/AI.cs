@@ -38,7 +38,7 @@ namespace Project1
             Boolean first = true;
             foreach (Move move in moves)
             {
-                int alpha = Maximizer(move.getState(), maxDepth, 0, -11000, 11000);
+                int alpha = Maximizer(move.getState(), maxDepth, depth, -11000, 11000);
                 if (alpha > i||first)
                 {
                     first = false;
@@ -50,6 +50,7 @@ namespace Project1
         }
         public int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
+            Console.WriteLine("Maximizer called with currentDepth = " + currentDepth);
             if (maxDepth == currentDepth)
             {
                 return board.evaluate(currentState);
@@ -94,7 +95,7 @@ namespace Project1
             Boolean first = true;
             foreach ( Move move in moves)
             {
-                int beta = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
+                int beta = Minimizer(move.getState(), maxDepth, depth, -11000, 11000);
                 if (beta < i||first)
                 {
                     first = false;
@@ -106,7 +107,7 @@ namespace Project1
         }
         public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
-            
+            Console.WriteLine("Minimizer called with currentDepth = " + currentDepth);
             if (maxDepth == currentDepth)
             {
                 return board.evaluate(currentState);
