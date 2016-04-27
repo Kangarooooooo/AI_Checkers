@@ -148,6 +148,7 @@ namespace Project1
                 {
                     bestSuggestion = MaximizerStart(maxDepth);
                     maxDepth++;
+                    Console.WriteLine(maxDepth);
                 }
             } 
             else
