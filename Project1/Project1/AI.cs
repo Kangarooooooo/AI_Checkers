@@ -70,6 +70,9 @@ namespace Project1
                     if (v > alpha)
                     {
                         alpha = v;
+                        Console.WriteLine("Alpha updated to " + alpha);
+                        Console.WriteLine("Depth = " + currentDepth + "\n");
+                        //HERE IS WHERE THE ERROR RESIDES!
                     }
                 }
                 return alpha;
@@ -124,6 +127,9 @@ namespace Project1
                     if (v < beta)
                     {
                         beta = v;
+                        Console.WriteLine("Beta updated to " + beta);
+                        Console.WriteLine("Depth = " + currentDepth + "\n");
+                        //HERE IS WHERE THE ERROR RESIDES!
                     }
                 }
                 return beta;
