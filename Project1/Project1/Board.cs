@@ -207,11 +207,11 @@ namespace Project1
 
                 }
             }
-            if (red == 0 || mg.legalMovesRedNow().Count < 1) //if red has no pieces or no moves
+            if (red == 0 || (mg.legalMovesRedNow().Count < 1 && mg.legalCapturesRedAI(copyCurrent()).Count < 1)) //if red has no pieces or no moves
             {
                 return -10000;
             }
-            if (black == 0 || mg.legalMovesBlackNow().Count < 1) //if black has no pieces or no moves
+            if (black == 0 || (mg.legalMovesBlackNow().Count < 1 && mg.legalCapturesBlackAI(copyCurrent()).Count < 1)) //if black has no pieces or no moves
             {
                 return 10000;
             }
@@ -239,11 +239,11 @@ namespace Project1
 
                     }
                 }
-                if (red == 0 || mg.legalMovesRed(boardState).Count < 1) //if red has no pieces or no moves
+                if (red == 0 || (mg.legalMovesRed(boardState).Count < 1 && mg.legalCapturesRedAI(copyCurrent()).Count < 1)) //if red has no pieces or no moves
                 {
                     return -10000;
                 }
-                if (black == 0 || mg.legalMovesBlack(boardState).Count < 1) //if black has no pieces or no moves
+                if (black == 0 || (mg.legalMovesBlack(boardState).Count < 1 && mg.legalCapturesBlackAI(copyCurrent()).Count < 1)) //if black has no pieces or no moves
                 {
                     return 10000;
                 }

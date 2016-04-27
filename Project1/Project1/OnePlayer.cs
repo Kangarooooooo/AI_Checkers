@@ -27,7 +27,7 @@ namespace Project1
             ai = new AI(mg);
             legalCaptures = new LinkedList<Move>();
             maxWorkTime = 15000; //means 15 thousand milliseconds of worktime
-            board.startState();
+            board.startState2();
             Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second");
             choice = Int32.Parse(Console.ReadLine());
             board.showBoard();
@@ -231,7 +231,19 @@ namespace Project1
 
         public void endGameMessage()
         {
-            Console.WriteLine("Here is where we call checkWin() to see who won, and where we provide an announcement of the situation");
+            Console.WriteLine("The game has ended.");
+            if (checkWin() > 0)
+            {
+                Console.WriteLine("Red player wins!");
+            }
+            else if(checkWin() < 0)
+            {
+                Console.WriteLine("Black player wins!");
+            }
+            else
+            {
+                Console.WriteLine("It is somehow a draw! Amazing game!");
+            }
             Console.ReadLine();
         }
     }
