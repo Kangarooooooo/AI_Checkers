@@ -30,7 +30,7 @@ namespace Project1
             board.startState();
             Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second");
             choice = Int32.Parse(Console.ReadLine());
-
+            board.showBoard();
             if (choice == 1)
             {
                 playerFirstLoop();
@@ -57,10 +57,12 @@ namespace Project1
                     break;
                 }
             }
+            endGameMessage();
         }
 
         void AIFirstLoop() //player plays last here
         {
+
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
                 AIred();
@@ -75,6 +77,7 @@ namespace Project1
                     break;
                 }
             }
+            endGameMessage();
         }
 
         int checkWin() //used to detect if anyone has definately won
@@ -103,7 +106,6 @@ namespace Project1
                 {
                     Console.WriteLine("Red do-while went through a second time!");
                 }
-                board.showBoard();
                 Console.WriteLine("Red player must now choose a possible move:\n");
                 if (testCount < 1)
                 {
@@ -141,6 +143,7 @@ namespace Project1
                     choice = Int32.Parse(Console.ReadLine());
                     latestMove = legalActions.ElementAt(choice - 1);
                     board.doMove(latestMove);
+                    board.showBoard();
                     testCount++;
                 }
             }
@@ -157,7 +160,6 @@ namespace Project1
                 {
                     Console.WriteLine("Black do-while went through a second time!");
                 }
-                board.showBoard();
                 Console.WriteLine("Black player must now choose a possible move:\n");
                 if (testCount < 1)
                 {
@@ -196,6 +198,7 @@ namespace Project1
                     choice = Int32.Parse(Console.ReadLine());
                     latestMove = legalActions.ElementAt(choice - 1);
                     board.doMove(latestMove);
+                    board.showBoard();
                     testCount++;
                 }
             }
@@ -204,20 +207,32 @@ namespace Project1
 
         public void AIred()
         {
+            Console.WriteLine("AI is planning its move...\n");
             ai.startFindMoveThread(true);
             System.Threading.Thread.Sleep(maxWorkTime);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
+            Console.WriteLine("AI has chosen a move\n");
             board.doMove(suggestion);
+            board.showBoard();
         }
 
         public void AIblack()
         {
+            Console.WriteLine("AI is planning its move...\n");
             ai.startFindMoveThread(false);
             System.Threading.Thread.Sleep(maxWorkTime);
             ai.killThread();
             Move suggestion = ai.getBestSuggestion();
+            Console.WriteLine("AI has chosen a move\n");
             board.doMove(suggestion);
+            board.showBoard();
+        }
+
+        public void endGameMessage()
+        {
+            Console.WriteLine("Here is where we call checkWin() to see who won, and where we provide an announcement of the situation");
+            Console.ReadLine();
         }
     }
 }
