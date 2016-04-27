@@ -11,7 +11,7 @@ namespace Project1
     {
         MoveGenerator mg;
         int[,] b; //2D array 'b' stores an int that represents the state of a given position on the board
-        int boardSize, redPieceCount, blackPieceCount;
+        int boardSize;
         ConsoleColor //Color variables. Change to personal preferences if you like.
             curBase,
             P1 = ConsoleColor.Cyan,
