@@ -33,6 +33,7 @@ namespace Project1
             {
                 moves = mg.legalMovesRed(board.copyCurrent());
             }
+            
             int i = 0;
             Move bestMove = null;
             Boolean first = true;
@@ -63,17 +64,15 @@ namespace Project1
 
             if (moves.Count != 0)
             {
-                while (alpha > beta&& moves.Count != 0)
+                while (alpha < beta&& moves.Count != 0)
                 {
+                    
                     Move move = moves.First();
                     moves.RemoveFirst();
-                    int v = Minimizer(move.getState(), maxDepth, currentDepth + 1, alpha, beta);
+                    int v = Minimizer(move.getState(), maxDepth, (currentDepth + 1), alpha, beta);
                     if (v > alpha)
                     {
                         alpha = v;
-                        Console.WriteLine("Alpha updated to " + alpha);
-                        Console.WriteLine("Depth = " + currentDepth + "\n");
-                        //HERE IS WHERE THE ERROR RESIDES!
                     }
                 }
                 return alpha;
@@ -107,8 +106,6 @@ namespace Project1
         }
         public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
-            Console.WriteLine(currentDepth);
-            Console.WriteLine(maxDepth);
             if (maxDepth == currentDepth)
             {
                 return board.evaluate(currentState);
@@ -125,13 +122,10 @@ namespace Project1
                 {
                     Move move = moves.First();
                     moves.RemoveFirst();
-                    int v = Maximizer(move.getState(), maxDepth, currentDepth + 1, alpha, beta);
+                    int v = Maximizer(move.getState(), maxDepth, (currentDepth + 1), alpha, beta);
                     if (v < beta)
                     {
                         beta = v;
-                        Console.WriteLine("Beta updated to " + beta);
-                        Console.WriteLine("Depth = " + currentDepth + "\n");
-                        //HERE IS WHERE THE ERROR RESIDES!
                     }
                 }
                 return beta;
