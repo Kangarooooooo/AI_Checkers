@@ -67,7 +67,7 @@ namespace Project1
                 {
                     Move move = moves.First();
                     moves.RemoveFirst();
-                    int v = Maximizer(move.getState(), maxDepth, currentDepth + 1, alpha, beta);
+                    int v = Minimizer(move.getState(), maxDepth, currentDepth + 1, alpha, beta);
                     if (v > alpha)
                     {
                         alpha = v;
@@ -107,7 +107,8 @@ namespace Project1
         }
         public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
-            Console.WriteLine("Minimizer called with currentDepth = " + currentDepth);
+            Console.WriteLine(currentDepth);
+            Console.WriteLine(maxDepth);
             if (maxDepth == currentDepth)
             {
                 return board.evaluate(currentState);

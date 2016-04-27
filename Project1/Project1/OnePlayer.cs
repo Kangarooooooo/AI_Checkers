@@ -18,6 +18,8 @@ namespace Project1
         Move latestMove;
         LinkedList<Move> legalActions, legalMoves, legalCaptures;
         int n, choice, testCount, maxWorkTime;
+        int testDepth = 1;
+        Boolean testing = false;
 
         public OnePlayer()
         {
@@ -73,7 +75,11 @@ namespace Project1
                 {
                     break;
                 }
-                AIblack();
+                if (!testing)
+                {
+                    AIblack();
+                }
+                AIblackTest();
                 if (checkWin() != 0)
                 {
                     break;
@@ -87,7 +93,11 @@ namespace Project1
 
             while (Math.Abs(board.evaluate()) < 1000) //no one is a winrar yet
             {
-                AIred();
+                if (!testing)
+                {
+                    AIred();
+                }
+                AIredTest();
                 checkWin();
                 if (checkWin() != 0)
                 {
@@ -290,6 +300,12 @@ namespace Project1
             board.doMove(suggestion);
             board.showBoard();
         }
+        public void AIredTest()
+        {
+            Console.WriteLine("AI is planning its move...\n");
+            board.doMove(ai.MaximizerStart(testDepth));
+            board.showBoard();
+        }
 
         public void AIblack()
         {
@@ -300,6 +316,12 @@ namespace Project1
             Move suggestion = ai.getBestSuggestion();
             Console.WriteLine("AI has chosen a move\n");
             board.doMove(suggestion);
+            board.showBoard();
+        }
+        public void AIblackTest()
+        {
+            Console.WriteLine("AI is planning its move...\n");
+            board.doMove(ai.MinimizerStart(testDepth));
             board.showBoard();
         }
 
