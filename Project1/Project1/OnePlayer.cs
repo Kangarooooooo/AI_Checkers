@@ -19,7 +19,7 @@ namespace Project1
         LinkedList<Move> legalActions, legalMoves, legalCaptures;
         int n, choice, testCount, maxWorkTime;
         int testDepth = 1;
-        Boolean testing = false;
+        Boolean testing = true;
 
         public OnePlayer()
         {
