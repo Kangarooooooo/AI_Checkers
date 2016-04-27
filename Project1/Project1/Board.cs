@@ -312,11 +312,11 @@ namespace Project1
             we start from boardSize-1 because we can only read from entry 0 to 7 and not 8 inclusive
             */
             {
-                showEmptyLine(); //draws a line with only vertical rows
+                //showEmptyLine(); //draws a line with only vertical rows
                 showTopBot(i); //draws the top/bottom row of the 5x3 artstyle for all spaces in row i. Top and bottom of the ASCII art are identical!
                 showMiddle(i); //draws the middle row of the 5x3 artstyle for all spaces in row i
                 showTopBot(i);
-                showEmptyLine();
+                //showEmptyLine();
                 showFullLine();
             }
             showBotLabels();
