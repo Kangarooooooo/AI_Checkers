@@ -39,7 +39,7 @@ namespace Project1
             foreach (Move move in moves)
             {
                 int alpha = Maximizer(move.getState(), maxDepth, 0, -11000, 11000);
-                if (alpha < i||first)
+                if (alpha > i||first)
                 {
                     first = false;
                     i = alpha;
@@ -92,7 +92,7 @@ namespace Project1
             foreach ( Move move in moves)
             {
                 int beta = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
-                if (beta > i||first)
+                if (beta < i||first)
                 {
                     first = false;
                     i = beta;
@@ -166,6 +166,7 @@ namespace Project1
         {
             this.isMaximizer = isMaximizer; //this is a variable that the entire AI object can read. It is needed in the threadCode.
             keepGoing = true;
+            maxDepth = 1;
             t = new Thread(new ThreadStart(threadCode));
             t.Start();
         }
@@ -175,6 +176,7 @@ namespace Project1
         //Use this to stop the thread
         {
             t.Abort();
+            Console.WriteLine("AI searched to depth " + maxDepth);
         }
     }
 }
