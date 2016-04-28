@@ -137,12 +137,12 @@ namespace Project1
         public void startState2() //TestingStart for testing tests
         //Author: Kasper
         {
-            redManSet(1, 0);
-            blackManSet(2, 1);
-            blackManSet(4, 3);
-            blackManSet(6, 5);
-            blackManSet(6, 3);
-            blackManSet(6, 1);
+            redManSet(1, 1);
+            blackManSet(2, 2);
+            blackManSet(4, 4);
+            blackManSet(6, 6);
+            blackManSet(6, 4);
+            blackManSet(6, 2);
         }
         public void startState22() //TestingStart for testing tests
         //Author: Kasper
@@ -190,32 +190,7 @@ namespace Project1
         //Author: Kasper
         //it counts the number of red pieces on the board and subtracts the black pieces. Kings count for double!
         {
-            int red = 0;
-            int black = 0;
-            for (int i = 0; i < boardSize; i++) //for each row
-            {
-                for (int j = 0; j < boardSize; j++) //for each column
-                {
-                    if (read(i, j) > 0)
-                    {
-                        red += read(i, j);
-                    }
-                    else
-                    {
-                        black += read(i, j);
-                    }
-
-                }
-            }
-            if (red == 0 || (mg.legalMovesRedNow().Count < 1 && mg.legalCapturesRedAI(copyCurrent()).Count < 1)) //if red has no pieces or no moves
-            {
-                return -10000;
-            }
-            if (black == 0 || (mg.legalMovesBlackNow().Count < 1 && mg.legalCapturesBlackAI(copyCurrent()).Count < 1)) //if black has no pieces or no moves
-            {
-                return 10000;
-            }
-            return red + black; //send back result
+            return evaluate(b);
         }
 
         public int evaluate(int[,] boardState) //overloaded method
@@ -230,11 +205,19 @@ namespace Project1
                     {
                         if (boardState[i,j] > 0)
                         {
-                            red += boardState[i,j];
+                            red += boardState[i,j]*5;
+                            if((j==0&&(i==0 || i ==2 || i ==4 || i == 6))||(j==7&&(i ==1 || i ==3 || i ==5 || i ==7)))
+                            {
+                                red += 2;
+                            }
                         }
-                        else
+                        else if(boardState[i, j] < 0)
                         {
-                            black += boardState[i, j];
+                            black += boardState[i, j]*5;
+                            if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
+                            {
+                                black += -2;
+                            }
                         }
 
                     }
@@ -274,7 +257,13 @@ namespace Project1
         {
             return boardSize;
         }
-
+        public void showBoard(int[,] boardState)
+        {
+            int[,] temp = b;
+            b = boardState;
+            showBoard();
+            b = temp;
+        }
         public void showBoard()
         //Author: Kasper
         {

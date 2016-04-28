@@ -13,6 +13,7 @@ namespace Project1
         Board board;
         int depth, maxDepth;
         Boolean isMaximizer,keepGoing;
+        Boolean testing = false;
         Move bestSuggestion;
         Thread t;
 
@@ -39,7 +40,7 @@ namespace Project1
             Boolean first = true;
             foreach (Move move in moves)
             {
-                int alpha = Maximizer(move.getState(), maxDepth, 0, -11000, 11000);
+                int alpha = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
                 if (alpha > i||first)
                 {
                     first = false;
@@ -53,6 +54,11 @@ namespace Project1
         {
             if (maxDepth == currentDepth)
             {
+                if (testing)
+                {
+                    Console.WriteLine("Board evaluated as : " + board.evaluate(currentState));
+                    board.showBoard(currentState);
+                }
                 return board.evaluate(currentState);
             }
             LinkedList<Move> moves = mg.legalCapturesRedAI(currentState);
@@ -93,7 +99,7 @@ namespace Project1
             Boolean first = true;
             foreach ( Move move in moves)
             {
-                int beta = Minimizer(move.getState(), maxDepth, 0, -11000, 11000);
+                int beta = Maximizer(move.getState(), maxDepth, 0, -11000, 11000);
                 if (beta < i||first)
                 {
                     first = false;
@@ -107,6 +113,12 @@ namespace Project1
         {
             if (maxDepth == currentDepth)
             {
+                if (testing)
+                {
+                    Console.WriteLine("Board evaluated as : "+board.evaluate(currentState));
+                    board.showBoard(currentState);
+                }
+                
                 return board.evaluate(currentState);
             }
             LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
@@ -117,7 +129,7 @@ namespace Project1
             
             if (moves.Count != 0)
             {
-                while (alpha < beta&& moves.Count != 0)
+                while (alpha < beta && moves.Count != 0)
                 {
                     Move move = moves.First();
                     moves.RemoveFirst();

@@ -18,7 +18,7 @@ namespace Project1
         Move latestMove;
         LinkedList<Move> legalActions, legalMoves, legalCaptures;
         int n, choice, testCount, maxWorkTime;
-        int testDepth = 1;
+        int testDepth = 8;
         Boolean testing = true;
 
         public OnePlayer()
@@ -30,7 +30,6 @@ namespace Project1
             legalCaptures = new LinkedList<Move>();
             maxWorkTime = 15000; //means 15 thousand milliseconds of worktime
             board.startState();
-
             Console.WriteLine("Do you want to play first or not? 1 for first, 0 for second:");
             inputNotValid = true;
             choice = 2;
