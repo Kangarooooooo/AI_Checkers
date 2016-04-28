@@ -18,7 +18,7 @@ namespace Project1
         Move latestMove;
         LinkedList<Move> legalActions, legalMoves, legalCaptures;
         int n, choice, testCount, maxWorkTime;
-        int testDepth = 8;
+        int testDepth = 5;
         Boolean testing = true;
 
         public OnePlayer()

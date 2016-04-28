@@ -11,15 +11,15 @@ namespace Project1
     {
         MoveGenerator mg;
         Board board;
-        int depth, maxDepth;
+        int maxDepth;
         Boolean isMaximizer,keepGoing;
         Boolean testing = false;
+        Boolean MinMax = false;
         Move bestSuggestion;
         Thread t;
 
         public AI(MoveGenerator mg)
         {
-            depth = 0;
             maxDepth = 1;
             this.mg = mg;
             this.board = mg.boardReference;
@@ -40,7 +40,14 @@ namespace Project1
             Boolean first = true;
             foreach (Move move in moves)
             {
-                int alpha = Minimizer(move.getState(), maxDepth, 0, -10000, 10000);
+                int alpha;
+                if (!MinMax) {
+                    alpha = Minimizer(move.getState(), maxDepth, 0, -10000, 10000);
+                }
+                else
+                {
+                    alpha = MinMaxMinimizer(move.getState(), maxDepth, 0);
+                }
                 if (alpha > i||first)
                 {
                     first = false;
@@ -50,6 +57,94 @@ namespace Project1
             }
             return bestMove;
         }
+
+        private int MinMaxMinimizer(int[,] currentState, int maxDepth, int currentDepth)
+        {
+            if (maxDepth == currentDepth)
+            {
+                if (testing)
+                {
+                    Console.WriteLine("Board evaluated as : " + board.evaluate(currentState));
+                    board.showBoard(currentState);
+                }
+
+                return board.evaluate(currentState);
+            }
+            LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
+            if (moves.Count == 0)
+            {
+                moves = mg.legalMovesBlack(currentState);
+            }
+
+            if (moves.Count != 0)
+            {
+                int rValue = 0;
+                Boolean first = true;
+                while (moves.Count != 0||first)
+                {
+                    
+                    Move move = moves.First();
+                    if (first)
+                    {
+                        rValue = MinMaxMaximizer(currentState, maxDepth, currentDepth+1);
+                    }
+                    
+                    moves.RemoveFirst();
+                    int v = MinMaxMinimizer(currentState, maxDepth, currentDepth+1);
+                    if (v < rValue)
+                    {
+                        rValue = v;
+                    }
+                    first = false;
+                }
+                return rValue;
+            }
+            return 10000;
+        }
+        private int MinMaxMaximizer(int[,] currentState, int maxDepth, int currentDepth)
+        {
+            if (maxDepth == currentDepth)
+            {
+                if (testing)
+                {
+                    Console.WriteLine("Board evaluated as : " + board.evaluate(currentState));
+                    board.showBoard(currentState);
+                }
+
+                return board.evaluate(currentState);
+            }
+            LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
+            if (moves.Count == 0)
+            {
+                moves = mg.legalMovesBlack(currentState);
+            }
+
+            if (moves.Count != 0)
+            {
+                int rValue = 0;
+                Boolean first = true;
+                while (moves.Count != 0 || first)
+                {
+
+                    Move move = moves.First();
+                    if (first)
+                    {
+                        rValue = MinMaxMinimizer(currentState, maxDepth, currentDepth+1);
+                    }
+
+                    moves.RemoveFirst();
+                    int v = MinMaxMinimizer(currentState, maxDepth, currentDepth+1);
+                    if (v > rValue)
+                    {
+                        rValue = v;
+                    }
+                    first = false;
+                }
+                return rValue;
+            }
+            return -10000;
+        }
+
         public int Maximizer(int[,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
         {
             if (maxDepth == currentDepth)
@@ -94,12 +189,23 @@ namespace Project1
             {
                 moves = mg.legalMovesBlack(board.copyCurrent());
             }
+
+
             int i = 0;
             Move bestMove = null;
             Boolean first = true;
             foreach ( Move move in moves)
             {
-                int beta = Maximizer(move.getState(), maxDepth, 0, -10000, 10000);
+
+                int beta;
+                if (!MinMax)
+                {
+                    beta = Maximizer(move.getState(), maxDepth, 0, -10000, 10000);
+                }
+                else
+                {
+                    beta = MinMaxMaximizer(move.getState(), maxDepth, 0);
+                }
                 if (beta < i||first)
                 {
                     first = false;
