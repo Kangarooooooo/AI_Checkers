@@ -41,7 +41,7 @@ namespace Project1
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("That was not a valid number!");
+                    Console.WriteLine(e.Message);
                 }
                 if(choice == 1 ||choice == 0)
                 {
@@ -181,7 +181,7 @@ namespace Project1
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine("That was not a valid number!");
+                            Console.WriteLine(e.Message);
                         }
                         if (choice > 0 && choice <= legalActions.Count)
                         {
@@ -262,7 +262,7 @@ namespace Project1
                         }
                         catch (Exception e)
                         {
-                            Console.WriteLine("That was not a valid number!");
+                            Console.WriteLine(e.Message);
                         }
                         if (choice > 0 && choice <= legalActions.Count)
                         {
