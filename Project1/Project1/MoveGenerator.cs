@@ -183,7 +183,12 @@ namespace Project1
             int[,] temp = new int[boardSize, boardSize];
             for (int i = 0; i < boardSize; i++)//Check for legal captures
             {
-                for (int j = 0; j < boardSize; j++)
+                for (int j = 0; j < boardSize; j = j +2)
+                {
+                    LegalCapturesRedPiece(currentState, legalCapturesRed, i, j);
+                }
+                i++;
+                for (int j = 1; j < boardSize; j = j + 2)
                 {
                     LegalCapturesRedPiece(currentState, legalCapturesRed, i, j);
                 }
@@ -279,7 +284,12 @@ namespace Project1
             //LinkedList<int[,]> legalCapturesBlack = new LinkedList<int[,]>();
             for (int i = 0; i < boardSize; i++)//Check for legal captures
             {
-                for (int j = 0; j < boardSize; j++)
+                for (int j = 0; j < boardSize; j = j + 2)
+                {
+                    LegalCapturesBlackPiece(currentState, legalCapturesBlack, i, j);
+                }
+                i++;
+                for (int j = 1; j < boardSize; j=j+2)
                 {
                     LegalCapturesBlackPiece(currentState, legalCapturesBlack, i, j);
                 }
@@ -371,73 +381,84 @@ namespace Project1
         public LinkedList<Move> legalMovesRed(int[,] currentState)//return list of legalmoves
         {
             LinkedList<Move> legalMovesRed = new LinkedList<Move>();
-            int[,] temp = new int[boardSize, boardSize];
+            
             for (int i = 0; i < boardSize; i++)
             {
-                for (int j = 0; j < boardSize; j++)
+                for (int j = 0; j < boardSize; j = j + 2)
                 {
-                    if (currentState[i, j] > 0)//Current collors piece is present
-                    {
-                        if ((i < (boardSize - 1)) && (j > 0))//Check move above to left
-                        {
-                            if (currentState[i + 1, j - 1] == 0)
-                            {
-                                temp = boardReference.copy(currentState);
-                                temp[i + 1, j - 1] = temp[i, j];
-                                if (i == (boardSize - 2))
-                                {
-                                    temp[i + 1, j - 1] = 2; //upgrade if in endzone
-                                }
-                                temp[i, j] = 0;
-                                legalMovesRed.AddLast(new Move(temp,PlyToString(i,j,i+1,j-1),i+1,j-1));
-                            }
-                        }
-                        if ((i < (boardSize - 1)) && (j < (boardSize - 1)))//Check move above to right
-                        {
-                            if (currentState[i + 1, j + 1] == 0)
-                            {
-                                temp = boardReference.copy(currentState);
-                                temp[i + 1, j + 1] = temp[i, j];
-                                if (i == (boardSize - 2))
-                                {
-                                    temp[i + 1, j + 1] = 2; //upgrade if in endzone
-                                }
-                                temp[i, j] = 0;
+                    legalMovesRedPiece(currentState, legalMovesRed, i, j);
+                }
+                i++;
+                for (int j = 1; j < boardSize; j = j + 2)
+                {
+                    legalMovesRedPiece(currentState, legalMovesRed, i, j);
+                }
+            }
+            return legalMovesRed;
+        }
 
-                                legalMovesRed.AddLast(new Move(temp, PlyToString(i,j,i+1,j+1),i+1,j+1));
-                            }
+        private void legalMovesRedPiece(int[,] currentState, LinkedList<Move> legalMovesRed, int i, int j)
+        {
+            int[,] temp;
+            if (currentState[i, j] > 0)//Current collors piece is present
+            {
+                if ((i < (boardSize - 1)) && (j > 0))//Check move above to left
+                {
+                    if (currentState[i + 1, j - 1] == 0)
+                    {
+                        temp = boardReference.copy(currentState);
+                        temp[i + 1, j - 1] = temp[i, j];
+                        if (i == (boardSize - 2))
+                        {
+                            temp[i + 1, j - 1] = 2; //upgrade if in endzone
+                        }
+                        temp[i, j] = 0;
+                        legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i + 1, j - 1), i + 1, j - 1));
+                    }
+                }
+                if ((i < (boardSize - 1)) && (j < (boardSize - 1)))//Check move above to right
+                {
+                    if (currentState[i + 1, j + 1] == 0)
+                    {
+                        temp = boardReference.copy(currentState);
+                        temp[i + 1, j + 1] = temp[i, j];
+                        if (i == (boardSize - 2))
+                        {
+                            temp[i + 1, j + 1] = 2; //upgrade if in endzone
+                        }
+                        temp[i, j] = 0;
+
+                        legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i + 1, j + 1), i + 1, j + 1));
+                    }
+                }
+            }
+            if (currentState[i, j] > 1)//Current collors piece is present and a king
+            {
+
+                if (i > 0)
+                {
+                    if (j > 0)
+                    {
+                        if (currentState[i - 1, j - 1] == 0) //checking down left
+                        {
+                            temp = boardReference.copy(currentState);
+                            temp[i - 1, j - 1] = temp[i, j];
+                            temp[i, j] = 0;
+                            legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1), i - 1, j - 1));
                         }
                     }
-                    if (currentState[i, j] > 1)//Current collors piece is present and a king
+                    if (j < boardSize - 1)
                     {
-
-                        if (i > 0)
+                        if (currentState[i - 1, j + 1] == 0) //checking down right
                         {
-                            if (j > 0)
-                            {
-                                if (currentState[i - 1, j - 1] == 0) //checking down left
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 1, j - 1] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1),i-1,j-1));
-                                }
-                            }
-                            if (j < boardSize - 1)
-                            {
-                                if (currentState[i - 1, j + 1] == 0) //checking down right
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i - 1, j + 1] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1),i-1,j+1));
-                                }
-                            }
+                            temp = boardReference.copy(currentState);
+                            temp[i - 1, j + 1] = temp[i, j];
+                            temp[i, j] = 0;
+                            legalMovesRed.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1), i - 1, j + 1));
                         }
                     }
                 }
             }
-            return legalMovesRed;
         }
 
         public LinkedList<Move> legalMovesRedNow()
@@ -455,73 +476,84 @@ namespace Project1
         public LinkedList<Move> legalMovesBlack(int[,] currentState)//return list of legalmoves
         {
             LinkedList<Move> legalMovesBlack = new LinkedList<Move>();
-            int[,] temp = new int[boardSize, boardSize];
             for (int i = 0; i < boardSize; i++)
             {
-                for (int j = 0; j < boardSize; j++)
+                for (int j = 0; j < boardSize; j = j + 2)
                 {
-                    if (currentState[i, j] < 0)//Current collors piece is present
-                    {
-                        if ((i > 0) && (j > 0))//Check move down left
-                        {
-                            if (currentState[i - 1, j - 1] == 0)
-                            {
-                                temp = boardReference.copy(currentState);
-                                temp[i - 1, j - 1] = temp[i, j];
-                                if (i == 1)
-                                {
-                                    temp[i - 1, j - 1] = -2; //upgrade if in endzone
-                                }
-                                temp[i, j] = 0;
-                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1),i-1,j-1));
-                            }
-                        }
-                        if ((i > 0) && (j < (boardSize - 1)))//Check move down right
-                        {
-                            if (currentState[i - 1, j + 1] == 0)
-                            {
-                                temp = boardReference.copy(currentState);
-                                temp[i - 1, j + 1] = temp[i, j];
-                                if (i == 1)
-                                {
-                                    temp[i - 1, j + 1] = 2; //upgrade if in endzone
-                                }
-                                temp[i, j] = 0;
+                    legalMovesBlackPiece(currentState, legalMovesBlack, i, j);
+                }
+                i++;
+                for (int j = 1; j < boardSize; j = j + 2)
+                {
+                    legalMovesBlackPiece(currentState, legalMovesBlack, i, j);
+                }
+            }
+            return legalMovesBlack;
+        }
 
-                                legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1),i-1,j+1));
-                            }
+        private void legalMovesBlackPiece(int[,] currentState, LinkedList<Move> legalMovesBlack, int i, int j)
+        {
+
+            int[,] temp; ;
+            if (currentState[i, j] < 0)//Current collors piece is present
+            {
+                if ((i > 0) && (j > 0))//Check move down left
+                {
+                    if (currentState[i - 1, j - 1] == 0)
+                    {
+                        temp = boardReference.copy(currentState);
+                        temp[i - 1, j - 1] = temp[i, j];
+                        if (i == 1)
+                        {
+                            temp[i - 1, j - 1] = -2; //upgrade if in endzone
+                        }
+                        temp[i, j] = 0;
+                        legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j - 1), i - 1, j - 1));
+                    }
+                }
+                if ((i > 0) && (j < (boardSize - 1)))//Check move down right
+                {
+                    if (currentState[i - 1, j + 1] == 0)
+                    {
+                        temp = boardReference.copy(currentState);
+                        temp[i - 1, j + 1] = temp[i, j];
+                        if (i == 1)
+                        {
+                            temp[i - 1, j + 1] = 2; //upgrade if in endzone
+                        }
+                        temp[i, j] = 0;
+
+                        legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i - 1, j + 1), i - 1, j + 1));
+                    }
+                }
+            }
+            if (currentState[i, j] < -1)//Current collors piece is present and a king
+            {
+
+                if (i < (boardSize - 1))
+                {
+                    if (j > 0)
+                    {
+                        if (currentState[i + 1, j - 1] == 0) //checking up left
+                        {
+                            temp = boardReference.copy(currentState);
+                            temp[i + 1, j - 1] = temp[i, j];
+                            temp[i, j] = 0;
+                            legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j - 1), i + 1, j - 1));
                         }
                     }
-                    if (currentState[i, j] < -1)//Current collors piece is present and a king
+                    if (j < (boardSize - 1))
                     {
-
-                        if (i < (boardSize - 1))
+                        if (currentState[i + 1, j + 1] == 0) //checking up right
                         {
-                            if (j > 0)
-                            {
-                                if (currentState[i + 1, j - 1] == 0) //checking up left
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i + 1, j - 1] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j - 1),i+1,j-1));
-                                }
-                            }
-                            if (j < (boardSize - 1))
-                            {
-                                if (currentState[i + 1, j + 1] == 0) //checking up right
-                                {
-                                    temp = boardReference.copy(currentState);
-                                    temp[i + 1, j + 1] = temp[i, j];
-                                    temp[i, j] = 0;
-                                    legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j + 1),i+1,j+1));
-                                }
-                            }
+                            temp = boardReference.copy(currentState);
+                            temp[i + 1, j + 1] = temp[i, j];
+                            temp[i, j] = 0;
+                            legalMovesBlack.AddLast(new Move(temp, PlyToString(i, j, i + 1, j + 1), i + 1, j + 1));
                         }
                     }
                 }
             }
-            return legalMovesBlack;
         }
 
         public LinkedList<Move> legalMovesBlackNow()

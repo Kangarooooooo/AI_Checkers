@@ -34,6 +34,20 @@ namespace Project1
             boardSize = 8;
             b = board; //8x8 spaces representing the 64 field gameboard.
         }
+        public Boolean compare(int[,] boardState1, int[,] boardState2)
+        {
+            for(int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (boardState2[i, j] != boardState1[i, j])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
         //Author Kangarooooooo
         public int[,] copy(int[,] board)//Method that returns a new copy of the argument
         {
@@ -58,7 +72,6 @@ namespace Project1
         /*
         HUUGE chunk of functions about moves was just removed from this place! they now reside in MoveGenerator.cs
         */
-
         public Boolean redManSet(int x, int y) //places red pawn on the field (x,y) returns true if it succeeds
         //Author: Kasper
         {
@@ -196,42 +209,62 @@ namespace Project1
         public int evaluate(int[,] boardState) //overloaded method
         //Author: Kasper
         {
+            int red = 0;
+            int black = 0;
+            for (int i = 0; i < boardSize; i++) //for each row
             {
-                int red = 0;
-                int black = 0;
-                for (int i = 0; i < boardSize; i++) //for each row
+                for (int j = 0; j < boardSize; j = j+2) //for each column
                 {
-                    for (int j = 0; j < boardSize; j++) //for each column
+                    if (boardState[i, j] > 0)
                     {
-                        if (boardState[i,j] > 0)
+                        red += boardState[i, j] * 5;
+                        if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
                         {
-                            red += boardState[i,j]*5;
-                            if((j==0&&(i==0 || i ==2 || i ==4 || i == 6))||(j==7&&(i ==1 || i ==3 || i ==5 || i ==7)))
-                            {
-                                red += 2;
-                            }
+                            red += 2;
                         }
-                        else if(boardState[i, j] < 0)
-                        {
-                            black += boardState[i, j]*5;
-                            if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
-                            {
-                                black += -2;
-                            }
-                        }
-
                     }
+                    else if (boardState[i, j] < 0)
+                    {
+                        black += boardState[i, j] * 5;
+                        if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
+                        {
+                            black += -2;
+                        }
+                    }
+
                 }
-                if (red == 0 || (mg.legalMovesRed(boardState).Count < 1 && mg.legalCapturesRedAI(copyCurrent()).Count < 1)) //if red has no pieces or no moves
+                i++;
+                for (int j = 1; j < boardSize; j = j + 2) //for each column
                 {
-                    return -10000;
+                    if (boardState[i, j] > 0)
+                    {
+                        red += boardState[i, j] * 5;
+                        if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
+                        {
+                            red += 2;
+                        }
+                    }
+                    else if (boardState[i, j] < 0)
+                    {
+                        black += boardState[i, j] * 5;
+                        if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
+                        {
+                            black += -2;
+                        }
+                    }
+
                 }
-                if (black == 0 || (mg.legalMovesBlack(boardState).Count < 1 && mg.legalCapturesBlackAI(copyCurrent()).Count < 1)) //if black has no pieces or no moves
-                {
-                    return 10000;
-                }
-                return red + black; //send back result
             }
+            if (red == 0 || (mg.legalMovesRed(boardState).Count < 1 && mg.legalCapturesRedAI(copyCurrent()).Count < 1)) //if red has no pieces or no moves
+            {
+                return -10000;
+            }
+            if (black == 0 || (mg.legalMovesBlack(boardState).Count < 1 && mg.legalCapturesBlackAI(copyCurrent()).Count < 1)) //if black has no pieces or no moves
+            {
+                return 10000;
+            }
+            return red + black; //send back result
+
         }
 
         public Boolean remove(int x, int y) //designed to remove a piece from the board

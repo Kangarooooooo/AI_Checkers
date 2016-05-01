@@ -18,8 +18,8 @@ namespace Project1
         Move latestMove;
         LinkedList<Move> legalActions, legalMoves, legalCaptures;
         int n, choice, testCount, maxWorkTime;
-        int testDepth = 5;
-        Boolean testing = true;
+        int testDepth = 9;
+        Boolean testing = false;
 
         public OnePlayer()
         {
@@ -78,7 +78,10 @@ namespace Project1
                 {
                     AIblack();
                 }
-                AIblackTest();
+                else
+                { 
+                    AIblackTest();
+                }
                 if (checkWin() != 0)
                 {
                     break;
@@ -96,7 +99,10 @@ namespace Project1
                 {
                     AIred();
                 }
-                AIredTest();
+                else
+                { 
+                    AIredTest();
+                }
                 checkWin();
                 if (checkWin() != 0)
                 {
@@ -290,11 +296,29 @@ namespace Project1
 
         public void AIred()
         {
+            Move suggestion = null;
             Console.WriteLine("AI is planning its move...\n");
+            int[,] temp = board.copyCurrent();
+            LinkedList<Move>  temp2 = mg.legalCapturesRedAI(temp);
+            if (temp2.Count == 1)
+            {
+                suggestion = temp2.First.Value;
+            }
+            else if (temp2.Count == 0)
+            {
+                temp2 = mg.legalMovesRed(temp);
+            }
+
+            if (temp2.Count == 1)
+            {
+                suggestion = temp2.First.Value;
+            }
+            else { 
             ai.startFindMoveThread(true);
             System.Threading.Thread.Sleep(maxWorkTime);
             ai.killThread();
-            Move suggestion = ai.getBestSuggestion();
+            suggestion = ai.getBestSuggestion();
+            }
             Console.WriteLine("AI has chosen a move\n");
             board.doMove(suggestion);
             board.showBoard();
@@ -308,14 +332,34 @@ namespace Project1
 
         public void AIblack()
         {
+            Move suggestion = null;
             Console.WriteLine("AI is planning its move...\n");
-            ai.startFindMoveThread(false);
-            System.Threading.Thread.Sleep(maxWorkTime);
-            ai.killThread();
-            Move suggestion = ai.getBestSuggestion();
+            int[,] temp = board.copyCurrent();
+            LinkedList<Move> temp2 = mg.legalCapturesBlackAI(temp);
+            if (temp2.Count == 1)
+            {
+                suggestion = temp2.First.Value;
+            }
+            else if (temp2.Count == 0)
+            {
+                temp2 = mg.legalMovesBlack(temp);
+            }
+
+            if (temp2.Count == 1)
+            {
+                suggestion = temp2.First.Value;
+            }
+            else
+            {
+                ai.startFindMoveThread(false);
+                System.Threading.Thread.Sleep(maxWorkTime);
+                ai.killThread();
+                suggestion = ai.getBestSuggestion();
+            }
             Console.WriteLine("AI has chosen a move\n");
             board.doMove(suggestion);
             board.showBoard();
+            
         }
         public void AIblackTest()
         {

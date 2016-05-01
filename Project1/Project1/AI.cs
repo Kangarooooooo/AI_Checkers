@@ -15,8 +15,11 @@ namespace Project1
         Boolean isMaximizer,keepGoing;
         Boolean testing = false;
         Boolean MinMax = false;
+        Boolean MoveOrdering = false;
         Move bestSuggestion;
         Thread t;
+        int evaluateCount = 0;
+
 
         public AI(MoveGenerator mg)
         {
@@ -34,7 +37,22 @@ namespace Project1
             {
                 moves = mg.legalMovesRed(board.copyCurrent());
             }
-            
+            if (bestSuggestion != null && MoveOrdering)
+            {
+                LinkedList<Move> temp = new LinkedList<Move>();
+                foreach (Move move in moves)
+                {
+                    if (board.compare(move.getState(),bestSuggestion.getState()))
+                    {
+                        temp.AddFirst(move);
+                    }
+                    else
+                    {
+                        
+                        temp.AddLast(move);
+                    }
+                }
+            }
             int i = 0;
             Move bestMove = null;
             Boolean first = true;
@@ -55,6 +73,8 @@ namespace Project1
                     bestMove = move;
                 }
             }
+            Console.WriteLine(evaluateCount);
+            evaluateCount = 0;
             return bestMove;
         }
 
@@ -154,6 +174,8 @@ namespace Project1
                     Console.WriteLine("Board evaluated as : " + board.evaluate(currentState));
                     board.showBoard(currentState);
                 }
+
+                evaluateCount++;
                 return board.evaluate(currentState);
             }
             LinkedList<Move> moves = mg.legalCapturesRedAI(currentState);
@@ -189,6 +211,21 @@ namespace Project1
             {
                 moves = mg.legalMovesBlack(board.copyCurrent());
             }
+            if (bestSuggestion != null && MoveOrdering)
+            {
+                LinkedList<Move> temp = new LinkedList<Move>();
+                foreach (Move move in moves)
+                {
+                    if (move.getState().Equals(bestSuggestion.getState()))
+                    {
+                        temp.AddFirst(move);
+                    }
+                    else
+                    {
+                        temp.AddLast(move);
+                    }
+                }
+            }
 
 
             int i = 0;
@@ -213,6 +250,8 @@ namespace Project1
                     bestMove = move;
                 }
             }
+            Console.WriteLine(evaluateCount);
+            evaluateCount = 0;
             return bestMove;
         }
         public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
@@ -224,7 +263,8 @@ namespace Project1
                     Console.WriteLine("Board evaluated as : "+board.evaluate(currentState));
                     board.showBoard(currentState);
                 }
-                
+
+                evaluateCount++;
                 return board.evaluate(currentState);
             }
             LinkedList<Move> moves = mg.legalCapturesBlackAI(currentState);
@@ -285,7 +325,7 @@ namespace Project1
         {
             this.isMaximizer = isMaximizer; //this is a variable that the entire AI object can read. It is needed in the threadCode.
             keepGoing = true;
-            maxDepth = 1;
+            maxDepth = 0;
             t = new Thread(new ThreadStart(threadCode));
             t.Start();
         }
