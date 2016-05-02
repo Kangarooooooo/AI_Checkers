@@ -15,8 +15,8 @@ namespace Project1
         Boolean isMaximizer,keepGoing;
         Boolean testing = false;
         Boolean MinMax = false;
-        Boolean MoveOrdering = false;
-        Move bestSuggestion;
+        Boolean MoveOrdering = true;
+        Move bestSuggestion = null;
         Thread t;
         int evaluateCount = 0;
 
@@ -40,18 +40,21 @@ namespace Project1
             if (bestSuggestion != null && MoveOrdering)
             {
                 LinkedList<Move> temp = new LinkedList<Move>();
+                int j = 0;
                 foreach (Move move in moves)
                 {
                     if (board.compare(move.getState(),bestSuggestion.getState()))
                     {
+                        Console.WriteLine("Previous best move was " + j);
                         temp.AddFirst(move);
                     }
                     else
                     {
-                        
                         temp.AddLast(move);
                     }
+                    j++;
                 }
+                moves = temp;
             }
             int i = 0;
             Move bestMove = null;
@@ -74,7 +77,7 @@ namespace Project1
                 }
             }
             Console.WriteLine(evaluateCount);
-            evaluateCount = 0;
+            //evaluateCount = 0;
             return bestMove;
         }
 
@@ -214,17 +217,21 @@ namespace Project1
             if (bestSuggestion != null && MoveOrdering)
             {
                 LinkedList<Move> temp = new LinkedList<Move>();
+                int j = 0;
                 foreach (Move move in moves)
                 {
-                    if (move.getState().Equals(bestSuggestion.getState()))
+                    if (board.compare(move.getState(), bestSuggestion.getState()))
                     {
+                        Console.WriteLine("Previous best move was " + j);
                         temp.AddFirst(move);
                     }
                     else
                     {
                         temp.AddLast(move);
                     }
+                    j++;
                 }
+                moves = temp;
             }
 
 
@@ -251,7 +258,7 @@ namespace Project1
                 }
             }
             Console.WriteLine(evaluateCount);
-            evaluateCount = 0;
+            //evaluateCount = 0;
             return bestMove;
         }
         public int Minimizer(int [,] currentState, int maxDepth, int currentDepth, int alpha, int beta)
@@ -293,6 +300,10 @@ namespace Project1
         public Move getBestSuggestion()
         {
             return bestSuggestion;
+        }
+        public void setBestSuggestion(Move bS)
+        {
+            this.bestSuggestion = bS;
         }
 
         public void threadCode()
@@ -336,6 +347,14 @@ namespace Project1
         {
             t.Abort();
             Console.WriteLine("AI searched to depth " + maxDepth);
+        }
+        public int getEvaluateCount()
+        {
+            return evaluateCount;
+        }
+        public void setEvaluateCount(int EC)
+        {
+            this.evaluateCount = EC;
         }
     }
 }
