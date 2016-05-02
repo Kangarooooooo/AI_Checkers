@@ -266,6 +266,56 @@ namespace Project1
             }
         }
 
+        public bool redHasFreeRun(int[,] boardState, int i, int j)
+        {
+            int w = 1;
+            for (int y = i; y < boardSize; y++)
+            {
+                for (int x = j; x < boardSize && w > x - j; x++)
+                {
+                    if (0>boardState[y,x])
+                    {
+                        return false;
+                    }
+
+                }
+                for (int x = j; x > -1&&w>Math.Abs(-x+j); x--)
+                {
+                    if (0 > boardState[y, x])
+                    {
+                        return false;
+                    }
+                }
+                w++;
+            }
+            return true;
+        }
+
+        public bool blackHasFreeRun(int[,] boardState, int i, int j)
+        {
+            int w = 1;
+            for (int y = i; y > -1; y--)
+            {
+                for (int x = j; x < boardSize && w > x - j; x++)
+                {
+                    if (0 < boardState[y, x])
+                    {
+                        return false;
+                    }
+
+                }
+                for (int x = j; x > -1 && w > Math.Abs(-x + j); x--)
+                {
+                    if (0 < boardState[y, x])
+                    {
+                        return false;
+                    }
+                }
+                w++;
+            }
+            return true;
+        }
+
         public LinkedList<Move> legalCapturesRedNow()
         //Author: Kasper
         {

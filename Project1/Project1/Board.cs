@@ -34,6 +34,14 @@ namespace Project1
             boardSize = 8;
             b = board; //8x8 spaces representing the 64 field gameboard.
         }
+        public int[,] getCurrentState()
+        {
+            return b;
+        }
+        public void setCurrentState(int[,] b)
+        {
+            this.b = b;
+        }
         public Boolean compare(int[,] boardState1, int[,] boardState2)
         {
             for(int i = 0; i < boardSize; i++)
@@ -160,11 +168,11 @@ namespace Project1
         public void startState22() //TestingStart for testing tests
         //Author: Kasper
         {
-            blackKingSet(0, 0);
-            redManSet(1, 1);
-            redManSet(3, 3);
-            redManSet(5, 5);
-            redManSet(5, 3);
+            
+            redManSet(4, 2);
+            blackManSet(2, 4);
+            blackManSet(1, 5);
+            blackManSet(1, 3);
         }
 
         public void startState3()
@@ -217,19 +225,37 @@ namespace Project1
                 {
                     if (boardState[i, j] > 0)
                     {
-                        red += boardState[i, j] * 5;
+                        red += boardState[i, j] * 6;
                         if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
                         {
                             red += 2;
-                        }
+                        }/*
+                        if (boardState[i,j] < 2)
+                        {
+                            if (mg.redHasFreeRun(boardState, i,j))
+                            {
+                                red += 3;
+                            }
+                        }*/
                     }
                     else if (boardState[i, j] < 0)
                     {
-                        black += boardState[i, j] * 5;
+                        black += boardState[i, j] * 6;
                         if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
                         {
                             black += -2;
                         }
+                        /*
+                        if (boardState[i, j] > -2)
+                        {
+                            if (boardState[i - 1, j - 1] == 0 || boardState[i - 1, j + 1] == 0)
+                            {
+                                if (mg.blackHasFreeRun(boardState, i, j))
+                                {
+                                    black += -3;
+                                }
+                            }
+                        }*/
                     }
 
                 }
@@ -238,19 +264,35 @@ namespace Project1
                 {
                     if (boardState[i, j] > 0)
                     {
-                        red += boardState[i, j] * 5;
+                        red += boardState[i, j] * 6;
                         if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
                         {
                             red += 2;
-                        }
+                        }/*
+                        if (boardState[i, j] < 2)
+                        {
+                            if (mg.redHasFreeRun(boardState, i, j))
+                            {
+                                red += 3;
+                            }
+                        }*/
                     }
                     else if (boardState[i, j] < 0)
                     {
-                        black += boardState[i, j] * 5;
+                        black += boardState[i, j] * 6;
                         if ((j == 0 && (i == 0 || i == 2 || i == 4 || i == 6)) || (j == 7 && (i == 1 || i == 3 || i == 5 || i == 7)))
                         {
                             black += -2;
-                        }
+                        }/*
+                        if (boardState[i, j] > -2)
+                        {
+                            if(boardState[i-1,j-1]==0|| boardState[i - 1, j + 1] == 0) { 
+                                if (mg.blackHasFreeRun(boardState, i, j))
+                                {
+                                    black += -3;
+                                }
+                            }
+                        }*/
                     }
 
                 }
