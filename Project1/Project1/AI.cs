@@ -15,7 +15,7 @@ namespace Project1
         Boolean isMaximizer,keepGoing;
         Boolean testing = false;
         Boolean MinMax = false;
-        Boolean MoveOrdering = true;
+        Boolean MoveOrdering = false;
         Move bestSuggestion = null;
         Thread t;
         int evaluateCount = 0;
@@ -76,7 +76,6 @@ namespace Project1
                     bestMove = move;
                 }
             }
-            Console.WriteLine(evaluateCount);
             //evaluateCount = 0;
             return bestMove;
         }
@@ -222,7 +221,6 @@ namespace Project1
                 {
                     if (board.compare(move.getState(), bestSuggestion.getState()))
                     {
-                        Console.WriteLine("Previous best move was " + j);
                         temp.AddFirst(move);
                     }
                     else
@@ -257,7 +255,6 @@ namespace Project1
                     bestMove = move;
                 }
             }
-            Console.WriteLine(evaluateCount);
             //evaluateCount = 0;
             return bestMove;
         }

@@ -320,7 +320,6 @@ namespace Project1
                 suggestion = ai.getBestSuggestion();
             }
             ai.setBestSuggestion(null);
-            Console.WriteLine("Evaluated leaves " + ai.getEvaluateCount() + " times.");
             ai.setEvaluateCount(0);
             Console.WriteLine("AI has chosen a move\n");
             board.doMove(suggestion);
@@ -360,7 +359,6 @@ namespace Project1
                 suggestion = ai.getBestSuggestion();
             }
             ai.setBestSuggestion(null);
-            Console.WriteLine("Evaluated leaves " + ai.getEvaluateCount() + " times.");
             ai.setEvaluateCount(0);
             Console.WriteLine("AI has chosen a move\n");
             board.doMove(suggestion);
